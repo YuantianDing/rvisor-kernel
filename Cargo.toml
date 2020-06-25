@@ -1,6 +1,6 @@
 [workspace]
 members = [
-    "linux-kernel_module-rust"
+    "linux-kernel-module-rust",
 ]
 
 exclude = [
