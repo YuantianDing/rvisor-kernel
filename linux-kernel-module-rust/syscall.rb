@@ -2,9 +2,7 @@ require 'nokogiri'
 
 $syscalls = Hash[]
 
-$rust_type = Hash [
-    "unsigned int"
-]
+$rust_type = Hash[]
 
 File.readlines("../zCore/linux-syscall/src/lib.rs").each do |line|
     m = line.match(/^[\s\t]*Sys::(\w+)/)
