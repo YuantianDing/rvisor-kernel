@@ -3,9 +3,10 @@
 require "ruby_make_script"
 require 'nokogiri'
 
-syscall_list = [
+File.open("syscall_table.html") do |f|
     
-]
+end
+syscall_list = 
 
 doc = File.open("syscall_table.html") { |f| Nokogiri::XML(f) }
 
