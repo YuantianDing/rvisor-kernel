@@ -18,7 +18,7 @@ extern "C" {
     pub fn user_max() -> u64;
 }
 /// replace_syscall 的安全包装
-fn safe_replace_syscall(sysnum : c_uint, f_ptr : *const()) {
+pub fn safe_replace_syscall(sysnum : c_uint, f_ptr : *const()) {
     unsafe{
         let i = replace_syscall(sysnum, f_ptr);
         if i == -1 {
@@ -34,16 +34,6 @@ pub fn init() {
             panic!("replace_init failed!");
         }
     }
-    safe_replace_syscall(bindings::__NR_open, syscall::rvisor_open as *const());
-    safe_replace_syscall(bindings::__NR_openat, syscall::rvisor_openat as *const());
-    safe_replace_syscall(bindings::__NR_execve, syscall::rvisor_execve as *const());
-    safe_replace_syscall(bindings::__NR_clone, syscall::rvisor_clone as *const());
-    safe_replace_syscall(bindings::__NR_fork, syscall::rvisor_fork as *const());
-    safe_replace_syscall(bindings::__NR_vfork, syscall::rvisor_vfork as *const());
-    safe_replace_syscall(bindings::__NR_chdir, syscall::rvisor_chdir as *const());
-    safe_replace_syscall(bindings::__NR_getcwd, syscall::rvisor_getcwd as *const());
-    safe_replace_syscall(bindings::__NR_stat, syscall::rvisor_stat as *const());
-    safe_replace_syscall(bindings::__NR_lstat, syscall::rvisor_lstat as *const());
 }
 
 /// 退出的时候调用
