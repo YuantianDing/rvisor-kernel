@@ -44,7 +44,6 @@ make do
             f.puts "    }"
             f.puts "}"
             f.puts ""
-            f.puts "use lx_orig;"
             f.puts ""
         $syscalls.each do |k, v|
             f.puts "#[inline]"
