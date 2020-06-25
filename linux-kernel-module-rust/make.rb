@@ -26,7 +26,7 @@ def rust_pair(v)
     }
 end
 
-def c_pairt(v)
+def c_pair(v)
     v.map { |name, ty|
         "#{ty}, #{name}"
     }
