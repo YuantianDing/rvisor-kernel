@@ -3,8 +3,8 @@
 require "ruby_make_script"
 require "./syscall.rb"
 
-c_header = """
-#include "hook_syscall.h"
+"
+#include \"hook_syscall.h\"
 #include <linux/module.h>
 #include <linux/init.h>
 #include <linux/types.h>
@@ -18,7 +18,7 @@ c_header = """
 #include <linux/sizes.h>
 #include <linux/byteorder/generic.h>
 #include <linux/preempt.h>
-"""
+"
 
 
 make do
