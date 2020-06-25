@@ -196,552 +196,552 @@ mod lx_orig {
 #[inline]
 pub fn read(fd : u32, buf : *mut u8, count : usize) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::read(fd, buf, count)
+    unsafe{ lx_orig::read(fd, buf, count) }
 }
 
 #[inline]
 pub fn write(fd : u32, buf : *const u8, count : usize) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::write(fd, buf, count)
+    unsafe{ lx_orig::write(fd, buf, count) }
 }
 
 #[inline]
 pub fn openat(dfd : i32, filename : *const u8, flags : i32, mode : u16) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::openat(dfd, filename, flags, mode)
+    unsafe{ lx_orig::openat(dfd, filename, flags, mode) }
 }
 
 #[inline]
 pub fn close(fd : u32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::close(fd)
+    unsafe{ lx_orig::close(fd) }
 }
 
 #[inline]
 pub fn fstat(fd : u32, statbuf : * const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::fstat(fd, statbuf)
+    unsafe{ lx_orig::fstat(fd, statbuf) }
 }
 
 #[inline]
 pub fn newfstatat(dfd : i32, filename : *const u8, statbuf : * const u8, flag : i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::newfstatat(dfd, filename, statbuf, flag)
+    unsafe{ lx_orig::newfstatat(dfd, filename, statbuf, flag) }
 }
 
 #[inline]
 pub fn lseek(fd : u32, offset : i64, whence : u32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::lseek(fd, offset, whence)
+    unsafe{ lx_orig::lseek(fd, offset, whence) }
 }
 
 #[inline]
 pub fn ioctl(fd : u32, cmd : u32, arg : u64) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::ioctl(fd, cmd, arg)
+    unsafe{ lx_orig::ioctl(fd, cmd, arg) }
 }
 
 #[inline]
 pub fn pread64(fd : u32, buf : *mut u8, count : usize, pos : i64) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::pread64(fd, buf, count, pos)
+    unsafe{ lx_orig::pread64(fd, buf, count, pos) }
 }
 
 #[inline]
 pub fn pwrite64(fd : u32, buf : *const u8, count : usize, pos : i64) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::pwrite64(fd, buf, count, pos)
+    unsafe{ lx_orig::pwrite64(fd, buf, count, pos) }
 }
 
 #[inline]
 pub fn readv(fd : u64, vec : * const u8, vlen : u64) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::readv(fd, vec, vlen)
+    unsafe{ lx_orig::readv(fd, vec, vlen) }
 }
 
 #[inline]
 pub fn writev(fd : u64, vec : * const u8, vlen : u64) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::writev(fd, vec, vlen)
+    unsafe{ lx_orig::writev(fd, vec, vlen) }
 }
 
 #[inline]
 pub fn sendfile(out_fd : i32, in_fd : i32, offset : *mut i64, count : usize) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::sendfile(out_fd, in_fd, offset, count)
+    unsafe{ lx_orig::sendfile(out_fd, in_fd, offset, count) }
 }
 
 #[inline]
 pub fn fcntl(fd : u32, cmd : u32, arg : u64) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::fcntl(fd, cmd, arg)
+    unsafe{ lx_orig::fcntl(fd, cmd, arg) }
 }
 
 #[inline]
 pub fn flock(fd : u32, cmd : u32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::flock(fd, cmd)
+    unsafe{ lx_orig::flock(fd, cmd) }
 }
 
 #[inline]
 pub fn fsync(fd : u32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::fsync(fd)
+    unsafe{ lx_orig::fsync(fd) }
 }
 
 #[inline]
 pub fn fdatasync(fd : u32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::fdatasync(fd)
+    unsafe{ lx_orig::fdatasync(fd) }
 }
 
 #[inline]
 pub fn truncate(path : *const u8, length : i64) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::truncate(path, length)
+    unsafe{ lx_orig::truncate(path, length) }
 }
 
 #[inline]
 pub fn ftruncate(fd : u32, length : u64) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::ftruncate(fd, length)
+    unsafe{ lx_orig::ftruncate(fd, length) }
 }
 
 #[inline]
 pub fn getdents64(fd : u32, dirent : * const u8, count : u32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::getdents64(fd, dirent, count)
+    unsafe{ lx_orig::getdents64(fd, dirent, count) }
 }
 
 #[inline]
 pub fn getcwd(buf : *mut u8, size : u64) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::getcwd(buf, size)
+    unsafe{ lx_orig::getcwd(buf, size) }
 }
 
 #[inline]
 pub fn chdir(filename : *const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::chdir(filename)
+    unsafe{ lx_orig::chdir(filename) }
 }
 
 #[inline]
 pub fn renameat(olddfd : i32, oldname : *const u8, newdfd : i32, newname : *const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::renameat(olddfd, oldname, newdfd, newname)
+    unsafe{ lx_orig::renameat(olddfd, oldname, newdfd, newname) }
 }
 
 #[inline]
 pub fn mkdirat(dfd : i32, pathname : *const u8, mode : u16) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::mkdirat(dfd, pathname, mode)
+    unsafe{ lx_orig::mkdirat(dfd, pathname, mode) }
 }
 
 #[inline]
 pub fn linkat(olddfd : i32, oldname : *const u8, newdfd : i32, newname : *const u8, flags : i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::linkat(olddfd, oldname, newdfd, newname, flags)
+    unsafe{ lx_orig::linkat(olddfd, oldname, newdfd, newname, flags) }
 }
 
 #[inline]
 pub fn unlinkat(dfd : i32, pathname : *const u8, flag : i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::unlinkat(dfd, pathname, flag)
+    unsafe{ lx_orig::unlinkat(dfd, pathname, flag) }
 }
 
 #[inline]
 pub fn symlinkat(oldname : *const u8, newdfd : i32, newname : *const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::symlinkat(oldname, newdfd, newname)
+    unsafe{ lx_orig::symlinkat(oldname, newdfd, newname) }
 }
 
 #[inline]
 pub fn readlinkat(dfd : i32, path : *const u8, buf : *mut u8, bufsiz : i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::readlinkat(dfd, path, buf, bufsiz)
+    unsafe{ lx_orig::readlinkat(dfd, path, buf, bufsiz) }
 }
 
 #[inline]
 pub fn fchmod(fd : u32, mode : u16) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::fchmod(fd, mode)
+    unsafe{ lx_orig::fchmod(fd, mode) }
 }
 
 #[inline]
 pub fn fchmodat(dfd : i32, filename : *const u8, mode : u16) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::fchmodat(dfd, filename, mode)
+    unsafe{ lx_orig::fchmodat(dfd, filename, mode) }
 }
 
 #[inline]
 pub fn fchown(fd : u32, user : u32, group : u32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::fchown(fd, user, group)
+    unsafe{ lx_orig::fchown(fd, user, group) }
 }
 
 #[inline]
 pub fn fchownat(dfd : i32, filename : *const u8, user : u32, group : u32, flag : i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::fchownat(dfd, filename, user, group, flag)
+    unsafe{ lx_orig::fchownat(dfd, filename, user, group, flag) }
 }
 
 #[inline]
 pub fn faccessat(dfd : i32, filename : *const u8, mode : i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::faccessat(dfd, filename, mode)
+    unsafe{ lx_orig::faccessat(dfd, filename, mode) }
 }
 
 #[inline]
 pub fn dup3(oldfd : u32, newfd : u32, flags : i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::dup3(oldfd, newfd, flags)
+    unsafe{ lx_orig::dup3(oldfd, newfd, flags) }
 }
 
 #[inline]
 pub fn utimensat(dfd : i32, filename : *const u8, utimes : * const u8, flags : i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::utimensat(dfd, filename, utimes, flags)
+    unsafe{ lx_orig::utimensat(dfd, filename, utimes, flags) }
 }
 
 #[inline]
 pub fn copy_file_range(fd_in : i32, off_in : *mut i64, fd_out : i32, off_out : *mut i64, len : usize, flags : u32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::copy_file_range(fd_in, off_in, fd_out, off_out, len, flags)
+    unsafe{ lx_orig::copy_file_range(fd_in, off_in, fd_out, off_out, len, flags) }
 }
 
 #[inline]
 pub fn statfs(path : *const u8, buf : * const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::statfs(path, buf)
+    unsafe{ lx_orig::statfs(path, buf) }
 }
 
 #[inline]
 pub fn fstatfs(fd : u32, buf : * const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::fstatfs(fd, buf)
+    unsafe{ lx_orig::fstatfs(fd, buf) }
 }
 
 #[inline]
 pub fn sync() -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::sync()
+    unsafe{ lx_orig::sync() }
 }
 
 #[inline]
 pub fn mount(dev_name : *mut u8, dir_name : *mut u8, ty : *mut u8, flags : u64, data : *mut u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::mount(dev_name, dir_name, ty, flags, data)
+    unsafe{ lx_orig::mount(dev_name, dir_name, ty, flags, data) }
 }
 
 #[inline]
 pub fn umount2(arg1 : u64, arg2 : u64, arg3 : u64, arg4 : u64, arg5 : u64, arg6 : u64) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::umount2(arg1, arg2, arg3, arg4, arg5, arg6)
+    unsafe{ lx_orig::umount2(arg1, arg2, arg3, arg4, arg5, arg6) }
 }
 
 #[inline]
 pub fn brk(brk : u64) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::brk(brk)
+    unsafe{ lx_orig::brk(brk) }
 }
 
 #[inline]
 pub fn mmap(arg1 : u64, arg2 : u64, arg3 : u64, arg4 : u64, arg5 : u64, arg6 : u64) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::mmap(arg1, arg2, arg3, arg4, arg5, arg6)
+    unsafe{ lx_orig::mmap(arg1, arg2, arg3, arg4, arg5, arg6) }
 }
 
 #[inline]
 pub fn mprotect(start : u64, len : usize, prot : u64) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::mprotect(start, len, prot)
+    unsafe{ lx_orig::mprotect(start, len, prot) }
 }
 
 #[inline]
 pub fn munmap(addr : u64, len : usize) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::munmap(addr, len)
+    unsafe{ lx_orig::munmap(addr, len) }
 }
 
 #[inline]
 pub fn madvise(start : u64, len : usize, behavior : i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::madvise(start, len, behavior)
+    unsafe{ lx_orig::madvise(start, len, behavior) }
 }
 
 #[inline]
 pub fn rt_sigaction(arg1 : i32, arg2 : * const u8, arg3 : * const u8, size_t : usize) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::rt_sigaction(arg1, arg2, arg3, size_t)
+    unsafe{ lx_orig::rt_sigaction(arg1, arg2, arg3, size_t) }
 }
 
 #[inline]
 pub fn rt_sigprocmask(how : i32, set : u64, oset : u64, sigsetsize : usize) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::rt_sigprocmask(how, set, oset, sigsetsize)
+    unsafe{ lx_orig::rt_sigprocmask(how, set, oset, sigsetsize) }
 }
 
 #[inline]
 pub fn sigaltstack(uss : * const u8, uoss : * const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::sigaltstack(uss, uoss)
+    unsafe{ lx_orig::sigaltstack(uss, uoss) }
 }
 
 #[inline]
 pub fn clone(arg1 : * const u8, arg2 : * const u8, arg3 : *mut i32, arg4 : *mut i32, arg5 : * const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::clone(arg1, arg2, arg3, arg4, arg5)
+    unsafe{ lx_orig::clone(arg1, arg2, arg3, arg4, arg5) }
 }
 
 #[inline]
 pub fn execve(filename : *const u8, argv : *const *const u8, envp : *const *const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::execve(filename, argv, envp)
+    unsafe{ lx_orig::execve(filename, argv, envp) }
 }
 
 #[inline]
 pub fn exit(error_code : i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::exit(error_code)
+    unsafe{ lx_orig::exit(error_code) }
 }
 
 #[inline]
 pub fn exit_group(error_code : i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::exit_group(error_code)
+    unsafe{ lx_orig::exit_group(error_code) }
 }
 
 #[inline]
 pub fn wait4(pid : i32, stat_addr : *mut i32, options : i32, ru : * const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::wait4(pid, stat_addr, options, ru)
+    unsafe{ lx_orig::wait4(pid, stat_addr, options, ru) }
 }
 
 #[inline]
 pub fn set_tid_address(tidptr : *mut i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::set_tid_address(tidptr)
+    unsafe{ lx_orig::set_tid_address(tidptr) }
 }
 
 #[inline]
 pub fn futex(uaddr : *mut u32, op : i32, val : u32, utime : * const u8, uaddr2 : *mut u32, val3 : u32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::futex(uaddr, op, val, utime, uaddr2, val3)
+    unsafe{ lx_orig::futex(uaddr, op, val, utime, uaddr2, val3) }
 }
 
 #[inline]
 pub fn tkill(pid : i32, sig : i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::tkill(pid, sig)
+    unsafe{ lx_orig::tkill(pid, sig) }
 }
 
 #[inline]
 pub fn setitimer(which : i32, value : * const u8, ovalue : * const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::setitimer(which, value, ovalue)
+    unsafe{ lx_orig::setitimer(which, value, ovalue) }
 }
 
 #[inline]
 pub fn clock_gettime(which_clock : i32, tp : * const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::clock_gettime(which_clock, tp)
+    unsafe{ lx_orig::clock_gettime(which_clock, tp) }
 }
 
 #[inline]
 pub fn getpid() -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::getpid()
+    unsafe{ lx_orig::getpid() }
 }
 
 #[inline]
 pub fn gettid() -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::gettid()
+    unsafe{ lx_orig::gettid() }
 }
 
 #[inline]
 pub fn uname(arg1 : * const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::uname(arg1)
+    unsafe{ lx_orig::uname(arg1) }
 }
 
 #[inline]
 pub fn umask(mask : i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::umask(mask)
+    unsafe{ lx_orig::umask(mask) }
 }
 
 #[inline]
 pub fn getuid() -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::getuid()
+    unsafe{ lx_orig::getuid() }
 }
 
 #[inline]
 pub fn getgid() -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::getgid()
+    unsafe{ lx_orig::getgid() }
 }
 
 #[inline]
 pub fn setuid(uid : u32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::setuid(uid)
+    unsafe{ lx_orig::setuid(uid) }
 }
 
 #[inline]
 pub fn geteuid() -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::geteuid()
+    unsafe{ lx_orig::geteuid() }
 }
 
 #[inline]
 pub fn getegid() -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::getegid()
+    unsafe{ lx_orig::getegid() }
 }
 
 #[inline]
 pub fn setpgid(pid : i32, pgid : i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::setpgid(pid, pgid)
+    unsafe{ lx_orig::setpgid(pid, pgid) }
 }
 
 #[inline]
 pub fn getppid() -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::getppid()
+    unsafe{ lx_orig::getppid() }
 }
 
 #[inline]
 pub fn setsid() -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::setsid()
+    unsafe{ lx_orig::setsid() }
 }
 
 #[inline]
 pub fn getpgid(pid : i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::getpgid(pid)
+    unsafe{ lx_orig::getpgid(pid) }
 }
 
 #[inline]
 pub fn getgroups(gidsetsize : i32, grouplist : *mut u32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::getgroups(gidsetsize, grouplist)
+    unsafe{ lx_orig::getgroups(gidsetsize, grouplist) }
 }
 
 #[inline]
 pub fn setgroups(gidsetsize : i32, grouplist : *mut u32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::setgroups(gidsetsize, grouplist)
+    unsafe{ lx_orig::setgroups(gidsetsize, grouplist) }
 }
 
 #[inline]
 pub fn prctl(option : i32, arg2 : u64, arg3 : u64, arg4 : u64, arg5 : u64) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::prctl(option, arg2, arg3, arg4, arg5)
+    unsafe{ lx_orig::prctl(option, arg2, arg3, arg4, arg5) }
 }
 
 #[inline]
 pub fn membarrier(cmd : i32, flags : i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::membarrier(cmd, flags)
+    unsafe{ lx_orig::membarrier(cmd, flags) }
 }
 
 #[inline]
 pub fn rt_sigqueueinfo(pid : i32, sig : i32, uinfo : * const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::rt_sigqueueinfo(pid, sig, uinfo)
+    unsafe{ lx_orig::rt_sigqueueinfo(pid, sig, uinfo) }
 }
 
 #[inline]
 pub fn finit_module(fd : i32, uargs : *const u8, flags : i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::finit_module(fd, uargs, flags)
+    unsafe{ lx_orig::finit_module(fd, uargs, flags) }
 }
 
 #[inline]
 pub fn open(filename : *const u8, flags : i32, mode : u16) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::open(filename, flags, mode)
+    unsafe{ lx_orig::open(filename, flags, mode) }
 }
 
 #[inline]
 pub fn stat(filename : *const u8, statbuf : * const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::stat(filename, statbuf)
+    unsafe{ lx_orig::stat(filename, statbuf) }
 }
 
 #[inline]
 pub fn lstat(filename : *const u8, statbuf : * const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::lstat(filename, statbuf)
+    unsafe{ lx_orig::lstat(filename, statbuf) }
 }
 
 #[inline]
 pub fn access(filename : *const u8, mode : i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::access(filename, mode)
+    unsafe{ lx_orig::access(filename, mode) }
 }
 
 #[inline]
 pub fn dup2(oldfd : u32, newfd : u32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::dup2(oldfd, newfd)
+    unsafe{ lx_orig::dup2(oldfd, newfd) }
 }
 
 #[inline]
 pub fn fork() -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::fork()
+    unsafe{ lx_orig::fork() }
 }
 
 #[inline]
 pub fn vfork() -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::vfork()
+    unsafe{ lx_orig::vfork() }
 }
 
 #[inline]
 pub fn rename(oldname : *const u8, newname : *const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::rename(oldname, newname)
+    unsafe{ lx_orig::rename(oldname, newname) }
 }
 
 #[inline]
 pub fn mkdir(pathname : *const u8, mode : u16) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::mkdir(pathname, mode)
+    unsafe{ lx_orig::mkdir(pathname, mode) }
 }
 
 #[inline]
 pub fn rmdir(pathname : *const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::rmdir(pathname)
+    unsafe{ lx_orig::rmdir(pathname) }
 }
 
 #[inline]
 pub fn link(oldname : *const u8, newname : *const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::link(oldname, newname)
+    unsafe{ lx_orig::link(oldname, newname) }
 }
 
 #[inline]
 pub fn unlink(pathname : *const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::unlink(pathname)
+    unsafe{ lx_orig::unlink(pathname) }
 }
 
 #[inline]
 pub fn readlink(path : *const u8, buf : *mut u8, bufsiz : i32) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::readlink(path, buf, bufsiz)
+    unsafe{ lx_orig::readlink(path, buf, bufsiz) }
 }
 
 #[inline]
 pub fn arch_prctl(arg1 : u64, arg2 : u64, arg3 : u64, arg4 : u64, arg5 : u64, arg6 : u64) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::arch_prctl(arg1, arg2, arg3, arg4, arg5, arg6)
+    unsafe{ lx_orig::arch_prctl(arg1, arg2, arg3, arg4, arg5, arg6) }
 }
 
