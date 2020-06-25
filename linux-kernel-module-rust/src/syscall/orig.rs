@@ -97,13 +97,13 @@ mod lx_orig {
 
         pub fn madvise(start : u64, len : usize, behavior : i32) -> i64;
 
-        pub fn rt_sigaction(int : i32, arg2 : * const u8, arg3 : * const u8, size_t : usize) -> i64;
+        pub fn rt_sigaction(arg1 : i32, arg2 : * const u8, arg3 : * const u8, size_t : usize) -> i64;
 
         pub fn rt_sigprocmask(how : i32, set : u64, oset : u64, sigsetsize : usize) -> i64;
 
         pub fn sigaltstack(uss : * const u8, uoss : * const u8) -> i64;
 
-        pub fn clone(long : u64, long : u64, arg3 : *mut i32, arg4 : *mut i32, long : u64) -> i64;
+        pub fn clone(arg1 : * const u8, arg2 : * const u8, arg3 : *mut i32, arg4 : *mut i32, arg5 : * const u8) -> i64;
 
         pub fn execve(filename : *const u8, argv : *const *const u8, envp : *const *const u8) -> i64;
 
@@ -470,9 +470,9 @@ pub fn madvise(start : u64, len : usize, behavior : i32) -> i64 {
 }
 
 #[inline]
-pub fn rt_sigaction(int : i32, arg2 : * const u8, arg3 : * const u8, size_t : usize) -> i64 {
+pub fn rt_sigaction(arg1 : i32, arg2 : * const u8, arg3 : * const u8, size_t : usize) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::rt_sigaction(int, arg2, arg3, size_t)
+    lx_orig::rt_sigaction(arg1, arg2, arg3, size_t)
 }
 
 #[inline]
@@ -488,9 +488,9 @@ pub fn sigaltstack(uss : * const u8, uoss : * const u8) -> i64 {
 }
 
 #[inline]
-pub fn clone(long : u64, long : u64, arg3 : *mut i32, arg4 : *mut i32, long : u64) -> i64 {
+pub fn clone(arg1 : * const u8, arg2 : * const u8, arg3 : *mut i32, arg4 : *mut i32, arg5 : * const u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::clone(long, long, arg3, arg4, long)
+    lx_orig::clone(arg1, arg2, arg3, arg4, arg5)
 }
 
 #[inline]
