@@ -36,5 +36,3 @@ trs.each do |tr|
 end
 
 
-
-p $rust_type
