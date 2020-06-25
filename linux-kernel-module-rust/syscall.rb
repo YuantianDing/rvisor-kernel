@@ -1,3 +1,4 @@
+require 'nokogiri'
 
 $syscalls = Hash[]
 
