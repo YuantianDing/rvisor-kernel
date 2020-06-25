@@ -51,6 +51,8 @@ def parse_type(str)
     $name_num += 1
     if name == ""
         name = "arg#{$name_num}"
+    elsif name == "type"
+        name = "ty"
     end
     [name, type]
 end
