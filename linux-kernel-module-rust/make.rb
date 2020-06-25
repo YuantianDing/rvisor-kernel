@@ -28,7 +28,7 @@ end
 
 make do
     :orig_syscall .then do
-        cd dir('src/syscall')
+        cd 'src/syscall'
         File.open('orig.rs', 'w') do |f|
             f.puts "use {"
             f.puts "    super::*,"
