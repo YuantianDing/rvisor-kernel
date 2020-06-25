@@ -2,8 +2,14 @@
 
 require "ruby_make_script"
 
+syscall = {
+    
+}
+
 make do
     :orig_syscall .then do
-        r "./src/syscall/make.rb"
+        using dir('src/syscall') do
+            
+        end
     end
 end
