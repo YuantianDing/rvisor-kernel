@@ -10,6 +10,9 @@ end
 
 doc = File.open("syscall_table.html") { |f| Nokogiri::XML(f) }
 
+def parse_type(str)
+    str.match(/(\w*)$/)
+end
 
 syscalls = Hash[]
 syscallxml = doc.xpath("//tr")
@@ -17,7 +20,7 @@ syscallxml.each { |xml|
     tds = xml.xpath("//")
     if syscall_list[tds[1]] != nil
         tds[4..-1].each { |td|
-            syscall_list[tds[1]] += [td]
+            syscall_list[tds[1]] += [parse_type(td.content)]
         }
     end
 }
