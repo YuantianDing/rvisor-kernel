@@ -5,12 +5,14 @@ mod chim;
 use cshim::*;
 
 struct ProtFs {
-    oldfs: 
+    oldfs: bindings::mm_segment_t,
 }
 
 impl ProtFs {
     pub fn prot() -> Self {
-        Self{}
+        Self{
+            oldfs: protect_fs(),
+        }
     }
 }
 
