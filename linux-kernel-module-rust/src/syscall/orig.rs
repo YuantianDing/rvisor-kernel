@@ -1,191 +1,656 @@
 use {
     super::*,
-}
-mod cshim {
+    cshim::*,
+};
+
+mod lx_orig {
     extern "C" {
-        pub fn read(fd : u32, buf : *mut u8, count : usize);
+        pub fn read(fd : u32, buf : *mut u8, count : usize) -> i64;
 
-        pub fn write(fd : u32, buf : *const u8, count : usize);
+        pub fn write(fd : u32, buf : *const u8, count : usize) -> i64;
 
-        pub fn openat(dfd : i32, filename : *const u8, flags : i32, mode : u16);
+        pub fn openat(dfd : i32, filename : *const u8, flags : i32, mode : u16) -> i64;
 
-        pub fn close(fd : u32);
+        pub fn close(fd : u32) -> i64;
 
-        pub fn fstat(fd : u32, statbuf : * const u8);
+        pub fn fstat(fd : u32, statbuf : * const u8) -> i64;
 
-        pub fn newfstatat(dfd : i32, filename : *const u8, statbuf : * const u8, flag : i32);
+        pub fn newfstatat(dfd : i32, filename : *const u8, statbuf : * const u8, flag : i32) -> i64;
 
-        pub fn lseek(fd : u32, offset : i64, whence : u32);
+        pub fn lseek(fd : u32, offset : i64, whence : u32) -> i64;
 
-        pub fn ioctl(fd : u32, cmd : u32, arg : u64);
+        pub fn ioctl(fd : u32, cmd : u32, arg : u64) -> i64;
 
-        pub fn pread64(fd : u32, buf : *mut u8, count : usize, pos : i64);
+        pub fn pread64(fd : u32, buf : *mut u8, count : usize, pos : i64) -> i64;
 
-        pub fn pwrite64(fd : u32, buf : *const u8, count : usize, pos : i64);
+        pub fn pwrite64(fd : u32, buf : *const u8, count : usize, pos : i64) -> i64;
 
-        pub fn readv(fd : u64, vec : * const u8, vlen : u64);
+        pub fn readv(fd : u64, vec : * const u8, vlen : u64) -> i64;
 
-        pub fn writev(fd : u64, vec : * const u8, vlen : u64);
+        pub fn writev(fd : u64, vec : * const u8, vlen : u64) -> i64;
 
-        pub fn sendfile(out_fd : i32, in_fd : i32, offset : *mut i64, count : usize);
+        pub fn sendfile(out_fd : i32, in_fd : i32, offset : *mut i64, count : usize) -> i64;
 
-        pub fn fcntl(fd : u32, cmd : u32, arg : u64);
+        pub fn fcntl(fd : u32, cmd : u32, arg : u64) -> i64;
 
-        pub fn flock(fd : u32, cmd : u32);
+        pub fn flock(fd : u32, cmd : u32) -> i64;
 
-        pub fn fsync(fd : u32);
+        pub fn fsync(fd : u32) -> i64;
 
-        pub fn fdatasync(fd : u32);
+        pub fn fdatasync(fd : u32) -> i64;
 
-        pub fn truncate(path : *const u8, length : i64);
+        pub fn truncate(path : *const u8, length : i64) -> i64;
 
-        pub fn ftruncate(fd : u32, length : u64);
+        pub fn ftruncate(fd : u32, length : u64) -> i64;
 
-        pub fn getdents64(fd : u32, dirent : * const u8, count : u32);
+        pub fn getdents64(fd : u32, dirent : * const u8, count : u32) -> i64;
 
-        pub fn getcwd(buf : *mut u8, size : u64);
+        pub fn getcwd(buf : *mut u8, size : u64) -> i64;
 
-        pub fn chdir(filename : *const u8);
+        pub fn chdir(filename : *const u8) -> i64;
 
-        pub fn renameat(olddfd : i32, oldname : *const u8, newdfd : i32, newname : *const u8);
+        pub fn renameat(olddfd : i32, oldname : *const u8, newdfd : i32, newname : *const u8) -> i64;
 
-        pub fn mkdirat(dfd : i32, pathname : *const u8, mode : u16);
+        pub fn mkdirat(dfd : i32, pathname : *const u8, mode : u16) -> i64;
 
-        pub fn linkat(olddfd : i32, oldname : *const u8, newdfd : i32, newname : *const u8, flags : i32);
+        pub fn linkat(olddfd : i32, oldname : *const u8, newdfd : i32, newname : *const u8, flags : i32) -> i64;
 
-        pub fn unlinkat(dfd : i32, pathname : *const u8, flag : i32);
+        pub fn unlinkat(dfd : i32, pathname : *const u8, flag : i32) -> i64;
 
-        pub fn symlinkat(oldname : *const u8, newdfd : i32, newname : *const u8);
+        pub fn symlinkat(oldname : *const u8, newdfd : i32, newname : *const u8) -> i64;
 
-        pub fn readlinkat(dfd : i32, path : *const u8, buf : *mut u8, bufsiz : i32);
+        pub fn readlinkat(dfd : i32, path : *const u8, buf : *mut u8, bufsiz : i32) -> i64;
 
-        pub fn fchmod(fd : u32, mode : u16);
+        pub fn fchmod(fd : u32, mode : u16) -> i64;
 
-        pub fn fchmodat(dfd : i32, filename : *const u8, mode : u16);
+        pub fn fchmodat(dfd : i32, filename : *const u8, mode : u16) -> i64;
 
-        pub fn fchown(fd : u32, user : u32, group : u32);
+        pub fn fchown(fd : u32, user : u32, group : u32) -> i64;
 
-        pub fn fchownat(dfd : i32, filename : *const u8, user : u32, group : u32, flag : i32);
+        pub fn fchownat(dfd : i32, filename : *const u8, user : u32, group : u32, flag : i32) -> i64;
 
-        pub fn faccessat(dfd : i32, filename : *const u8, mode : i32);
+        pub fn faccessat(dfd : i32, filename : *const u8, mode : i32) -> i64;
 
-        pub fn dup3(oldfd : u32, newfd : u32, flags : i32);
+        pub fn dup3(oldfd : u32, newfd : u32, flags : i32) -> i64;
 
-        pub fn utimensat(dfd : i32, filename : *const u8, utimes : * const u8, flags : i32);
+        pub fn utimensat(dfd : i32, filename : *const u8, utimes : * const u8, flags : i32) -> i64;
 
-        pub fn copy_file_range(fd_in : i32, off_in : *mut i64, fd_out : i32, off_out : *mut i64, len : usize, flags : u32);
+        pub fn copy_file_range(fd_in : i32, off_in : *mut i64, fd_out : i32, off_out : *mut i64, len : usize, flags : u32) -> i64;
 
-        pub fn statfs(path : *const u8, buf : * const u8);
+        pub fn statfs(path : *const u8, buf : * const u8) -> i64;
 
-        pub fn fstatfs(fd : u32, buf : * const u8);
+        pub fn fstatfs(fd : u32, buf : * const u8) -> i64;
 
-        pub fn sync();
+        pub fn sync() -> i64;
 
-        pub fn mount(dev_name : *mut u8, dir_name : *mut u8, type : *mut u8, flags : u64, data : *mut u8);
+        pub fn mount(dev_name : *mut u8, dir_name : *mut u8, type : *mut u8, flags : u64, data : *mut u8) -> i64;
 
-        pub fn umount2( : u64,  : u64,  : u64,  : u64,  : u64,  : u64);
+        pub fn umount2( : u64,  : u64,  : u64,  : u64,  : u64,  : u64) -> i64;
 
-        pub fn brk(brk : u64);
+        pub fn brk(brk : u64) -> i64;
 
-        pub fn mmap( : u64,  : u64,  : u64,  : u64,  : u64,  : u64);
+        pub fn mmap( : u64,  : u64,  : u64,  : u64,  : u64,  : u64) -> i64;
 
-        pub fn mprotect(start : u64, len : usize, prot : u64);
+        pub fn mprotect(start : u64, len : usize, prot : u64) -> i64;
 
-        pub fn munmap(addr : u64, len : usize);
+        pub fn munmap(addr : u64, len : usize) -> i64;
 
-        pub fn madvise(start : u64, len : usize, behavior : i32);
+        pub fn madvise(start : u64, len : usize, behavior : i32) -> i64;
 
-        pub fn rt_sigaction(int : i32,  : * const u8,  : * const u8, size_t : usoze);
+        pub fn rt_sigaction(int : i32,  : * const u8,  : * const u8, size_t : usoze) -> i64;
 
-        pub fn rt_sigprocmask(how : i32, set : u64, oset : u64, sigsetsize : usize);
+        pub fn rt_sigprocmask(how : i32, set : u64, oset : u64, sigsetsize : usize) -> i64;
 
-        pub fn sigaltstack(uss : * const u8, uoss : * const u8);
+        pub fn sigaltstack(uss : * const u8, uoss : * const u8) -> i64;
 
-        pub fn clone(long : u64, long : u64,  : *mut i32,  : *mut i32, long : u64);
+        pub fn clone(long : u64, long : u64,  : *mut i32,  : *mut i32, long : u64) -> i64;
 
-        pub fn execve(filename : *const u8, argv : *const *const u8, envp : *const *const u8);
+        pub fn execve(filename : *const u8, argv : *const *const u8, envp : *const *const u8) -> i64;
 
-        pub fn exit(error_code : i32);
+        pub fn exit(error_code : i32) -> i64;
 
-        pub fn exit_group(error_code : i32);
+        pub fn exit_group(error_code : i32) -> i64;
 
-        pub fn wait4(pid : i32, stat_addr : *mut i32, options : i32, ru : * const u8);
+        pub fn wait4(pid : i32, stat_addr : *mut i32, options : i32, ru : * const u8) -> i64;
 
-        pub fn set_tid_address(tidptr : *mut i32);
+        pub fn set_tid_address(tidptr : *mut i32) -> i64;
 
-        pub fn futex(uaddr : *mut u32, op : i32, val : u32, utime : * const u8, uaddr2 : *mut u32, val3 : u32);
+        pub fn futex(uaddr : *mut u32, op : i32, val : u32, utime : * const u8, uaddr2 : *mut u32, val3 : u32) -> i64;
 
-        pub fn tkill(pid : i32, sig : i32);
+        pub fn tkill(pid : i32, sig : i32) -> i64;
 
-        pub fn setitimer(which : i32, value : * const u8, ovalue : * const u8);
+        pub fn setitimer(which : i32, value : * const u8, ovalue : * const u8) -> i64;
 
-        pub fn clock_gettime(which_clock : i32, tp : * const u8);
+        pub fn clock_gettime(which_clock : i32, tp : * const u8) -> i64;
 
-        pub fn getpid();
+        pub fn getpid() -> i64;
 
-        pub fn gettid();
+        pub fn gettid() -> i64;
 
-        pub fn uname( : * const u8);
+        pub fn uname( : * const u8) -> i64;
 
-        pub fn umask(mask : i32);
+        pub fn umask(mask : i32) -> i64;
 
-        pub fn getuid();
+        pub fn getuid() -> i64;
 
-        pub fn getgid();
+        pub fn getgid() -> i64;
 
-        pub fn setuid(uid : u32);
+        pub fn setuid(uid : u32) -> i64;
 
-        pub fn geteuid();
+        pub fn geteuid() -> i64;
 
-        pub fn getegid();
+        pub fn getegid() -> i64;
 
-        pub fn setpgid(pid : i32, pgid : i32);
+        pub fn setpgid(pid : i32, pgid : i32) -> i64;
 
-        pub fn getppid();
+        pub fn getppid() -> i64;
 
-        pub fn setsid();
+        pub fn setsid() -> i64;
 
-        pub fn getpgid(pid : i32);
+        pub fn getpgid(pid : i32) -> i64;
 
-        pub fn getgroups(gidsetsize : i32, grouplist : *mut u32);
+        pub fn getgroups(gidsetsize : i32, grouplist : *mut u32) -> i64;
 
-        pub fn setgroups(gidsetsize : i32, grouplist : *mut u32);
+        pub fn setgroups(gidsetsize : i32, grouplist : *mut u32) -> i64;
 
-        pub fn prctl(option : i32, arg2 : u64, arg3 : u64, arg4 : u64, arg5 : u64);
+        pub fn prctl(option : i32, arg2 : u64, arg3 : u64, arg4 : u64, arg5 : u64) -> i64;
 
-        pub fn membarrier(cmd : i32, flags : i32);
+        pub fn membarrier(cmd : i32, flags : i32) -> i64;
 
-        pub fn rt_sigqueueinfo(pid : i32, sig : i32, uinfo : * const u8);
+        pub fn rt_sigqueueinfo(pid : i32, sig : i32, uinfo : * const u8) -> i64;
 
-        pub fn finit_module(fd : i32, uargs : *const u8, flags : i32);
+        pub fn finit_module(fd : i32, uargs : *const u8, flags : i32) -> i64;
 
-        pub fn open(filename : *const u8, flags : i32, mode : u16);
+        pub fn open(filename : *const u8, flags : i32, mode : u16) -> i64;
 
-        pub fn stat(filename : *const u8, statbuf : * const u8);
+        pub fn stat(filename : *const u8, statbuf : * const u8) -> i64;
 
-        pub fn lstat(filename : *const u8, statbuf : * const u8);
+        pub fn lstat(filename : *const u8, statbuf : * const u8) -> i64;
 
-        pub fn access(filename : *const u8, mode : i32);
+        pub fn access(filename : *const u8, mode : i32) -> i64;
 
-        pub fn dup2(oldfd : u32, newfd : u32);
+        pub fn dup2(oldfd : u32, newfd : u32) -> i64;
 
-        pub fn fork();
+        pub fn fork() -> i64;
 
-        pub fn vfork();
+        pub fn vfork() -> i64;
 
-        pub fn rename(oldname : *const u8, newname : *const u8);
+        pub fn rename(oldname : *const u8, newname : *const u8) -> i64;
 
-        pub fn mkdir(pathname : *const u8, mode : u16);
+        pub fn mkdir(pathname : *const u8, mode : u16) -> i64;
 
-        pub fn rmdir(pathname : *const u8);
+        pub fn rmdir(pathname : *const u8) -> i64;
 
-        pub fn link(oldname : *const u8, newname : *const u8);
+        pub fn link(oldname : *const u8, newname : *const u8) -> i64;
 
-        pub fn unlink(pathname : *const u8);
+        pub fn unlink(pathname : *const u8) -> i64;
 
-        pub fn readlink(path : *const u8, buf : *mut u8, bufsiz : i32);
+        pub fn readlink(path : *const u8, buf : *mut u8, bufsiz : i32) -> i64;
 
-        pub fn arch_prctl( : u64,  : u64,  : u64,  : u64,  : u64,  : u64);
+        pub fn arch_prctl( : u64,  : u64,  : u64,  : u64,  : u64,  : u64) -> i64;
 
     }
+};
+
+use lx_orig;
+
+pub fn read(fd : u32, buf : *mut u8, count : usize) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::read(fd, buf, count)
 }
+
+pub fn write(fd : u32, buf : *const u8, count : usize) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::write(fd, buf, count)
+}
+
+pub fn openat(dfd : i32, filename : *const u8, flags : i32, mode : u16) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::openat(dfd, filename, flags, mode)
+}
+
+pub fn close(fd : u32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::close(fd)
+}
+
+pub fn fstat(fd : u32, statbuf : * const u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::fstat(fd, statbuf)
+}
+
+pub fn newfstatat(dfd : i32, filename : *const u8, statbuf : * const u8, flag : i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::newfstatat(dfd, filename, statbuf, flag)
+}
+
+pub fn lseek(fd : u32, offset : i64, whence : u32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::lseek(fd, offset, whence)
+}
+
+pub fn ioctl(fd : u32, cmd : u32, arg : u64) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::ioctl(fd, cmd, arg)
+}
+
+pub fn pread64(fd : u32, buf : *mut u8, count : usize, pos : i64) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::pread64(fd, buf, count, pos)
+}
+
+pub fn pwrite64(fd : u32, buf : *const u8, count : usize, pos : i64) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::pwrite64(fd, buf, count, pos)
+}
+
+pub fn readv(fd : u64, vec : * const u8, vlen : u64) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::readv(fd, vec, vlen)
+}
+
+pub fn writev(fd : u64, vec : * const u8, vlen : u64) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::writev(fd, vec, vlen)
+}
+
+pub fn sendfile(out_fd : i32, in_fd : i32, offset : *mut i64, count : usize) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::sendfile(out_fd, in_fd, offset, count)
+}
+
+pub fn fcntl(fd : u32, cmd : u32, arg : u64) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::fcntl(fd, cmd, arg)
+}
+
+pub fn flock(fd : u32, cmd : u32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::flock(fd, cmd)
+}
+
+pub fn fsync(fd : u32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::fsync(fd)
+}
+
+pub fn fdatasync(fd : u32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::fdatasync(fd)
+}
+
+pub fn truncate(path : *const u8, length : i64) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::truncate(path, length)
+}
+
+pub fn ftruncate(fd : u32, length : u64) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::ftruncate(fd, length)
+}
+
+pub fn getdents64(fd : u32, dirent : * const u8, count : u32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::getdents64(fd, dirent, count)
+}
+
+pub fn getcwd(buf : *mut u8, size : u64) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::getcwd(buf, size)
+}
+
+pub fn chdir(filename : *const u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::chdir(filename)
+}
+
+pub fn renameat(olddfd : i32, oldname : *const u8, newdfd : i32, newname : *const u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::renameat(olddfd, oldname, newdfd, newname)
+}
+
+pub fn mkdirat(dfd : i32, pathname : *const u8, mode : u16) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::mkdirat(dfd, pathname, mode)
+}
+
+pub fn linkat(olddfd : i32, oldname : *const u8, newdfd : i32, newname : *const u8, flags : i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::linkat(olddfd, oldname, newdfd, newname, flags)
+}
+
+pub fn unlinkat(dfd : i32, pathname : *const u8, flag : i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::unlinkat(dfd, pathname, flag)
+}
+
+pub fn symlinkat(oldname : *const u8, newdfd : i32, newname : *const u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::symlinkat(oldname, newdfd, newname)
+}
+
+pub fn readlinkat(dfd : i32, path : *const u8, buf : *mut u8, bufsiz : i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::readlinkat(dfd, path, buf, bufsiz)
+}
+
+pub fn fchmod(fd : u32, mode : u16) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::fchmod(fd, mode)
+}
+
+pub fn fchmodat(dfd : i32, filename : *const u8, mode : u16) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::fchmodat(dfd, filename, mode)
+}
+
+pub fn fchown(fd : u32, user : u32, group : u32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::fchown(fd, user, group)
+}
+
+pub fn fchownat(dfd : i32, filename : *const u8, user : u32, group : u32, flag : i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::fchownat(dfd, filename, user, group, flag)
+}
+
+pub fn faccessat(dfd : i32, filename : *const u8, mode : i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::faccessat(dfd, filename, mode)
+}
+
+pub fn dup3(oldfd : u32, newfd : u32, flags : i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::dup3(oldfd, newfd, flags)
+}
+
+pub fn utimensat(dfd : i32, filename : *const u8, utimes : * const u8, flags : i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::utimensat(dfd, filename, utimes, flags)
+}
+
+pub fn copy_file_range(fd_in : i32, off_in : *mut i64, fd_out : i32, off_out : *mut i64, len : usize, flags : u32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::copy_file_range(fd_in, off_in, fd_out, off_out, len, flags)
+}
+
+pub fn statfs(path : *const u8, buf : * const u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::statfs(path, buf)
+}
+
+pub fn fstatfs(fd : u32, buf : * const u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::fstatfs(fd, buf)
+}
+
+pub fn sync() -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::sync()
+}
+
+pub fn mount(dev_name : *mut u8, dir_name : *mut u8, type : *mut u8, flags : u64, data : *mut u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::mount(dev_name, dir_name, type, flags, data)
+}
+
+pub fn umount2( : u64,  : u64,  : u64,  : u64,  : u64,  : u64) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::umount2(, , , , , )
+}
+
+pub fn brk(brk : u64) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::brk(brk)
+}
+
+pub fn mmap( : u64,  : u64,  : u64,  : u64,  : u64,  : u64) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::mmap(, , , , , )
+}
+
+pub fn mprotect(start : u64, len : usize, prot : u64) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::mprotect(start, len, prot)
+}
+
+pub fn munmap(addr : u64, len : usize) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::munmap(addr, len)
+}
+
+pub fn madvise(start : u64, len : usize, behavior : i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::madvise(start, len, behavior)
+}
+
+pub fn rt_sigaction(int : i32,  : * const u8,  : * const u8, size_t : usoze) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::rt_sigaction(int, , , size_t)
+}
+
+pub fn rt_sigprocmask(how : i32, set : u64, oset : u64, sigsetsize : usize) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::rt_sigprocmask(how, set, oset, sigsetsize)
+}
+
+pub fn sigaltstack(uss : * const u8, uoss : * const u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::sigaltstack(uss, uoss)
+}
+
+pub fn clone(long : u64, long : u64,  : *mut i32,  : *mut i32, long : u64) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::clone(long, long, , , long)
+}
+
+pub fn execve(filename : *const u8, argv : *const *const u8, envp : *const *const u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::execve(filename, argv, envp)
+}
+
+pub fn exit(error_code : i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::exit(error_code)
+}
+
+pub fn exit_group(error_code : i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::exit_group(error_code)
+}
+
+pub fn wait4(pid : i32, stat_addr : *mut i32, options : i32, ru : * const u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::wait4(pid, stat_addr, options, ru)
+}
+
+pub fn set_tid_address(tidptr : *mut i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::set_tid_address(tidptr)
+}
+
+pub fn futex(uaddr : *mut u32, op : i32, val : u32, utime : * const u8, uaddr2 : *mut u32, val3 : u32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::futex(uaddr, op, val, utime, uaddr2, val3)
+}
+
+pub fn tkill(pid : i32, sig : i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::tkill(pid, sig)
+}
+
+pub fn setitimer(which : i32, value : * const u8, ovalue : * const u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::setitimer(which, value, ovalue)
+}
+
+pub fn clock_gettime(which_clock : i32, tp : * const u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::clock_gettime(which_clock, tp)
+}
+
+pub fn getpid() -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::getpid()
+}
+
+pub fn gettid() -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::gettid()
+}
+
+pub fn uname( : * const u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::uname()
+}
+
+pub fn umask(mask : i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::umask(mask)
+}
+
+pub fn getuid() -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::getuid()
+}
+
+pub fn getgid() -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::getgid()
+}
+
+pub fn setuid(uid : u32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::setuid(uid)
+}
+
+pub fn geteuid() -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::geteuid()
+}
+
+pub fn getegid() -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::getegid()
+}
+
+pub fn setpgid(pid : i32, pgid : i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::setpgid(pid, pgid)
+}
+
+pub fn getppid() -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::getppid()
+}
+
+pub fn setsid() -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::setsid()
+}
+
+pub fn getpgid(pid : i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::getpgid(pid)
+}
+
+pub fn getgroups(gidsetsize : i32, grouplist : *mut u32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::getgroups(gidsetsize, grouplist)
+}
+
+pub fn setgroups(gidsetsize : i32, grouplist : *mut u32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::setgroups(gidsetsize, grouplist)
+}
+
+pub fn prctl(option : i32, arg2 : u64, arg3 : u64, arg4 : u64, arg5 : u64) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::prctl(option, arg2, arg3, arg4, arg5)
+}
+
+pub fn membarrier(cmd : i32, flags : i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::membarrier(cmd, flags)
+}
+
+pub fn rt_sigqueueinfo(pid : i32, sig : i32, uinfo : * const u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::rt_sigqueueinfo(pid, sig, uinfo)
+}
+
+pub fn finit_module(fd : i32, uargs : *const u8, flags : i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::finit_module(fd, uargs, flags)
+}
+
+pub fn open(filename : *const u8, flags : i32, mode : u16) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::open(filename, flags, mode)
+}
+
+pub fn stat(filename : *const u8, statbuf : * const u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::stat(filename, statbuf)
+}
+
+pub fn lstat(filename : *const u8, statbuf : * const u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::lstat(filename, statbuf)
+}
+
+pub fn access(filename : *const u8, mode : i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::access(filename, mode)
+}
+
+pub fn dup2(oldfd : u32, newfd : u32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::dup2(oldfd, newfd)
+}
+
+pub fn fork() -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::fork()
+}
+
+pub fn vfork() -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::vfork()
+}
+
+pub fn rename(oldname : *const u8, newname : *const u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::rename(oldname, newname)
+}
+
+pub fn mkdir(pathname : *const u8, mode : u16) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::mkdir(pathname, mode)
+}
+
+pub fn rmdir(pathname : *const u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::rmdir(pathname)
+}
+
+pub fn link(oldname : *const u8, newname : *const u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::link(oldname, newname)
+}
+
+pub fn unlink(pathname : *const u8) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::unlink(pathname)
+}
+
+pub fn readlink(path : *const u8, buf : *mut u8, bufsiz : i32) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::readlink(path, buf, bufsiz)
+}
+
+pub fn arch_prctl( : u64,  : u64,  : u64,  : u64,  : u64,  : u64) -> i64 {
+    let fs = ProtFs::prot();
+    lx_orig::arch_prctl(, , , , , )
+}
+

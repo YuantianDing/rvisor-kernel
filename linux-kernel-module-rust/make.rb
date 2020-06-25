@@ -47,6 +47,7 @@ make do
             f.puts "use lx_orig;"
             f.puts ""
         $syscalls.each do |k, v|
+            f.puts "#[inline]"
             f.puts "pub fn #{k}(#{rust_pair(v).join(', ')}) -> i64 {"
             f.puts "    let fs = ProtFs::prot();"
             f.puts "    lx_orig::#{k}(#{v.map{ |n,t| n }.join(', ')})"
