@@ -49,8 +49,9 @@ make do
         $syscalls.each do |k, v|
             f.puts "pub fn #{k}(#{rust_pair(v).join(', ')}) -> i64 {"
             f.puts "    let fs = ProtFs::prot();"
-            f.puts "    lx_orig::#{k}(#{v.map{|v| v[0]}.join(', ')})"
+            f.puts "    lx_orig::#{k}(#{v.map{ |n,t| n }.join(', ')})"
             f.puts "}"
+            f.puts ""
         end
             
         end
