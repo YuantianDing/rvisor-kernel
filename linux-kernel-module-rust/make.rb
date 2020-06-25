@@ -3,8 +3,8 @@
 require "ruby_make_script"
 require 'nokogiri'
 
-File.readlines("../zCore/") do |line|
-
+File.readlines("../zCore/linux-syscall/src/lib.rs") do |line|
+    
 end
 syscall_list = 
 
