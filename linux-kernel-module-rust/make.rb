@@ -3,7 +3,7 @@
 require "ruby_make_script"
 require 'nokogiri'
 
-doc = File.open("blossom.xml") { |f| Nokogiri::XML(f) }
+doc = File.open("syscall_table.html") { |f| Nokogiri::XML(f) }
 
 p doc
 
