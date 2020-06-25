@@ -9,8 +9,10 @@ use {
 };
 
 mod cshim;
-
 use cshim::*;
+
+mod orig;
+pub use orig::*;
 
 pub struct ProtFs {
     oldfs: bindings::mm_segment_t,
