@@ -21,8 +21,8 @@ require "./syscall.rb"
 "
 
 def rust_pair(v)
-    v.map { |p|
-        
+    v.map { |name, ty|
+        "#{name} : #{rust_type(ty)}"
     }
 end
 
