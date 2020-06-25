@@ -5,6 +5,7 @@ require 'nokogiri'
 
 syscalls = Hash[]
 File.readlines("../zCore/linux-syscall/src/lib.rs") do |line|
+    p line
     str = line.match(/^\W*Sys::(\w+)/)[1]
     syscalls[str.downcase] = []
 end
