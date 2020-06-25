@@ -3,7 +3,8 @@
 require "ruby_make_script"
 require 'rexml/document'
 
-doc = Document.new(File.new("syscall_table.html"))
+file = File.new("syscall_table.html")
+doc = Document.new(file)
 
 puts doc
 
