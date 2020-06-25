@@ -25,9 +25,10 @@ trs = doc.xpath("//tr")
 
 trs.each { |tr|
     tds = tr.children
+    p tds[1]
     if syscalls[tds[1]] != nil
         tds[4..-1].each { |td|
-            syscalls[tds[1]] += [parse_type(td.content)]
+            syscalls[tds[1]] += [parse_type(td)]
         }
     end
 }
