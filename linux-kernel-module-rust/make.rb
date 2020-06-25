@@ -49,7 +49,7 @@ make do
             f.puts "#[inline]"
             f.puts "pub fn #{k}(#{rust_pair(v).join(', ')}) -> i64 {"
             f.puts "    let fs = ProtFs::prot();"
-            f.puts "    lx_orig::#{k}(#{v.map{ |n,t| n }.join(', ')})"
+            f.puts "    unsafe{ lx_orig::#{k}(#{v.map{ |n,t| n }.join(', ')}) }"
             f.puts "}"
             f.puts ""
         end
