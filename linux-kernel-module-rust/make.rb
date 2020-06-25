@@ -16,6 +16,8 @@ def parse_type(str)
     [name, type]
 end
 
+puts syscalls
+
 syscallxml = doc.xpath("//tr")
 syscallxml.each { |xml|
     tds = xml.xpath("//td")
