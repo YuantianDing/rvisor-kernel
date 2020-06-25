@@ -6,7 +6,6 @@ require 'nokogiri'
 syscalls = Hash[]
 
 File.readlines("../zCore/linux-syscall/src/lib.rs").each do |line|
-    p line
     m = line.match(/^\W*Sys::(\w+)/)
     if m
         syscalls[m[1].downcase] = []
@@ -25,6 +24,7 @@ end
 syscallxml = doc.xpath("//tr")
 syscallxml.each { |xml|
     tds = xml.xpath("//td")
+    p tds
     if syscalls[tds[1]] != nil
         tds[4..-1].each { |td|
             syscalls[tds[1]] += [parse_type(td.content)]
@@ -32,7 +32,6 @@ syscallxml.each { |xml|
     end
 }
 
-puts syscalls
 
 make do
     :orig_syscall .then do
