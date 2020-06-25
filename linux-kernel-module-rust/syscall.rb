@@ -16,7 +16,7 @@ $rust_type = Hash[
     "size_t"=>"usoze",
     "sigset_t *"=>"u64",
     "loff_t "=>"i64",
-    "off_t *"=>"*mut u64",
+    "off_t *"=>"*mut i64",
     "unsigned "=>"u64",
     "int *"=>"*mut i32",
     "const char *const *"=>"*const *const u8",
@@ -64,4 +64,11 @@ trs.each do |tr|
     end
 end
 
+def rust_type(str)
+    if $rust_type[str]
+        return $rust_type[str]
+    else
+        return "* const u8"
+    end
+end
 
