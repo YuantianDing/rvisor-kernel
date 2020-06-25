@@ -2,9 +2,9 @@
 
 require "ruby_make_script"
 
-syscall = {
+syscall = [
     
-}
+]
 
 make do
     :orig_syscall .then do
