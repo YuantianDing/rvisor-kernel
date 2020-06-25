@@ -4,11 +4,11 @@ $syscalls = Hash[]
 
 $rust_type = Hash[
     "unsigned int "=> "u32",
-    "char *"=>"* const u8",
+    "char *"=>"*mut u8",
     "size_t "=> "usize",
-    "const char *"=> "* const u8",
-    "int "=>"missing",
-    "umode_t "=>"missing",
+    "const char *"=> "*const u8",
+    "int "=>"i32",
+    "umode_t "=>"",
     "struct __old_kernel_stat *"=>"missing",
     "off_t "=>"missing",
     "?"=>"missing",
