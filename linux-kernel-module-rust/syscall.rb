@@ -2,6 +2,10 @@ require 'nokogiri'
 
 $syscalls = Hash[]
 
+$rust_type = Hash [
+    "unsigned int"
+]
+
 File.readlines("../zCore/linux-syscall/src/lib.rs").each do |line|
     m = line.match(/^[\s\t]*Sys::(\w+)/)
     if m
@@ -15,6 +19,7 @@ doc = File.open("syscall_table.html") { |f| Nokogiri::XML(f) }
 def parse_type(str)
     name = str.match(/(\w*)$/)[1]
     type = str[0..(str.length - name.length - 1)]
+    $rust_type[type] = 'missing'
     [name, type]
 end
 
@@ -32,9 +37,7 @@ trs.each do |tr|
     end
 end
 
-$rust_type = Hash [
-    "unsigned int"
-]
+
 
 def rust_ty()
 
