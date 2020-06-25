@@ -5,8 +5,6 @@ require 'nokogiri'
 
 doc = File.open("syscall_table.html") { |f| Nokogiri::XML(f) }
 
-p doc
-
 make do
     :orig_syscall .then do
         using dir('src/syscall') do
