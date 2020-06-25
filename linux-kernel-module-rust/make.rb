@@ -6,7 +6,7 @@ require 'rexml/document'
 file = File.new("syscall_table.html")
 doc = Document.new(file)
 
-p doc
+p doc == nil
 
 make do
     :orig_syscall .then do
