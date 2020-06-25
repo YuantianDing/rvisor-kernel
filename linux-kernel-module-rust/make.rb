@@ -5,7 +5,12 @@ require 'nokogiri'
 
 doc = File.open("syscall_table.html") { |f| Nokogiri::XML(f) }
 
-doc.
+syscalls = Hash[]
+syscallxml = doc.xpath("//tr")
+syscallxml.each { |xml|
+    xml.xpath("//")
+}
+
 
 make do
     :orig_syscall .then do
