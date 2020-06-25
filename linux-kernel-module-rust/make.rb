@@ -4,11 +4,11 @@ require "ruby_make_script"
 require 'nokogiri'
 
 syscalls = Hash[]
-File.readlines("../zCore/linux-syscall/src/lib.rs") do |line|
+File.readlines("../zCore/linux-syscall/src/lib.rs") { |line|
     p line
     str = line.match(/^\W*Sys::(\w+)/)[1]
     syscalls[str.downcase] = []
-end
+}
 
 doc = File.open("syscall_table.html") { |f| Nokogiri::XML(f) }
 
