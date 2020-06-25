@@ -5,7 +5,7 @@ require 'nokogiri'
 
 syscall_list = []
 File.readlines("../zCore/linux-syscall/src/lib.rs") do |line|
-    syscall_list += [line.match(/^\W*Sys::(\w+)/)[1]]
+    syscall_list += [line.match(/^\W*Sys::(\w+)/)[1]].downcase
 end
 
 doc = File.open("syscall_table.html") { |f| Nokogiri::XML(f) }
