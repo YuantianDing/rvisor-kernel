@@ -5,7 +5,8 @@ use {
         KernelResult,
         Error,
     }
-}
+};
+
 mod cshim;
 
 use cshim::*;
