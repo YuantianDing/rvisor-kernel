@@ -3,5 +3,4 @@ members = [
     "linux-kernel-module-rust",
 ]
 
-exclude = [
-]
+exclude = []
