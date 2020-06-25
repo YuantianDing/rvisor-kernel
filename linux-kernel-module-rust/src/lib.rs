@@ -48,6 +48,7 @@ extern crate alloc;
 use core::panic::PanicInfo;
 
 mod allocator;
+pub mod syscall;
 pub mod bindings;
 pub mod c_types;
 pub mod chrdev;
