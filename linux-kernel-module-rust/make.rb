@@ -29,7 +29,6 @@ end
 make do
     :orig_syscall .then do
         using dir('src/syscall') do
-            r "touch orig.rs"
             File.open('orig.rs', 'w') do |f|
                 f.puts "use {"
                 f.puts "    super::*,"
