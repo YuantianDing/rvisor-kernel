@@ -39,6 +39,4 @@ end
 
 
 
-def rust_ty()
-
-end
+p $rust_type
