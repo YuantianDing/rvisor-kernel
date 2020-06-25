@@ -55,7 +55,6 @@ trs = doc.xpath("//tr")
 trs.each do |tr|
     tds = tr.children
     if $syscalls[tds[1].content] != nil
-        p tds[1].content
         tds[4..-1].each do |td|
             if td.content != "-"
                 $syscalls[tds[1].content] += [parse_type(td.content)]
