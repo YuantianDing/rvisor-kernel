@@ -31,7 +31,7 @@ trs.each { |tr|
         }
     end
 }
-p syscall
+p syscalls
 
 make do
     :orig_syscall .then do
