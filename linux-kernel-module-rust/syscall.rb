@@ -65,6 +65,7 @@ trs = doc.xpath("//tr")
 trs.each do |tr|
     tds = tr.children
     $name_num = 0
+    puts "#{tds[1].content.inspect},"
     if $syscalls[tds[1].content] != nil
         tds[4..-1].each do |td|
             if td.content != "-"
