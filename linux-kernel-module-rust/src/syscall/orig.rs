@@ -83,7 +83,7 @@ mod lx_orig {
 
         pub fn sync() -> i64;
 
-        pub fn mount(dev_name : *mut u8, dir_name : *mut u8, type : *mut u8, flags : u64, data : *mut u8) -> i64;
+        pub fn mount(dev_name : *mut u8, dir_name : *mut u8, ty : *mut u8, flags : u64, data : *mut u8) -> i64;
 
         pub fn umount2(arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64) -> i64;
 
@@ -97,7 +97,7 @@ mod lx_orig {
 
         pub fn madvise(start : u64, len : usize, behavior : i32) -> i64;
 
-        pub fn rt_sigaction(int : i32, arg1 : * const u8, arg1 : * const u8, size_t : usoze) -> i64;
+        pub fn rt_sigaction(int : i32, arg1 : * const u8, arg1 : * const u8, size_t : usize) -> i64;
 
         pub fn rt_sigprocmask(how : i32, set : u64, oset : u64, sigsetsize : usize) -> i64;
 
@@ -190,9 +190,8 @@ mod lx_orig {
         pub fn arch_prctl(arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64) -> i64;
 
     }
-};
+}
 
-use lx_orig;
 
 #[inline]
 pub fn read(fd : u32, buf : *mut u8, count : usize) -> i64 {
@@ -429,9 +428,9 @@ pub fn sync() -> i64 {
 }
 
 #[inline]
-pub fn mount(dev_name : *mut u8, dir_name : *mut u8, type : *mut u8, flags : u64, data : *mut u8) -> i64 {
+pub fn mount(dev_name : *mut u8, dir_name : *mut u8, ty : *mut u8, flags : u64, data : *mut u8) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::mount(dev_name, dir_name, type, flags, data)
+    lx_orig::mount(dev_name, dir_name, ty, flags, data)
 }
 
 #[inline]
@@ -471,7 +470,7 @@ pub fn madvise(start : u64, len : usize, behavior : i32) -> i64 {
 }
 
 #[inline]
-pub fn rt_sigaction(int : i32, arg1 : * const u8, arg1 : * const u8, size_t : usoze) -> i64 {
+pub fn rt_sigaction(int : i32, arg1 : * const u8, arg1 : * const u8, size_t : usize) -> i64 {
     let fs = ProtFs::prot();
     lx_orig::rt_sigaction(int, arg1, arg1, size_t)
 }
