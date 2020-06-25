@@ -13,8 +13,8 @@ impl ProtFs {
 }
 
 pub fn protect_fs_run<T, F: Fn()->T> (func : F) -> T{
-    let oldfs = unsafe{ bindings::protect_fs() };
+    let oldfs = unsafe{ protect_fs() };
     let ret = func();
-    unsafe{ bindings::release_fs(oldfs);}
+    unsafe{ release_fs(oldfs);}
     ret
 }
