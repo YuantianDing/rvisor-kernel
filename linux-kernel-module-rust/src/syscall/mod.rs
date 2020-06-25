@@ -18,13 +18,13 @@ pub struct ProtFs {
 impl ProtFs {
     pub fn prot() -> Self {
         Self{
-            oldfs: protect_fs(),
+            oldfs: unsafe{protect_fs()},
         }
     }
 }
 
 impl Drop for ProtFs {
     fn drop(&mut self) {
-        release_fs(self.oldfs)
+        unsafe{release_fs(self.oldfs)}
     }
 }
