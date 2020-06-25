@@ -1,4 +1,4 @@
-use linux_module_rust
+use crate::bindings::*;
 
 extern "C" {
     pub fn orig_getpid() -> c_long;
