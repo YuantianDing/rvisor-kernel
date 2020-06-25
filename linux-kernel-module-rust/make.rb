@@ -3,9 +3,9 @@
 require "ruby_make_script"
 require 'nokogiri'
 
-syscall_list = []
+syscall_list = Hash[]
 File.readlines("../zCore/linux-syscall/src/lib.rs") do |line|
-    syscall_list += [line.match(/^\W*Sys::(\w+)/)[1]].downcase
+    syscall_list[line.match(/^\W*Sys::(\w+)/)[1].downcase] = []
 end
 
 doc = File.open("syscall_table.html") { |f| Nokogiri::XML(f) }
