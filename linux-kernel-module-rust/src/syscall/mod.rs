@@ -1,7 +1,7 @@
 
 use super::bindings;
 
-mod chim;
+mod cshim;
 use cshim::*;
 
 struct ProtFs {
