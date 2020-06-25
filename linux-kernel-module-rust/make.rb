@@ -4,7 +4,7 @@ require "ruby_make_script"
 require 'nokogiri'
 
 File.readlines("../zCore/linux-syscall/src/lib.rs") do |line|
-    
+    line
 end
 syscall_list = 
 
