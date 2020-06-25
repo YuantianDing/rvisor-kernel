@@ -7,8 +7,8 @@ require "./syscall.rb"
 
 make do
     :orig_syscall .then do
-        # using dir('src/syscall') do
+        using dir('src/syscall') do
             
-        # end
+        end
     end
 end
