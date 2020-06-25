@@ -3,8 +3,8 @@
 require "ruby_make_script"
 require 'nokogiri'
 
-File.readlines("syscall_table.html") do |line|
-    
+File.readlines("../zCore/") do |line|
+
 end
 syscall_list = 
 
