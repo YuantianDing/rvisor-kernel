@@ -35,7 +35,7 @@ make do
             f.puts "    cshim::*,"
             f.puts "};"
             f.puts ""
-            f.puts "mod cshim {"
+            f.puts "mod lx_orig {"
             f.puts "    extern \"C\" {"
         $syscalls.each do |k, v|
             f.puts "        pub fn #{k}(#{rust_pair(v).join(', ')}) -> i64;"
@@ -44,10 +44,12 @@ make do
             f.puts "    }"
             f.puts "};"
             f.puts ""
+            f.puts "use lx_orig;"
             f.puts ""
         $syscalls.each do |k, v|
             f.puts "pub fn #{k}(#{rust_pair(v).join(', ')}) -> i64 {"
-            f.puts "    "
+            f.puts "    let fs = ProtFs::prot();"
+            f.puts "    lx_orig::#{k}(#{v.map{|v| v[0]}.join(', ')})"
             f.puts "}"
         end
             
