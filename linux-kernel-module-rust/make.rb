@@ -22,8 +22,8 @@ def parse_type(str)
 end
 
 trs = doc.xpath("//tr")
+p trs[0].xpath("//td").content
 trs.each { |tr|
-    tds = tr.xpath("/td")
     p tds[3].content
     if syscalls[tds[1]] != nil
         tds[4..-1].each { |td|
