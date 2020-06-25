@@ -22,15 +22,15 @@ def parse_type(str)
 end
 
 trs = doc.xpath("//tr")
-p trs[0].xpath("//td")
-trs.each { |tr|
-    p tds[3].content
-    if syscalls[tds[1]] != nil
-        tds[4..-1].each { |td|
-            syscalls[tds[1]] += [parse_type(td.content)]
-        }
-    end
-}
+p trs[0].xpath("//td").map{|a| a.content}
+# trs.each { |tr|
+#     p tds[3].content
+#     if syscalls[tds[1]] != nil
+#         tds[4..-1].each { |td|
+#             syscalls[tds[1]] += [parse_type(td.content)]
+#         }
+#     end
+# }
 
 
 make do
