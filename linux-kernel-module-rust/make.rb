@@ -14,7 +14,8 @@ doc = File.open("syscall_table.html") { |f| Nokogiri::XML(f) }
 syscalls = Hash[]
 syscallxml = doc.xpath("//tr")
 syscallxml.each { |xml|
-    xml.xpath("//")
+    tds = xml.xpath("//")
+    if syscall_list[tds[1]] != nil
 }
 
 
