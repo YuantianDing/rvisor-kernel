@@ -18,7 +18,7 @@ end
 
 syscallxml = doc.xpath("//tr")
 syscallxml.each { |xml|
-    tds = xml.xpath("//")
+    tds = xml.xpath("//td")
     if syscalls[tds[1]] != nil
         tds[4..-1].each { |td|
             syscalls[tds[1]] += [parse_type(td.content)]
