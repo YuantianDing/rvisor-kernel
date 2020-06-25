@@ -5,11 +5,13 @@ require 'nokogiri'
 
 syscalls = Hash[]
 
-File.readlines("../zCore/linux-syscall/src/lib.rs").each { |line|
+File.readlines("../zCore/linux-syscall/src/lib.rs").each do |line|
     p line
-    str = line.match(/^\W*Sys::(\w+)/)&[1]
-    syscalls[str&.downcase] = []
-}
+    m = line.match(/^\W*Sys::(\w+)/)
+    if m
+        syscalls[m[1].downcase] = []
+    end
+end
 
 
 doc = File.open("syscall_table.html") { |f| Nokogiri::XML(f) }
