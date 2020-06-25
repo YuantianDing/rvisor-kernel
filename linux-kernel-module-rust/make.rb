@@ -2,7 +2,7 @@
 
 require "ruby_make_script"
 require 'nokogiri'
-
+Line = Struct.new(sysname, )
 File.readlines("../zCore/linux-syscall/src/lib.rs") do |line|
     line
 end
