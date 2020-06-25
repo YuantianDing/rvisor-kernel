@@ -37,7 +37,8 @@ make do
                 f.puts "mod cshim {"
                 f.puts "    extern \"C\" {"
                 $syscall.each do |k, v|
-                    f.puts "        pub fn #{k}(#{v})"
+                    f.puts "        pub fn #{k}(#{rust_pair(v).join(', ')});"
+                    f.puts ""
                 end
                 f.puts "    }"
                 f.puts "}"
