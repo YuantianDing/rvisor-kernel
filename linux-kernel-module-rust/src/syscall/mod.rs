@@ -5,7 +5,7 @@ mod cshim;
 
 use cshim::*;
 
-struct ProtFs {
+pub struct ProtFs {
     oldfs: bindings::mm_segment_t,
 }
 
