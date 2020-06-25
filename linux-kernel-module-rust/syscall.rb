@@ -9,7 +9,6 @@ $rust_type = Hash[
     "const char *"=> "*const u8",
     "int "=>"i32",
     "umode_t "=>"u16",
-    "struct __old_kernel_stat *"=>"missing",
     "off_t "=>"missing",
     "?"=>"missing",
     "unsigned long "=>"missing",
