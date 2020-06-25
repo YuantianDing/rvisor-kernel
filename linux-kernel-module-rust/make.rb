@@ -28,7 +28,7 @@ trs.each { |tr|
     p tds[1]
     if syscalls[tds[1].content] != nil
         tds[4..-1].each { |td|
-            syscalls[tds[1].content] += [parse_type(td)]
+            syscalls[tds[1].content] += [parse_type(td.content)]
         }
     end
 }
