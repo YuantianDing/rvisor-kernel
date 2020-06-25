@@ -16,6 +16,8 @@ syscallxml = doc.xpath("//tr")
 syscallxml.each { |xml|
     tds = xml.xpath("//")
     if syscall_list[tds[1]] != nil
+        syscall_list[tds[1]] += []
+    end
 }
 
 
