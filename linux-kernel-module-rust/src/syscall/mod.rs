@@ -18,7 +18,7 @@ impl ProtFs {
 }
 
 impl Drop for ProtFs {
-    pub fn drop(&mut self) {
+    fn drop(&mut self) {
         release_fs(self.oldfs)
     }
 }
