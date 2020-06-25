@@ -3,7 +3,7 @@
 require "ruby_make_script"
 require 'nokogiri'
 
-File.open("syscall_table.html") do |f|
+File.readlines("syscall_table.html") do |line|
     
 end
 syscall_list = 
