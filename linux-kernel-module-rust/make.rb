@@ -3,7 +3,10 @@
 require "ruby_make_script"
 require 'nokogiri'
 
+syscall_list = [""]
+
 doc = File.open("syscall_table.html") { |f| Nokogiri::XML(f) }
+
 
 syscalls = Hash[]
 syscallxml = doc.xpath("//tr")
