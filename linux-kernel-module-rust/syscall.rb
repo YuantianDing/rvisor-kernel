@@ -31,3 +31,11 @@ trs.each do |tr|
         end
     end
 end
+
+$rust_type = Hash [
+    "unsigned int"
+]
+
+def rust_ty()
+
+end
