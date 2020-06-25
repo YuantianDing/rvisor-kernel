@@ -85,11 +85,11 @@ mod lx_orig {
 
         pub fn mount(dev_name : *mut u8, dir_name : *mut u8, ty : *mut u8, flags : u64, data : *mut u8) -> i64;
 
-        pub fn umount2(arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64) -> i64;
+        pub fn umount2(arg1 : u64, arg2 : u64, arg3 : u64, arg4 : u64, arg5 : u64, arg6 : u64) -> i64;
 
         pub fn brk(brk : u64) -> i64;
 
-        pub fn mmap(arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64) -> i64;
+        pub fn mmap(arg1 : u64, arg2 : u64, arg3 : u64, arg4 : u64, arg5 : u64, arg6 : u64) -> i64;
 
         pub fn mprotect(start : u64, len : usize, prot : u64) -> i64;
 
@@ -97,13 +97,13 @@ mod lx_orig {
 
         pub fn madvise(start : u64, len : usize, behavior : i32) -> i64;
 
-        pub fn rt_sigaction(int : i32, arg1 : * const u8, arg1 : * const u8, size_t : usize) -> i64;
+        pub fn rt_sigaction(int : i32, arg2 : * const u8, arg3 : * const u8, size_t : usize) -> i64;
 
         pub fn rt_sigprocmask(how : i32, set : u64, oset : u64, sigsetsize : usize) -> i64;
 
         pub fn sigaltstack(uss : * const u8, uoss : * const u8) -> i64;
 
-        pub fn clone(long : u64, long : u64, arg1 : *mut i32, arg1 : *mut i32, long : u64) -> i64;
+        pub fn clone(long : u64, long : u64, arg3 : *mut i32, arg4 : *mut i32, long : u64) -> i64;
 
         pub fn execve(filename : *const u8, argv : *const *const u8, envp : *const *const u8) -> i64;
 
@@ -187,7 +187,7 @@ mod lx_orig {
 
         pub fn readlink(path : *const u8, buf : *mut u8, bufsiz : i32) -> i64;
 
-        pub fn arch_prctl(arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64) -> i64;
+        pub fn arch_prctl(arg1 : u64, arg2 : u64, arg3 : u64, arg4 : u64, arg5 : u64, arg6 : u64) -> i64;
 
     }
 }
@@ -434,9 +434,9 @@ pub fn mount(dev_name : *mut u8, dir_name : *mut u8, ty : *mut u8, flags : u64, 
 }
 
 #[inline]
-pub fn umount2(arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64) -> i64 {
+pub fn umount2(arg1 : u64, arg2 : u64, arg3 : u64, arg4 : u64, arg5 : u64, arg6 : u64) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::umount2(arg1, arg1, arg1, arg1, arg1, arg1)
+    lx_orig::umount2(arg1, arg2, arg3, arg4, arg5, arg6)
 }
 
 #[inline]
@@ -446,9 +446,9 @@ pub fn brk(brk : u64) -> i64 {
 }
 
 #[inline]
-pub fn mmap(arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64) -> i64 {
+pub fn mmap(arg1 : u64, arg2 : u64, arg3 : u64, arg4 : u64, arg5 : u64, arg6 : u64) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::mmap(arg1, arg1, arg1, arg1, arg1, arg1)
+    lx_orig::mmap(arg1, arg2, arg3, arg4, arg5, arg6)
 }
 
 #[inline]
@@ -470,9 +470,9 @@ pub fn madvise(start : u64, len : usize, behavior : i32) -> i64 {
 }
 
 #[inline]
-pub fn rt_sigaction(int : i32, arg1 : * const u8, arg1 : * const u8, size_t : usize) -> i64 {
+pub fn rt_sigaction(int : i32, arg2 : * const u8, arg3 : * const u8, size_t : usize) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::rt_sigaction(int, arg1, arg1, size_t)
+    lx_orig::rt_sigaction(int, arg2, arg3, size_t)
 }
 
 #[inline]
@@ -488,9 +488,9 @@ pub fn sigaltstack(uss : * const u8, uoss : * const u8) -> i64 {
 }
 
 #[inline]
-pub fn clone(long : u64, long : u64, arg1 : *mut i32, arg1 : *mut i32, long : u64) -> i64 {
+pub fn clone(long : u64, long : u64, arg3 : *mut i32, arg4 : *mut i32, long : u64) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::clone(long, long, arg1, arg1, long)
+    lx_orig::clone(long, long, arg3, arg4, long)
 }
 
 #[inline]
@@ -740,8 +740,8 @@ pub fn readlink(path : *const u8, buf : *mut u8, bufsiz : i32) -> i64 {
 }
 
 #[inline]
-pub fn arch_prctl(arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64, arg1 : u64) -> i64 {
+pub fn arch_prctl(arg1 : u64, arg2 : u64, arg3 : u64, arg4 : u64, arg5 : u64, arg6 : u64) -> i64 {
     let fs = ProtFs::prot();
-    lx_orig::arch_prctl(arg1, arg1, arg1, arg1, arg1, arg1)
+    lx_orig::arch_prctl(arg1, arg2, arg3, arg4, arg5, arg6)
 }
 

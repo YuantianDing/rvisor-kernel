@@ -46,6 +46,9 @@ doc = File.open("syscall_table.html") { |f| Nokogiri::XML(f) }
 $name_num
 def parse_type(str)
     name = str.match(/(\w*)$/)[1]
+    if ["int", "long", "short", "char", "byte"].include?(name)
+        name = ""
+    end
     type = str[0..(str.length - name.length - 1)]
     # $rust_type[type] = 'missing'
     $name_num += 1
