@@ -20,6 +20,11 @@ require "./syscall.rb"
 #include <linux/preempt.h>
 "
 
+def rust_pair(v)
+    v.map { |p|
+        
+    }
+end
 
 make do
     :orig_syscall .then do
@@ -28,11 +33,11 @@ make do
                 f.puts "use {"
                 f.puts "    super::*,"
                 f.puts "}"
-                
+
                 f.puts "mod cshim {"
                 f.puts "    extern \"C\" {"
                 $syscall.each do |k, v|
-
+                    f.puts "        pub fn #{k}(#{v})"
                 end
                 f.puts "    }"
                 f.puts "}"
