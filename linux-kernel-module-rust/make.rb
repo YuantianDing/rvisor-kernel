@@ -42,7 +42,7 @@ make do
             f.puts ""
         end
             f.puts "    }"
-            f.puts "};"
+            f.puts "}"
             f.puts ""
             f.puts "use lx_orig;"
             f.puts ""
