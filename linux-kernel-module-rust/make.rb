@@ -1,4 +1,4 @@
-#!/usr/bin/en
+#!/usr/bin/env ruby
 
 require "ruby_make_script"
 
