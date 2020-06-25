@@ -21,9 +21,9 @@ def parse_type(str)
     [name, type]
 end
 
-syscallxml = doc.xpath("//tr")
-syscallxml.each { |xml|
-    tds = xml.xpath("//td")
+trs = doc.xpath("//tr")
+trs.each { |tr|
+    tds = tr.xpath("//td")
     p tds[1].content
     if syscalls[tds[1]] != nil
         tds[4..-1].each { |td|
