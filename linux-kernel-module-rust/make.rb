@@ -1,60 +1,9 @@
 #!/usr/bin/env ruby
 
 require "ruby_make_script"
+require 'rexml/document'
 
-syscall = [
-    :open = [
-        [ , :]
-    ]
-    :getpid = [
-        [ , :]
-    ]
-    :openat = [
-        [ , :]
-    ]
-    :clone = [
-        [ , :]
-    ]
-    :fork = [
-        [ , :]
-    ]
-    :vfork = [
-        [ , :]
-    ]
-    :execve = [
-        [ , :]
-    ]
-    :execveat = [
-        [ , :]
-    ]
-    :chdir = [
-        [ , :]
-    ]
-    :getcwd = [
-        [ , :]
-    ]
-    :mknodat = [
-        [ , :]
-    ]
-    :mknod = [
-        [ , :]
-    ]
-    :mkdirat = [
-        [ , :]
-    ]
-    :mkdir = [
-        [ , :]
-    ]
-    :rmdir = [
-        [ , :]
-    ]
-    :stat = [
-        [ , :]
-    ]
-    :lstat = [
-        [ , :]
-    ]
-]
+syscall = []
 
 make do
     :orig_syscall .then do
