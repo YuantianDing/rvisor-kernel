@@ -5,8 +5,6 @@ require "./syscall.rb"
 
 
 
-p syscalls
-
 make do
     :orig_syscall .then do
         # using dir('src/syscall') do
