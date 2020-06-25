@@ -4,8 +4,7 @@ require "ruby_make_script"
 require "./syscall.rb"
 
 c_header = """
-#include \"hook_syscall.h\"
-
+#include "hook_syscall.h"
 #include <linux/module.h>
 #include <linux/init.h>
 #include <linux/types.h>
