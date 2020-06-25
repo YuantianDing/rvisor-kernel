@@ -32,6 +32,7 @@ make do
         File.open('orig.rs', 'w') do |f|
             f.puts "use {"
             f.puts "    super::*,"
+            f.puts "    cshim::*,"
             f.puts "};"
             f.puts ""
             f.puts "mod cshim {"
