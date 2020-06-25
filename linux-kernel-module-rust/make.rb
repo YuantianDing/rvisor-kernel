@@ -28,21 +28,21 @@ end
 
 make do
     :orig_syscall .then do
-        using dir('src/syscall') do
-            File.open('orig.rs', 'w') do |f|
-                f.puts "use {"
-                f.puts "    super::*,"
-                f.puts "}"
+        cd dir('src/syscall')
+        File.open('orig.rs', 'w') do |f|
+            f.puts "use {"
+            f.puts "    super::*,"
+            f.puts "}"
 
-                f.puts "mod cshim {"
-                f.puts "    extern \"C\" {"
-                $syscall.each do |k, v|
-                    f.puts "        pub fn #{k}(#{rust_pair(v).join(', ')});"
-                    f.puts ""
-                end
-                f.puts "    }"
-                f.puts "}"
+            f.puts "mod cshim {"
+            f.puts "    extern \"C\" {"
+            $syscall.each do |k, v|
+                f.puts "        pub fn #{k}(#{rust_pair(v).join(', ')});"
+                f.puts ""
             end
+            f.puts "    }"
+            f.puts "}"
         end
+        cd "../.."
     end
 end
