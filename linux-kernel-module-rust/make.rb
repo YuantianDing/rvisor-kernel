@@ -32,16 +32,24 @@ make do
         File.open('orig.rs', 'w') do |f|
             f.puts "use {"
             f.puts "    super::*,"
-            f.puts "}"
-
+            f.puts "};"
+            f.puts ""
             f.puts "mod cshim {"
             f.puts "    extern \"C\" {"
-            $syscalls.each do |k, v|
-                f.puts "        pub fn #{k}(#{rust_pair(v).join(', ')});"
-                f.puts ""
-            end
+        $syscalls.each do |k, v|
+            f.puts "        pub fn #{k}(#{rust_pair(v).join(', ')}) -> i64;"
+            f.puts ""
+        end
             f.puts "    }"
+            f.puts "};"
+            f.puts ""
+            f.puts ""
+        $syscalls.each do |k, v|
+            f.puts "pub fn #{k}(#{rust_pair(v).join(', ')}) -> i64 {"
+            f.puts "    "
             f.puts "}"
+        end
+            
         end
         cd "../.."
     end
