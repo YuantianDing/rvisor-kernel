@@ -3,7 +3,7 @@ require 'nokogiri'
 $syscalls = Hash[]
 
 File.readlines("../zCore/linux-syscall/src/lib.rs").each do |line|
-    m = line.match(/^\W*Sys::(\w+)/)
+    m = line.match(/^[\s\t]*Sys::(\w+)/)
     if m
         $syscalls[m[1].downcase] = []
     end
