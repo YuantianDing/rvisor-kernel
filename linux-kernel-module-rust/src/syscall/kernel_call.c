@@ -17,10 +17,9 @@
 #include <linux/preempt.h>
 
 // 这里用宏来将系统调用指针封装成函数，对C宏编程，参考：https://blog.csdn.net/gkzscs/article/details/82934054
-SYSCALL_EXPORT3(open, const char *, filename, int,flags, unsigned short,mode)
+SYSCALL_EXPORT3(open, const char *, filename, int, flags, unsigned short,mode)
 
 SYSCALL_EXPORT0(getpid)
-
 
 SYSCALL_EXPORT4(openat, unsigned long, f, const char *, filename, int, flags, unsigned short, mode)
 
