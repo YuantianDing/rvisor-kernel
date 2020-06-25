@@ -7,7 +7,7 @@ syscalls = Hash[]
 
 File.readlines("../zCore/linux-syscall/src/lib.rs").each { |line|
     p line
-    str = line.match(/^\W*Sys::(\w+)/)[1]
+    str = line.match(/^\W*Sys::(\w+)/)&[1]
     syscalls[str.downcase] = []
 }
 
