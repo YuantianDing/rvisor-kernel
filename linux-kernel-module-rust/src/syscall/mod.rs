@@ -1,6 +1,11 @@
 
-use super::bindings;
-
+use {
+    crate::{
+        bindings,
+        KernelResult,
+        Error,
+    }
+}
 mod cshim;
 
 use cshim::*;
