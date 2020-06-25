@@ -3,7 +3,7 @@
 require "ruby_make_script"
 
 syscall = [
-    
+    ""
 ]
 
 make do
