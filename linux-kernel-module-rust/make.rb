@@ -3,7 +3,8 @@
 require "ruby_make_script"
 require 'rexml/document'
 
-syscall = []
+doc = Document.new(File.new("syscall_table.html"))
+
 
 make do
     :orig_syscall .then do
