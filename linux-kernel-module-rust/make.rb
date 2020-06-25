@@ -23,7 +23,7 @@ end
 
 trs = doc.xpath("//tr")
 
-trs.each { |tr|
+trs.each do |tr|
     tds = tr.children
     p tds[1]
     if syscalls[tds[1].content] != nil
@@ -33,7 +33,7 @@ trs.each { |tr|
             end
         end
     end
-}
+end
 p syscalls
 
 make do
