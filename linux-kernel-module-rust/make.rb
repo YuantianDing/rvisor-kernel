@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require "ruby_make_script"
-require 'rexml/document'
+require 'nokogiri'
 
 file = File.new("syscall_table.html")
 doc = Document.new(file)
