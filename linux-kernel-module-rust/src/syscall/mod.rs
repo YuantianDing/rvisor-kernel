@@ -16,9 +16,8 @@ impl ProtFs {
     }
 }
 
-pub fn protect_fs_run<T, F: Fn()->T> (func : F) -> T{
-    let  = unsafe{ protect_fs() };
-    let ret = func();
-    unsafe{ release_fs(oldfs);}
-    ret
+impl Drop for ProtFs {
+    pub fn drop(self) {
+        
+    }
 }
