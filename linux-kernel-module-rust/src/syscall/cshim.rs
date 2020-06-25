@@ -1,5 +1,5 @@
 use crate::bindings;
-
+use crate::*;
 extern "C" {
     pub fn orig_getpid() -> c_long;
     fn protect_fs() -> bindings::mm_segment_t;
