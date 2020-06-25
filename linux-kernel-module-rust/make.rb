@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require "ruby_make_script"
-require "syscall.rb"
+require "./syscall.rb"
 
 
 
