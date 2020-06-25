@@ -28,6 +28,9 @@ end
 
 def c_pair(v)
     v.map { |name, ty|
+        if ty == "?"
+            ty = "unsigned long"
+        end
         "#{ty}, #{name}"
     }
 end
@@ -63,7 +66,7 @@ make do
         File.open('syscall.c', 'w') do |f|
             f.puts c_headers
             $syscalls.each do |k, v|
-                f.puts "SYSCALL_EXPORT#{v.length}(#{k}, #{c_pair(v).join(', ')})"
+                f.puts "SYSCALL_EXPORT#{v.length}(#{[k, *c_pair(v)].join(', ')})"
             end
         end
         cd "../.."
