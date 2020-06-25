@@ -3,7 +3,7 @@
 require "ruby_make_script"
 require "./syscall.rb"
 
-"
+c_headers = "
 #include \"hook_syscall.h\"
 #include <linux/module.h>
 #include <linux/init.h>
@@ -26,6 +26,12 @@ def rust_pair(v)
     }
 end
 
+def c_pairt(v)
+    v.map { |name, ty|
+        "#{ty}, #{name}"
+    }
+end
+
 make do
     :orig_syscall .then do
         cd 'src/syscall'
@@ -36,23 +42,29 @@ make do
             f.puts ""
             f.puts "mod lx_orig {"
             f.puts "    extern \"C\" {"
-        $syscalls.each do |k, v|
-            f.puts "        pub fn #{k}(#{rust_pair(v).join(', ')}) -> i64;"
-            f.puts ""
-        end
+            $syscalls.each do |k, v|
+                f.puts "        pub fn #{k}(#{rust_pair(v).join(', ')}) -> i64;"
+                f.puts ""
+            end
             f.puts "    }"
             f.puts "}"
             f.puts ""
             f.puts ""
-        $syscalls.each do |k, v|
-            f.puts "#[inline]"
-            f.puts "pub fn #{k}(#{rust_pair(v).join(', ')}) -> i64 {"
-            f.puts "    let fs = ProtFs::prot();"
-            f.puts "    unsafe{ lx_orig::#{k}(#{v.map{ |n,t| n }.join(', ')}) }"
-            f.puts "}"
-            f.puts ""
+            $syscalls.each do |k, v|
+                f.puts "#[inline]"
+                f.puts "pub fn #{k}(#{rust_pair(v).join(', ')}) -> i64 {"
+                f.puts "    let fs = ProtFs::prot();"
+                f.puts "    unsafe{ lx_orig::#{k}(#{v.map{ |n,t| n }.join(', ')}) }"
+                f.puts "}"
+                f.puts ""
+            end
         end
-            
+
+        File.open('syscall.c', 'w') do |f|
+            f.puts c_headers
+            $syscalls.each do |k, v|
+                f.puts "SYSCALL_EXPORT#{v.length}()"
+            end
         end
         cd "../.."
     end
