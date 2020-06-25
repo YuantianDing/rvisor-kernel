@@ -23,7 +23,7 @@ end
 
 trs = doc.xpath("//tr")
 trs.each { |tr|
-    tds = tr.xpath("//td")
+    tds = tr.xpath("/td")
     p tds[3].content
     if syscalls[tds[1]] != nil
         tds[4..-1].each { |td|
