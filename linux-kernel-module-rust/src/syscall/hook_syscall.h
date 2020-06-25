@@ -45,3 +45,8 @@ extern void * saved_syscall_table[SYSCALL_TABLE_LENGTH];
     SYSCALL_C_FUNC(name, long, T1 V1, T2 V2, T3 V3, T4 V4, T5 V5) \
         (V1, V2, V3, V4, V5) \
     SYSCALL_C_FUNC_END
+
+#define SYSCALL_EXPORT6(name, T1, V1, T2, V2, T3, V3, T4, V4, T5, V5, T6, V6) \
+    SYSCALL_C_FUNC(name, long, T1 V1, T2 V2, T3 V3, T4 V4, T5 V5, T6 V6) \
+        (V1, V2, V3, V4, V5, V6) \
+    SYSCALL_C_FUNC_END
