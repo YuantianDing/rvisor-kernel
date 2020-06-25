@@ -5,7 +5,9 @@ require 'nokogiri'
 
 syscalls = Hash[]
 File.readlines("../zCore/linux-syscall/src/lib.rs") do |line|
-    syscalls[line.match(/^\W*Sys::(\w+)/)[1].downcase] = []
+    str = line.match(/^\W*Sys::(\w+)/)[1]
+    p str
+    syscalls[str.downcase] = []
 end
 
 doc = File.open("syscall_table.html") { |f| Nokogiri::XML(f) }
@@ -15,8 +17,6 @@ def parse_type(str)
     type = str[0..str.length - name-length]
     [name, type]
 end
-
-puts syscalls
 
 syscallxml = doc.xpath("//tr")
 syscallxml.each { |xml|
