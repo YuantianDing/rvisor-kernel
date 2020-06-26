@@ -7,6 +7,6 @@ make do
         cd 'linux-kernel-module-rust'
             r "cargo build -p lkm --features bindgen"
         cd ".."
-        cp "target/debug/build/lkm-*/out/bindings", "linux-kernel-module-rust/src/"
+        cp *Dir.glob("target/debug/build/lkm-*/out/bindings"), "linux-kernel-module-rust/src/"
     end
 end
