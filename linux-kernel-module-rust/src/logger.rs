@@ -22,11 +22,8 @@ impl Log for KernelLogger {
                 Level::Debug => String::from("Debug"),
                 Level::Trace => String::from("Trace"),
             };
-            let target = if record.target().len() > 0 {
-                record.target()
-            } else {
-                record.module_path().unwrap_or_default()
-            };
+            let file = record.file().unwrap_or("unknownfile");
+            let line = record.line().unwrap_or(-1);
             println!("{:<5} [{}] {}", level_string, target, record.args());
         }
     }
