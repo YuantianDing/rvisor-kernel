@@ -2,8 +2,7 @@ use alloc::string::String;
 use alloc::vec::Vec;
 use core::fmt::{Debug, Formatter};
 use core::marker::PhantomData;
-use core::mem::size_of;
-
+use core::mem;
 
 #[repr(C)]
 pub struct UserPtr<T, P: Policy> {
@@ -103,7 +102,7 @@ impl<T, P: Read> UserPtr<T, P> {
         trace!("UserPtr::read");
         self.check()?;
         Ok(unsafe {
-            lkm_user
+            lkm::user_ptr::UserSlicePtrReader(self.ptr, mem::size_of::<T>());
             self.ptr.read()
         })
     }
