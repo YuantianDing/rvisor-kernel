@@ -73,7 +73,7 @@ impl<T, P: Policy> UserPtr<T, P> {
     }
 
     pub fn add(&self, count: usize) -> Self {
-        trace!("UserPtr::add > UserPtr Calculated!")
+        trace!("UserPtr Calculated!");
         UserPtr {
             ptr: unsafe { self.ptr.add(count) },
             mark: PhantomData,
