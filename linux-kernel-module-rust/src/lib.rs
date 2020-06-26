@@ -62,7 +62,7 @@ pub mod filesystem;
 pub mod printk;
 pub mod random;
 pub mod sysctl;
-pub mod log;
+pub mod kernel_logger;
 mod types;
 pub mod user_ptr;
 
