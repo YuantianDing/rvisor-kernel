@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require "ruby_make_script"
 
 make do
