@@ -5,280 +5,280 @@ use {
 pub mod user {
     extern "C" {
         fn orig_read(fd : u32, buf : *mut u8, count : usize) -> i64;
-        pub use orig_read as read
+        pub use orig_read as read;
 
         fn orig_write(fd : u32, buf : *const u8, count : usize) -> i64;
-        pub use orig_write as write
+        pub use orig_write as write;
 
         fn orig_openat(dfd : i32, filename : *const u8, flags : i32, mode : u16) -> i64;
-        pub use orig_openat as openat
+        pub use orig_openat as openat;
 
         fn orig_close(fd : u32) -> i64;
-        pub use orig_close as close
+        pub use orig_close as close;
 
         fn orig_fstat(fd : u32, statbuf : * const u8) -> i64;
-        pub use orig_fstat as fstat
+        pub use orig_fstat as fstat;
 
         fn orig_newfstatat(dfd : i32, filename : *const u8, statbuf : * const u8, flag : i32) -> i64;
-        pub use orig_newfstatat as newfstatat
+        pub use orig_newfstatat as newfstatat;
 
         fn orig_lseek(fd : u32, offset : i64, whence : u32) -> i64;
-        pub use orig_lseek as lseek
+        pub use orig_lseek as lseek;
 
         fn orig_ioctl(fd : u32, cmd : u32, arg : u64) -> i64;
-        pub use orig_ioctl as ioctl
+        pub use orig_ioctl as ioctl;
 
         fn orig_pread64(fd : u32, buf : *mut u8, count : usize, pos : i64) -> i64;
-        pub use orig_pread64 as pread64
+        pub use orig_pread64 as pread64;
 
         fn orig_pwrite64(fd : u32, buf : *const u8, count : usize, pos : i64) -> i64;
-        pub use orig_pwrite64 as pwrite64
+        pub use orig_pwrite64 as pwrite64;
 
         fn orig_readv(fd : u64, vec : * const u8, vlen : u64) -> i64;
-        pub use orig_readv as readv
+        pub use orig_readv as readv;
 
         fn orig_writev(fd : u64, vec : * const u8, vlen : u64) -> i64;
-        pub use orig_writev as writev
+        pub use orig_writev as writev;
 
         fn orig_sendfile(out_fd : i32, in_fd : i32, offset : *mut i64, count : usize) -> i64;
-        pub use orig_sendfile as sendfile
+        pub use orig_sendfile as sendfile;
 
         fn orig_fcntl(fd : u32, cmd : u32, arg : u64) -> i64;
-        pub use orig_fcntl as fcntl
+        pub use orig_fcntl as fcntl;
 
         fn orig_flock(fd : u32, cmd : u32) -> i64;
-        pub use orig_flock as flock
+        pub use orig_flock as flock;
 
         fn orig_fsync(fd : u32) -> i64;
-        pub use orig_fsync as fsync
+        pub use orig_fsync as fsync;
 
         fn orig_fdatasync(fd : u32) -> i64;
-        pub use orig_fdatasync as fdatasync
+        pub use orig_fdatasync as fdatasync;
 
         fn orig_truncate(path : *const u8, length : i64) -> i64;
-        pub use orig_truncate as truncate
+        pub use orig_truncate as truncate;
 
         fn orig_ftruncate(fd : u32, length : u64) -> i64;
-        pub use orig_ftruncate as ftruncate
+        pub use orig_ftruncate as ftruncate;
 
         fn orig_getdents64(fd : u32, dirent : * const u8, count : u32) -> i64;
-        pub use orig_getdents64 as getdents64
+        pub use orig_getdents64 as getdents64;
 
         fn orig_getcwd(buf : *mut u8, size : u64) -> i64;
-        pub use orig_getcwd as getcwd
+        pub use orig_getcwd as getcwd;
 
         fn orig_chdir(filename : *const u8) -> i64;
-        pub use orig_chdir as chdir
+        pub use orig_chdir as chdir;
 
         fn orig_renameat(olddfd : i32, oldname : *const u8, newdfd : i32, newname : *const u8) -> i64;
-        pub use orig_renameat as renameat
+        pub use orig_renameat as renameat;
 
         fn orig_mkdirat(dfd : i32, pathname : *const u8, mode : u16) -> i64;
-        pub use orig_mkdirat as mkdirat
+        pub use orig_mkdirat as mkdirat;
 
         fn orig_linkat(olddfd : i32, oldname : *const u8, newdfd : i32, newname : *const u8, flags : i32) -> i64;
-        pub use orig_linkat as linkat
+        pub use orig_linkat as linkat;
 
         fn orig_unlinkat(dfd : i32, pathname : *const u8, flag : i32) -> i64;
-        pub use orig_unlinkat as unlinkat
+        pub use orig_unlinkat as unlinkat;
 
         fn orig_symlinkat(oldname : *const u8, newdfd : i32, newname : *const u8) -> i64;
-        pub use orig_symlinkat as symlinkat
+        pub use orig_symlinkat as symlinkat;
 
         fn orig_readlinkat(dfd : i32, path : *const u8, buf : *mut u8, bufsiz : i32) -> i64;
-        pub use orig_readlinkat as readlinkat
+        pub use orig_readlinkat as readlinkat;
 
         fn orig_fchmod(fd : u32, mode : u16) -> i64;
-        pub use orig_fchmod as fchmod
+        pub use orig_fchmod as fchmod;
 
         fn orig_fchmodat(dfd : i32, filename : *const u8, mode : u16) -> i64;
-        pub use orig_fchmodat as fchmodat
+        pub use orig_fchmodat as fchmodat;
 
         fn orig_fchown(fd : u32, user : u32, group : u32) -> i64;
-        pub use orig_fchown as fchown
+        pub use orig_fchown as fchown;
 
         fn orig_fchownat(dfd : i32, filename : *const u8, user : u32, group : u32, flag : i32) -> i64;
-        pub use orig_fchownat as fchownat
+        pub use orig_fchownat as fchownat;
 
         fn orig_faccessat(dfd : i32, filename : *const u8, mode : i32) -> i64;
-        pub use orig_faccessat as faccessat
+        pub use orig_faccessat as faccessat;
 
         fn orig_dup3(oldfd : u32, newfd : u32, flags : i32) -> i64;
-        pub use orig_dup3 as dup3
+        pub use orig_dup3 as dup3;
 
         fn orig_utimensat(dfd : i32, filename : *const u8, utimes : * const u8, flags : i32) -> i64;
-        pub use orig_utimensat as utimensat
+        pub use orig_utimensat as utimensat;
 
         fn orig_copy_file_range(fd_in : i32, off_in : *mut i64, fd_out : i32, off_out : *mut i64, len : usize, flags : u32) -> i64;
-        pub use orig_copy_file_range as copy_file_range
+        pub use orig_copy_file_range as copy_file_range;
 
         fn orig_statfs(path : *const u8, buf : * const u8) -> i64;
-        pub use orig_statfs as statfs
+        pub use orig_statfs as statfs;
 
         fn orig_fstatfs(fd : u32, buf : * const u8) -> i64;
-        pub use orig_fstatfs as fstatfs
+        pub use orig_fstatfs as fstatfs;
 
         fn orig_sync() -> i64;
-        pub use orig_sync as sync
+        pub use orig_sync as sync;
 
         fn orig_mount(dev_name : *mut u8, dir_name : *mut u8, ty : *mut u8, flags : u64, data : *const u8) -> i64;
-        pub use orig_mount as mount
+        pub use orig_mount as mount;
 
         fn orig_umount2(arg1 : u64, arg2 : u64, arg3 : u64, arg4 : u64, arg5 : u64, arg6 : u64) -> i64;
-        pub use orig_umount2 as umount2
+        pub use orig_umount2 as umount2;
 
         fn orig_brk(brk : u64) -> i64;
-        pub use orig_brk as brk
+        pub use orig_brk as brk;
 
         fn orig_mmap(arg1 : u64, arg2 : u64, arg3 : u64, arg4 : u64, arg5 : u64, arg6 : u64) -> i64;
-        pub use orig_mmap as mmap
+        pub use orig_mmap as mmap;
 
         fn orig_mprotect(start : u64, len : usize, prot : u64) -> i64;
-        pub use orig_mprotect as mprotect
+        pub use orig_mprotect as mprotect;
 
         fn orig_munmap(addr : u64, len : usize) -> i64;
-        pub use orig_munmap as munmap
+        pub use orig_munmap as munmap;
 
         fn orig_madvise(start : u64, len : usize, behavior : i32) -> i64;
-        pub use orig_madvise as madvise
+        pub use orig_madvise as madvise;
 
         fn orig_rt_sigaction(arg1 : i32, arg2 : * const u8, arg3 : * const u8, size_t : usize) -> i64;
-        pub use orig_rt_sigaction as rt_sigaction
+        pub use orig_rt_sigaction as rt_sigaction;
 
         fn orig_rt_sigprocmask(how : i32, set : u64, oset : u64, sigsetsize : usize) -> i64;
-        pub use orig_rt_sigprocmask as rt_sigprocmask
+        pub use orig_rt_sigprocmask as rt_sigprocmask;
 
         fn orig_sigaltstack(uss : * const u8, uoss : * const u8) -> i64;
-        pub use orig_sigaltstack as sigaltstack
+        pub use orig_sigaltstack as sigaltstack;
 
         fn orig_clone(arg1 : * const u8, arg2 : * const u8, arg3 : *mut i32, arg4 : *mut i32, arg5 : * const u8) -> i64;
-        pub use orig_clone as clone
+        pub use orig_clone as clone;
 
         fn orig_execve(filename : *const u8, argv : *const *const u8, envp : *const *const u8) -> i64;
-        pub use orig_execve as execve
+        pub use orig_execve as execve;
 
         fn orig_exit(error_code : i32) -> i64;
-        pub use orig_exit as exit
+        pub use orig_exit as exit;
 
         fn orig_exit_group(error_code : i32) -> i64;
-        pub use orig_exit_group as exit_group
+        pub use orig_exit_group as exit_group;
 
         fn orig_wait4(pid : i32, stat_addr : *mut i32, options : i32, ru : * const u8) -> i64;
-        pub use orig_wait4 as wait4
+        pub use orig_wait4 as wait4;
 
         fn orig_set_tid_address(tidptr : *mut i32) -> i64;
-        pub use orig_set_tid_address as set_tid_address
+        pub use orig_set_tid_address as set_tid_address;
 
         fn orig_futex(uaddr : *mut u32, op : i32, val : u32, utime : * const u8, uaddr2 : *mut u32, val3 : u32) -> i64;
-        pub use orig_futex as futex
+        pub use orig_futex as futex;
 
         fn orig_tkill(pid : i32, sig : i32) -> i64;
-        pub use orig_tkill as tkill
+        pub use orig_tkill as tkill;
 
         fn orig_setitimer(which : i32, value : * const u8, ovalue : * const u8) -> i64;
-        pub use orig_setitimer as setitimer
+        pub use orig_setitimer as setitimer;
 
         fn orig_clock_gettime(which_clock : i32, tp : *const u8) -> i64;
-        pub use orig_clock_gettime as clock_gettime
+        pub use orig_clock_gettime as clock_gettime;
 
         fn orig_getpid() -> i64;
-        pub use orig_getpid as getpid
+        pub use orig_getpid as getpid;
 
         fn orig_gettid() -> i64;
-        pub use orig_gettid as gettid
+        pub use orig_gettid as gettid;
 
         fn orig_uname(arg1 : * const u8) -> i64;
-        pub use orig_uname as uname
+        pub use orig_uname as uname;
 
         fn orig_umask(mask : i32) -> i64;
-        pub use orig_umask as umask
+        pub use orig_umask as umask;
 
         fn orig_getuid() -> i64;
-        pub use orig_getuid as getuid
+        pub use orig_getuid as getuid;
 
         fn orig_getgid() -> i64;
-        pub use orig_getgid as getgid
+        pub use orig_getgid as getgid;
 
         fn orig_setuid(uid : u32) -> i64;
-        pub use orig_setuid as setuid
+        pub use orig_setuid as setuid;
 
         fn orig_geteuid() -> i64;
-        pub use orig_geteuid as geteuid
+        pub use orig_geteuid as geteuid;
 
         fn orig_getegid() -> i64;
-        pub use orig_getegid as getegid
+        pub use orig_getegid as getegid;
 
         fn orig_setpgid(pid : i32, pgid : i32) -> i64;
-        pub use orig_setpgid as setpgid
+        pub use orig_setpgid as setpgid;
 
         fn orig_getppid() -> i64;
-        pub use orig_getppid as getppid
+        pub use orig_getppid as getppid;
 
         fn orig_setsid() -> i64;
-        pub use orig_setsid as setsid
+        pub use orig_setsid as setsid;
 
         fn orig_getpgid(pid : i32) -> i64;
-        pub use orig_getpgid as getpgid
+        pub use orig_getpgid as getpgid;
 
         fn orig_getgroups(gidsetsize : i32, grouplist : *mut u32) -> i64;
-        pub use orig_getgroups as getgroups
+        pub use orig_getgroups as getgroups;
 
         fn orig_setgroups(gidsetsize : i32, grouplist : *mut u32) -> i64;
-        pub use orig_setgroups as setgroups
+        pub use orig_setgroups as setgroups;
 
         fn orig_prctl(option : i32, arg2 : u64, arg3 : u64, arg4 : u64, arg5 : u64) -> i64;
-        pub use orig_prctl as prctl
+        pub use orig_prctl as prctl;
 
         fn orig_membarrier(cmd : i32, flags : i32) -> i64;
-        pub use orig_membarrier as membarrier
+        pub use orig_membarrier as membarrier;
 
         fn orig_rt_sigqueueinfo(pid : i32, sig : i32, uinfo : * const u8) -> i64;
-        pub use orig_rt_sigqueueinfo as rt_sigqueueinfo
+        pub use orig_rt_sigqueueinfo as rt_sigqueueinfo;
 
         fn orig_finit_module(fd : i32, uargs : *const u8, flags : i32) -> i64;
-        pub use orig_finit_module as finit_module
+        pub use orig_finit_module as finit_module;
 
         fn orig_open(filename : *const u8, flags : i32, mode : u16) -> i64;
-        pub use orig_open as open
+        pub use orig_open as open;
 
         fn orig_stat(filename : *const u8, statbuf : * const u8) -> i64;
-        pub use orig_stat as stat
+        pub use orig_stat as stat;
 
         fn orig_lstat(filename : *const u8, statbuf : * const u8) -> i64;
-        pub use orig_lstat as lstat
+        pub use orig_lstat as lstat;
 
         fn orig_access(filename : *const u8, mode : i32) -> i64;
-        pub use orig_access as access
+        pub use orig_access as access;
 
         fn orig_dup2(oldfd : u32, newfd : u32) -> i64;
-        pub use orig_dup2 as dup2
+        pub use orig_dup2 as dup2;
 
         fn orig_fork() -> i64;
-        pub use orig_fork as fork
+        pub use orig_fork as fork;
 
         fn orig_vfork() -> i64;
-        pub use orig_vfork as vfork
+        pub use orig_vfork as vfork;
 
         fn orig_rename(oldname : *const u8, newname : *const u8) -> i64;
-        pub use orig_rename as rename
+        pub use orig_rename as rename;
 
         fn orig_mkdir(pathname : *const u8, mode : u16) -> i64;
-        pub use orig_mkdir as mkdir
+        pub use orig_mkdir as mkdir;
 
         fn orig_rmdir(pathname : *const u8) -> i64;
-        pub use orig_rmdir as rmdir
+        pub use orig_rmdir as rmdir;
 
         fn orig_link(oldname : *const u8, newname : *const u8) -> i64;
-        pub use orig_link as link
+        pub use orig_link as link;
 
         fn orig_unlink(pathname : *const u8) -> i64;
-        pub use orig_unlink as unlink
+        pub use orig_unlink as unlink;
 
         fn orig_readlink(path : *const u8, buf : *mut u8, bufsiz : i32) -> i64;
-        pub use orig_readlink as readlink
+        pub use orig_readlink as readlink;
 
         fn orig_arch_prctl(arg1 : u64, arg2 : u64, arg3 : u64, arg4 : u64, arg5 : u64, arg6 : u64) -> i64;
-        pub use orig_arch_prctl as arch_prctl
+        pub use orig_arch_prctl as arch_prctl;
 
     }
 }
