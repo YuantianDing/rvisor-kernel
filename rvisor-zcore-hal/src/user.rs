@@ -61,8 +61,6 @@ impl<T, P: Policy> From<usize> for UserPtr<T, P> {
 }
 
 impl<T, P: Policy> UserPtr<T, P> {
-    #[inline]
-    pub fn as_
     pub fn from_addr_size(addr: usize, size: usize) -> Result<Self> {
         if size < core::mem::size_of::<T>() {
             return Err(Error::BufferTooSmall);
