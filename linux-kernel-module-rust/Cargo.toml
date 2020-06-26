@@ -6,7 +6,8 @@ edition = "2018"
 
 [dependencies.log]
 version = "0.4.8"
-no_std = true
+default-features = false
+features = []]
 
 [dependencies]
 bitflags = "1"
