@@ -47,8 +47,6 @@
 
 extern crate alloc;
 
-extern crate log;
-
 use core::panic::PanicInfo;
 
 mod allocator;
@@ -62,7 +60,6 @@ pub mod filesystem;
 pub mod printk;
 pub mod random;
 pub mod sysctl;
-pub mod logger;
 mod types;
 pub mod user_ptr;
 
