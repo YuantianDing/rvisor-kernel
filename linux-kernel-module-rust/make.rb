@@ -26,9 +26,6 @@ make do
     :build .from "orig_syscall" do
         r "cargo build"
     end
-    :update_raw do
-        
-    end
     :orig_syscall .then do
         cd 'src/syscall'
         File.open('orig.rs', 'w') do |f|
