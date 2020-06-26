@@ -11,7 +11,7 @@ default = []
 bitflags = "1"
 
 [build-dependencies]
-bindgen = {"0.51.0", optional = true }
+bindgen = { "0.51.0", optional=true }
 cc = "1.0"
 shlex = "0.1"
 glob = "0.3.0"
