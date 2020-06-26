@@ -13,7 +13,6 @@ use cshim::*;
 
 pub mod num;
 
-#[allow(dead_code)]
 mod orig;
 pub use orig::*;
 
