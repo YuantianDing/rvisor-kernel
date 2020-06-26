@@ -21,7 +21,7 @@ const INCLUDED_TYPES: &[&str] = &[
     "path",
     "file",
 ];
-const INCLUDED_FUNCTIONS: &[&str] = &[
+const _INCLUDED_FUNCTIONS: &[&str] = &[
     "cdev_add",
     "cdev_init",
     "cdev_del",
