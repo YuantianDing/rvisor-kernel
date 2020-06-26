@@ -33,7 +33,7 @@ make do
             f.puts "pub mod user {"
             f.puts "    extern \"C\" {"
             $syscalls.each do |k, v|
-                f.puts "        fn orig_#{k}(#{rust_pair(v).join(', ')}) -> i64;"
+                f.puts "        pub fn orig_#{k}(#{rust_pair(v).join(', ')}) -> i64;"
                 f.puts ""
             end
             f.puts "    }"
