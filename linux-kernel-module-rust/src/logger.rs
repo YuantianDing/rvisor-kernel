@@ -2,6 +2,7 @@
 use log::{Level, Log, Metadata, Record, SetLoggerError};
 use alloc::string::String;
 use alloc::boxed::Box;
+use crate::println;
 
 
 struct KernelLogger {
