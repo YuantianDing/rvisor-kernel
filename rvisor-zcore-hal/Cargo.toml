@@ -3,7 +3,7 @@ name = "rvisor-zcore-hal"
 version = "0.1.0"
 authors = ["Yuantian Ding <dnailzb@outlook.com>", "Runji Wang <wangrunji0408@163.com>"]
 edition = "2018"
-description = "Kernel HAL interface definations."
+description = "Kernel HAL interface impletation for rvisor."
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
