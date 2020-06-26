@@ -1,6 +1,7 @@
 use log::{Level, Log, Metadata, Record, SetLoggerError};
 use alloc::string::String;
-use crate::printk::println;
+
+use crate::println;
 
 struct KernelLogger {
     level: Level,
