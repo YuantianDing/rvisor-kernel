@@ -101,7 +101,7 @@ impl<T, P: Read> UserPtr<T, P> {
         // TODO: check ptr and return err
         trace!("UserPtr::read");
         self.check()?;
-        let mut data = [0; mem::size_of::<T>()];
+        let mut data = [0; mem::size_of::<T>];
         lkm::user_ptr::UserSlicePtrReader(
             self.ptr, mem::size_of::<T>()
         ).read(data).map_err(|_| { Error::InvalidPointer })?;
