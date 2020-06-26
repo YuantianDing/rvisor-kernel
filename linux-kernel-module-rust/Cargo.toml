@@ -1,5 +1,5 @@
 [package]
-name = "linux-kernel-module"
+name = "lkm"
 version = "0.1.0"
 authors = ["Alex Gaynor <alex.gaynor@gmail.com>", "Yuantian Ding <dnailzb@outlook.com>"]
 edition = "2018"
