@@ -102,7 +102,7 @@ impl<T, P: Read> UserPtr<T, P> {
         trace!("UserPtr::read");
         self.check()?;
 
-        let data = UserSlicePtr::new_ptr(self.ptr as u64, size_of::<T>())
+        let mut data = UserSlicePtr::new_ptr(self.ptr as u64, size_of::<T>())
             .map_err(|_| { Error::InvalidPointer })?
             .reader()
             .read_all()
