@@ -41,7 +41,7 @@ make do
             end
             f.puts "    }"
             $syscalls.each do |k, v|
-                f.puts "        pub use orig_#{k} as #{k};"
+                f.puts "    pub use orig_#{k} as #{k};"
                 f.puts ""
             end
             f.puts "}"
@@ -49,8 +49,7 @@ make do
             f.puts "pub mod kern {"
             f.puts "    use super::*;"
             $syscalls.each do |k, v|
-                f.puts "    #[inline]"
-                f.puts "    #[allow(dead_code)]"
+                f.puts "    #[inline, allow(dead_code)]"
                 f.puts "    pub unsafe fn #{k}(#{rust_pair(v).join(', ')}) -> i64 {"
                 f.puts "        let fs = ProtFs::prot();"
                 f.puts "        user::#{k}(#{v.map{ |n,t| n }.join(', ')})"
