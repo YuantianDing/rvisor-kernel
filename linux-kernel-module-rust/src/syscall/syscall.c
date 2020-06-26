@@ -13,7 +13,7 @@
 #include <linux/sizes.h>
 #include <linux/byteorder/generic.h>
 #include <linux/preempt.h>
-#include <dirent.h>
+#include <linux/syscalls.h>
 
 SYSCALL_EXPORT3(read, unsigned int , fd, char *, buf, size_t , count)
 SYSCALL_EXPORT3(write, unsigned int , fd, const char *, buf, size_t , count)
