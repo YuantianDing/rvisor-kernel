@@ -1,6 +1,6 @@
 use log::{Level, Log, Metadata, Record, SetLoggerError};
 use alloc::string::String;
-
+use alloc::boxed::Box;
 use crate::println;
 
 struct KernelLogger {
@@ -37,8 +37,12 @@ pub fn init_with_level(level: Level) -> Result<(), SetLoggerError> {
     #[cfg(all(windows, feature = "colored"))]
     set_up_color_terminal();
 
-    let logger = SimpleLogger { level };
+    let logger = KernelLogger { level };
     log::set_boxed_logger(Box::new(logger))?;
     log::set_max_level(level.to_level_filter());
     Ok(())
+}
+
+pub fn init() -> Result<(), SetLoggerError> {
+    init_with_level(Level::Trace)
 }
