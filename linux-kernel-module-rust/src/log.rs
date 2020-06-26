@@ -1,5 +1,7 @@
 use log::{Level, Log, Metadata, Record, SetLoggerError};
 
-struct SimpleLogger {
+struct KernelLogger {
     level: Level,
 }
+
+
