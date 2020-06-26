@@ -1,7 +1,6 @@
 use {
     super::*,
 };
-#![allow(dead_code)]
 
 pub mod user {
     extern "C" {
