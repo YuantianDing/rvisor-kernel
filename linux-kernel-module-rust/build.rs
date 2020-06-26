@@ -396,7 +396,7 @@ const INCLUDED_VARS: &[&str] = &[
     "__NR_pkey_free",
     "__NR_statx",
 ];
-const OPAQUE_TYPES: &[&str] = &[
+const _OPAQUE_TYPES: &[&str] = &[
     // These need to be opaque because they're both packed and aligned, which rustc
     // doesn't support yet. See https://github.com/rust-lang/rust/issues/59154
     // and https://github.com/rust-lang/rust-bindgen/issues/1538
