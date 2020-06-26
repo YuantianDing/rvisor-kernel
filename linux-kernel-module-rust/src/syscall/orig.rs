@@ -192,6 +192,7 @@ pub mod user {
 }
 
 pub mod kern {
+    use super::*;
     #[inline]
     pub fn read(fd : u32, buf : *mut u8, count : usize) -> i64 {
         let fs = ProtFs::prot();
