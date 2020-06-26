@@ -522,7 +522,7 @@ fn main() {
         fs::copy(out_path.join("bindings.rs"), "src/bindings_raw.rs").expect("cp failed");
     }
 
-    handle_kernel_version_cfg(PathBuf::from("src/bindings_raw.rs"));
+    handle_kernel_version_cfg(&PathBuf::from("src/bindings_raw.rs"));
     handle_kernel_symbols_cfg(&PathBuf::from(&kdir).join("Module.symvers"));
 
     let mut builder = cc::Build::new();
