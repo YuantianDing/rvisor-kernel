@@ -329,6 +329,7 @@ dependencies = [
  "acpi",
  "bitflags",
  "lkm",
+ "log",
  "numeric-enum-macro",
  "trapframe",
 ]
