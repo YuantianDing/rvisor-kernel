@@ -5,7 +5,9 @@ authors = ["Alex Gaynor <alex.gaynor@gmail.com>", "Yuantian Ding <dnailzb@outloo
 edition = "2018"
 
 [dependencies.log]
-log = "0.4"
+version = "0.4"
+
+
 [dependencies]
 bitflags = "1"
 
