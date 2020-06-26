@@ -4,7 +4,6 @@ use core::fmt::{Debug, Formatter};
 use core::marker::PhantomData;
 use core::mem::size_of;
 
-use lkm::user_ptr as lkm_user;
 
 #[repr(C)]
 pub struct UserPtr<T, P: Policy> {
@@ -71,16 +70,17 @@ impl<T, P: Policy> UserPtr<T, P> {
     pub fn is_null(&self) -> bool {
         self.ptr.is_null()
     }
-
+    
     pub fn add(&self, count: usize) -> Self {
-        trace!("UserPtr Calculated!");
+        warn!("UserPtr added!");
         UserPtr {
             ptr: unsafe { self.ptr.add(count) },
             mark: PhantomData,
         }
     }
-
+    
     pub fn as_ptr(&self) -> *mut T {
+        warn!("UserPtr as_ptr!");
         self.ptr
     }
 
@@ -94,13 +94,18 @@ impl<T, P: Policy> UserPtr<T, P> {
 
 impl<T, P: Read> UserPtr<T, P> {
     pub fn as_ref(&self) -> Result<&'static T> {
+        warn!("UserPtr as_ref!");
         Ok(unsafe { &*self.ptr })
     }
 
     pub fn read(&self) -> Result<T> {
         // TODO: check ptr and return err
+        trace!("UserPtr::read");
         self.check()?;
-        Ok(unsafe { self.ptr.read() })
+        Ok(unsafe {
+            lkm_user
+            self.ptr.read()
+        })
     }
 
     pub fn read_if_not_null(&self) -> Result<Option<T>> {
