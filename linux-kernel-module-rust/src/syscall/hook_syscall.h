@@ -13,7 +13,7 @@
 #include <linux/sizes.h>
 #include <linux/byteorder/generic.h>
 #include <linux/preempt.h>
-#include <linux/syscall.h>
+#include <linux/syscalls.h>
 
 extern void **syscall_table;
 
