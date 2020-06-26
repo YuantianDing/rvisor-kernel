@@ -45,9 +45,6 @@
 
 extern crate alloc;
 
-#[no_std]
-extern crate log;
-
 use core::panic::PanicInfo;
 
 mod allocator;
