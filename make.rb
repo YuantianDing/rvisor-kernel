@@ -6,5 +6,6 @@ make do
         use dir('linux-kernel-module-rust') do
             r "cargo build -p lkm --features bindgen"
         end
+        cp "target/debug/build/lkm-*/out/bindings", ""
     end
 end
