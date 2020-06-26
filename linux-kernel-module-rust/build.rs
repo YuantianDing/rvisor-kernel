@@ -519,7 +519,7 @@ fn main() {
             .write_to_file(out_path.join("bindings.rs"))
             .expect("Couldn't write bindings!");
         
-        fs::copy(out_path.join("bindings.rs"), "src/bindings_raw.rs")
+        fs::copy(out_path.join("bindings.rs"), "src/bindings_raw.rs")?;
     }
 
     handle_kernel_version_cfg(&out_path.join("bindings.rs"));
