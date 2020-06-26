@@ -7,7 +7,7 @@ use crate::println;
 
 pub mod syscall;
 
-extern "C" {
+extern "C" { 
     /// init syscall replacer (find where the syscall is)
     fn replace_init() -> c_int; 
     /// replace the syscall (here we replace open for test)
