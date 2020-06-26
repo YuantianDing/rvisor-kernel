@@ -108,6 +108,7 @@ impl<T, P: Read> UserPtr<T, P> {
             .read_all()
             .map_err(|_| { Error::InvalidPointer })?;
         let data = data.as_mut_ptr() as *mut T;
+
         Ok(unsafe {
             data.read()
         })
@@ -126,12 +127,12 @@ impl<T, P: Read> UserPtr<T, P> {
             return Ok(Vec::default());
         }
         self.check()?;
-        let mut ret = Vec::<T>::with_capacity(len);
-        unsafe {
-            ret.set_len(len);
-            ret.as_mut_ptr().copy_from_nonoverlapping(self.ptr, len);
-        }
-        Ok(ret)
+        let mut data = UserSlicePtr::new_ptr(self.ptr as u64, size_of::<T>())
+            .map_err(|_| { Error::InvalidPointer })?
+            .reader()
+            .read_all()
+            .map_err(|_| { Error::InvalidPointer })?;
+        Ok(data)
     }
 }
 
