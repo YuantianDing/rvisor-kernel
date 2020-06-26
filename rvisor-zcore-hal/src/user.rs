@@ -102,9 +102,10 @@ impl<T, P: Read> UserPtr<T, P> {
         trace!("UserPtr::read");
         self.check()?;
         let mut data = [0; mem::size_of::<T>];
-        UserSlicePtr(
-            self.ptr as u64, mem::size_of::<T>
-        ).reader().read(data).map_err(|_| { Error::InvalidPointer })?;
+        UserSlicePtr::new(self.ptr as u64, mem::size_of::<T>)
+            .reader()
+            .read(data)
+            .map_err(|_| { Error::InvalidPointer })?;
         Ok(unsafe {
             data.into()
         })
