@@ -10,3 +10,4 @@ Module.symvers
 *.o
 modules.order
 dummy.c
+.make_script.yaml
