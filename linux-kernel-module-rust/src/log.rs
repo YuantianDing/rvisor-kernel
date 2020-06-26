@@ -34,8 +34,7 @@ impl Log for SimpleLogger {
             };
             {
                 println!(
-                    "{} {:<5} [{}] {}",
-                    Local::now().format("%Y-%m-%d %H:%M:%S,%3f"),
+                    "{:<5} [{}] {}",
                     level_string,
                     target,
                     record.args()
