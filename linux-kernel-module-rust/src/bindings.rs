@@ -6,7 +6,7 @@
     improper_ctypes
 )]
 
-#[allow(unused)]
+#[allow(dead_code)]
 mod bindings {
     use crate::c_types;
     include!("bindings_raw.rs");
