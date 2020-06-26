@@ -6,7 +6,7 @@ edition = "2018"
 
 [dependencies]
 bitflags = "1"
-log = "0.4
+log = "0.4"
 
 [build-dependencies]
 bindgen = "0.51.0"
