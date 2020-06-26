@@ -7,7 +7,7 @@
 )]
 mod bindings {
     use crate::c_types;
-    include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+    include!("src/bindings_raw");
 }
 pub use bindings::*;
 
