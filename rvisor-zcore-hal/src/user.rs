@@ -106,7 +106,7 @@ impl<T, P: Read> UserPtr<T, P> {
             self.ptr, mem::size_of::<T>()
         ).read(data).map_err(|_| { Error::InvalidPointer })?;
         Ok(unsafe {
-            a
+            data.into()
         })
     }
 
