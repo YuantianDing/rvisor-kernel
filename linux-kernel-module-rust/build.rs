@@ -485,42 +485,43 @@ fn main() {
     let target = env::var("TARGET").unwrap();
 
     #[cfg(feature="bindgen")]
-    let mut builder = bindgen::Builder::default()
-        .use_core()
-        .ctypes_prefix("c_types")
-        .derive_default(true)
-        .rustfmt_bindings(true);
+    {
+        let mut builder = bindgen::Builder::default()
+            .use_core()
+            .ctypes_prefix("c_types")
+            .derive_default(true)
+            .rustfmt_bindings(true);
 
-    builder = builder.clang_arg(format!("--target={}", target));
-    for arg in shlex::split(std::str::from_utf8(&output.stdout).unwrap()).unwrap() {
-        builder = builder.clang_arg(arg.to_string());
+        builder = builder.clang_arg(format!("--target={}", target));
+        for arg in shlex::split(std::str::from_utf8(&output.stdout).unwrap()).unwrap() {
+            builder = builder.clang_arg(arg.to_string());
+        }
+
+        println!("cargo:rerun-if-changed=src/bindings_helper.h");
+        builder = builder.header("src/bindings_helper.h");
+
+        for t in INCLUDED_TYPES {
+            builder = builder.whitelist_type(t);
+        }
+        for f in INCLUDED_FUNCTIONS {
+            builder = builder.whitelist_function(f);
+        }
+        for v in INCLUDED_VARS {
+            builder = builder.whitelist_var(v);
+        }
+        for t in OPAQUE_TYPES {
+            builder = builder.opaque_type(t);
+        }
+        let bindings = builder.generate().expect("Unable to generate bindings");
+
+        let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
+        bindings
+            .write_to_file(out_path.join("bindings.rs"))
+            .expect("Couldn't write bindings!");
+
+        handle_kernel_version_cfg(&out_path.join("bindings.rs"));
+        handle_kernel_symbols_cfg(&PathBuf::from(&kdir).join("Module.symvers"));
     }
-
-    println!("cargo:rerun-if-changed=src/bindings_helper.h");
-    builder = builder.header("src/bindings_helper.h");
-
-    for t in INCLUDED_TYPES {
-        builder = builder.whitelist_type(t);
-    }
-    for f in INCLUDED_FUNCTIONS {
-        builder = builder.whitelist_function(f);
-    }
-    for v in INCLUDED_VARS {
-        builder = builder.whitelist_var(v);
-    }
-    for t in OPAQUE_TYPES {
-        builder = builder.opaque_type(t);
-    }
-    let bindings = builder.generate().expect("Unable to generate bindings");
-
-    let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
-    bindings
-        .write_to_file(out_path.join("bindings.rs"))
-        .expect("Couldn't write bindings!");
-
-    handle_kernel_version_cfg(&out_path.join("bindings.rs"));
-    handle_kernel_symbols_cfg(&PathBuf::from(&kdir).join("Module.symvers"));
-
     let mut builder = cc::Build::new();
     builder.compiler(env::var("CLANG").unwrap_or("clang".to_string()));
     builder.target(&target);
