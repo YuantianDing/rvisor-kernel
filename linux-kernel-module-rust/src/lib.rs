@@ -58,6 +58,7 @@ mod error;
 pub mod file_operations;
 pub mod filesystem;
 pub mod printk;
+pub mod logger;
 pub mod random;
 pub mod sysctl;
 mod types;
