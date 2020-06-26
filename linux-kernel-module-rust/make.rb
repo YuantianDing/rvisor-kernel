@@ -23,7 +23,7 @@ def c_pair(v)
 end
 
 make do
-    :build do
+    :build .from "orig_syscall" do
         r "cargo build"
     end
     :orig_syscall .then do
