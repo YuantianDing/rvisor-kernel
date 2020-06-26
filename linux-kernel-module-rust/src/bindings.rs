@@ -5,6 +5,7 @@
     non_snake_case,
     improper_ctypes
 )]
+#allow[]
 mod bindings {
     use crate::c_types;
     include!("bindings_raw.rs");
