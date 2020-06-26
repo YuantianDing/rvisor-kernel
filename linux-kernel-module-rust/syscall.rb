@@ -57,6 +57,9 @@ def parse_type(str)
     elsif name == "type"
         name = "ty"
     end
+    if type == "struct __kernel_timespec *"
+        type = "void *"
+    end
     [name, type]
 end
 
