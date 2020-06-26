@@ -1,4 +1,6 @@
+#[cfg(feature="bindgen")]
 use bindgen;
+
 use cc;
 use shlex;
 
