@@ -6,9 +6,7 @@ use alloc::boxed::Box;
 use crate::println;
 
 
-struct KernelLogger {
-    level: Level,
-}
+struct KernelLogger {}
 
 impl Log for KernelLogger {
     fn enabled(&self, metadata: &Metadata) -> bool {
@@ -34,7 +32,7 @@ impl Log for KernelLogger {
 }
 
 pub fn init() -> Result<(), SetLoggerError> {
-    static LOGGER = 
+    static LOGGER = KernelLogger{}
     log::set_logger(&LOGGER)?;
     Ok(())
 }
