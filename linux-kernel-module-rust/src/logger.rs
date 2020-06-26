@@ -32,3 +32,13 @@ impl Log for KernelLogger {
 
     fn flush(&self) {}
 }
+
+pub fn init_with_level(level: Level) -> Result<(), SetLoggerError> {
+    #[cfg(all(windows, feature = "colored"))]
+    set_up_color_terminal();
+
+    let logger = SimpleLogger { level };
+    log::set_boxed_logger(Box::new(logger))?;
+    log::set_max_level(level.to_level_filter());
+    Ok(())
+}
