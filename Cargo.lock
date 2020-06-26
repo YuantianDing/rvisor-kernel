@@ -174,14 +174,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "klogger"
-version = "0.0.0"
-dependencies = [
- "lkm",
- "log",
-]
-
-[[package]]
 name = "lazy_static"
 version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
