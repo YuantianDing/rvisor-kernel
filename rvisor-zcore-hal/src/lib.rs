@@ -6,6 +6,8 @@
 
 extern crate alloc;
 
+extern crate lkm;
+
 pub mod defs {
     use bitflags::bitflags;
     use numeric_enum_macro::numeric_enum;
