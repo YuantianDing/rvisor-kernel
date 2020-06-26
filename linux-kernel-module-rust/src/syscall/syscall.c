@@ -1,20 +1,5 @@
 
 #include "hook_syscall.h"
-#include <linux/module.h>
-#include <linux/init.h>
-#include <linux/types.h>
-#include <linux/delay.h>
-#include <linux/sched.h>
-#include <linux/version.h>
-#include <linux/kallsyms.h>
-#include <linux/semaphore.h>
-#include <asm/cacheflush.h>
-#include <linux/bitops.h>
-#include <linux/sizes.h>
-#include <linux/byteorder/generic.h>
-#include <linux/preempt.h>
-#include <linux/syscalls.h>
-
 SYSCALL_EXPORT3(read, unsigned int , fd, char *, buf, size_t , count)
 SYSCALL_EXPORT3(write, unsigned int , fd, const char *, buf, size_t , count)
 SYSCALL_EXPORT4(openat, int , dfd, const char *, filename, int , flags, umode_t , mode)
@@ -73,7 +58,7 @@ SYSCALL_EXPORT1(set_tid_address, int *, tidptr)
 SYSCALL_EXPORT6(futex, u32 *, uaddr, int , op, u32 , val, struct timespec *, utime, u32 *, uaddr2, u32 , val3)
 SYSCALL_EXPORT2(tkill, pid_t , pid, int , sig)
 SYSCALL_EXPORT3(setitimer, int , which, struct itimerval *, value, struct itimerval *, ovalue)
-SYSCALL_EXPORT2(clock_gettime, clockid_t , which_clock, struct __kernel_timespec *, tp)
+SYSCALL_EXPORT2(clock_gettime, clockid_t , which_clock, void *, tp)
 SYSCALL_EXPORT0(getpid)
 SYSCALL_EXPORT0(gettid)
 SYSCALL_EXPORT1(uname, struct old_utsname *, arg1)

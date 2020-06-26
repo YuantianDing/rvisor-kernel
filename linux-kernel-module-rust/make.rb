@@ -34,7 +34,7 @@ make do
             f.puts "    extern \"C\" {"
             $syscalls.each do |k, v|
                 f.puts "        fn orig_#{k}(#{rust_pair(v).join(', ')}) -> i64;"
-                f.puts "        pub use orig_#{k} as #{k}"
+                f.puts "        pub use orig_#{k} as #{k};"
                 f.puts ""
             end
             f.puts "    }"
