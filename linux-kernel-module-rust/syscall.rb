@@ -30,7 +30,8 @@ $rust_type = Hash[
     "u32 *"=>"*mut u32",
     "u32 "=>"u32",
     "clockid_t "=>"i32",
-    "loff_t *"=>"*mut i64"
+    "loff_t *"=>"*mut i64",
+    "void *" => "*const u8"
 ]
 
 File.readlines("../zCore/linux-syscall/src/lib.rs").each do |line|
