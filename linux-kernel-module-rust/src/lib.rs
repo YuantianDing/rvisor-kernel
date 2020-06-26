@@ -42,7 +42,7 @@
 //! Kbuild should contains the infomation of where the compiled library (writen in rust) is, and how to convert them to object file.
 
 #![allow(unused_imports)]
-#![allow(unused_constants)]
+
 #![allow(dead_code)]
 #![feature(allocator_api, alloc_error_handler, const_fn, const_raw_ptr_deref)]
 
