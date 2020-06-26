@@ -524,7 +524,7 @@ fn main() {
     builder.warnings(false);
     builder.file("src/helpers.c");
 
-    for entry in glob("../src/cshim/*.c").unwrap() {
+    for entry in glob("src/syscall/*.c").unwrap() {
         if let Ok(path) = entry {
             println!("cargo:rerun-if-env-changed={}", path.to_str().unwrap());
             builder.file(path);
@@ -536,12 +536,6 @@ fn main() {
     builder.flag("-mfentry");
     builder.compile("helpers");
 } 
- 
- 
- 
- 
- 
- 
  
  
  
