@@ -1,4 +1,5 @@
 use log::{Level, Log, Metadata, Record, SetLoggerError};
+use alloc::string::String;
 
 struct KernelLogger {
     level: Level,
