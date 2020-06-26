@@ -4,9 +4,9 @@ require "ruby_make_script"
 make do
     :update_raw .then do
         rm "-rf", "target/debug/build/lkm-*"
-        using dir('linux-kernel-module-rust') do
+        cd 'linux-kernel-module-rust'
             r "cargo build -p lkm --features bindgen"
-        end
+        cd ".."
         cp "target/debug/build/lkm-*/out/bindings", "linux-kernel-module-rust/src/"
     end
 end
