@@ -5,7 +5,7 @@
 #![deny(warnings)]
 
 extern crate alloc;
-
+use trapframe;
 
 pub mod defs {
     use bitflags::bitflags;
