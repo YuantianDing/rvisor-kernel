@@ -33,11 +33,8 @@ impl Log for KernelLogger {
     fn flush(&self) {}
 }
 
-pub fn init_with_level(level: Level) -> Result<(), SetLoggerError> {
-    let logger = KernelLogger { level };
-}
-
 pub fn init() -> Result<(), SetLoggerError> {
-    log::set_logger(&logger)?;
+    static LOGGER = 
+    log::set_logger(&LOGGER)?;
     Ok(())
 }
