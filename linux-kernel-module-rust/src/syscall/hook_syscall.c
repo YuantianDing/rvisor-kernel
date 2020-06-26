@@ -45,7 +45,6 @@ inline void restore_wp ( unsigned long cr0 ) {
 
 void **syscall_table = 0;
 
-#define SYSCALL_TABLE_LENGTH 333
 void * saved_syscall_table[SYSCALL_TABLE_LENGTH];
 
 int replace_init() {
