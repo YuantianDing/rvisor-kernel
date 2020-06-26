@@ -518,11 +518,12 @@ fn main() {
         bindings
             .write_to_file(out_path.join("bindings.rs"))
             .expect("Couldn't write bindings!");
-
-        handle_kernel_version_cfg(&out_path.join("bindings.rs"));
-        handle_kernel_symbols_cfg(&PathBuf::from(&kdir).join("Module.symvers"));
+        out_path.join("bindings.rs")
     }
-    
+
+    handle_kernel_version_cfg(&out_path.join("bindings.rs"));
+    handle_kernel_symbols_cfg(&PathBuf::from(&kdir).join("Module.symvers"));
+
     let mut builder = cc::Build::new();
     builder.compiler(env::var("CLANG").unwrap_or("clang".to_string()));
     builder.target(&target);
