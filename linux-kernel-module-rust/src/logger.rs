@@ -4,7 +4,7 @@ struct KernelLogger {
     level: Level,
 }
 
-impl Log for SimpleLogger {
+impl Log for KernelLogger {
     fn enabled(&self, metadata: &Metadata) -> bool {
         metadata.level() <= self.level
     }
