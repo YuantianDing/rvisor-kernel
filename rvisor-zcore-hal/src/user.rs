@@ -98,8 +98,9 @@ impl<T, P: Read> UserPtr<T, P> {
     }
 
     pub fn read(&self) -> Result<T> {
-        // TODO: check ptr and return err
         trace!("UserPtr::read");
+        
+        // TODO: check ptr and return err
         self.check()?;
 
         let mut data = UserSlicePtr::new_ptr(self.ptr as u64, size_of::<T>())
@@ -123,11 +124,11 @@ impl<T, P: Read> UserPtr<T, P> {
     }
 
     pub fn read_array(&self, len: usize) -> Result<Vec<T>> {
+        trace!("UserPtr::read_array");
         if len == 0 {
             return Ok(Vec::default());
         }
         self.check()?;
-        trace!("UserPtr::read_array");
         let mut data = UserSlicePtr::new_ptr(self.ptr as u64, size_of::<T>())
             .map_err(|_| { Error::InvalidPointer })?
             .reader()
@@ -139,6 +140,7 @@ impl<T, P: Read> UserPtr<T, P> {
 
 impl<P: Read> UserPtr<u8, P> {
     pub fn read_string(&self, len: usize) -> Result<String> {
+        trace!("UserPtr::read_string");
         self.check()?;
         let src = unsafe { core::slice::from_raw_parts(self.ptr, len) };
         let s = core::str::from_utf8(src).map_err(|_| Error::InvalidUtf8)?;
@@ -146,6 +148,7 @@ impl<P: Read> UserPtr<u8, P> {
     }
 
     pub fn read_cstring(&self) -> Result<String> {
+        trace!("UserPtr::read_cstring");
         self.check()?;
         let len = unsafe { (0usize..).find(|&i| *self.ptr.add(i) == 0).unwrap() };
         self.read_string(len)
@@ -154,6 +157,7 @@ impl<P: Read> UserPtr<u8, P> {
 
 impl<P: Read> UserPtr<UserPtr<u8, P>, P> {
     pub fn read_cstring_array(&self) -> Result<Vec<String>> {
+        trace!("UserPtr::read_cstring_array");
         self.check()?;
         let len = unsafe {
             (0usize..)
@@ -169,6 +173,7 @@ impl<P: Read> UserPtr<UserPtr<u8, P>, P> {
 
 impl<T, P: Write> UserPtr<T, P> {
     pub fn write(&mut self, value: T) -> Result<()> {
+        trace!("UserPtr::write");
         self.check()?;
         unsafe {
             self.ptr.write(value);
@@ -177,6 +182,7 @@ impl<T, P: Write> UserPtr<T, P> {
     }
 
     pub fn write_if_not_null(&mut self, value: T) -> Result<()> {
+        trace!("UserPtr::write_if_not_null");
         if self.ptr.is_null() {
             return Ok(());
         }
@@ -184,6 +190,7 @@ impl<T, P: Write> UserPtr<T, P> {
     }
 
     pub fn write_array(&mut self, values: &[T]) -> Result<()> {
+        trace!("UserPtr::write_array");
         if values.is_empty() {
             return Ok(());
         }
@@ -198,6 +205,7 @@ impl<T, P: Write> UserPtr<T, P> {
 
 impl<P: Write> UserPtr<u8, P> {
     pub fn write_cstring(&mut self, s: &str) -> Result<()> {
+        trace!("UserPtr::write_cstring");
         let bytes = s.as_bytes();
         self.write_array(bytes)?;
         unsafe {
