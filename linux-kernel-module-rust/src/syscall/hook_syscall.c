@@ -1,7 +1,7 @@
 //
 // this file contains syscall hook logic.
 //
-
+#include "hook_syscall.h"
 
 
 #include <linux/module.h>
