@@ -18,6 +18,7 @@ c_headers = "
 #include <linux/sizes.h>
 #include <linux/byteorder/generic.h>
 #include <linux/preempt.h>
+#include <linux/syscall.h>
 "
 
 def rust_pair(v)
