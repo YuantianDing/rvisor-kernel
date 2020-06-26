@@ -10,7 +10,7 @@ struct KernelLogger {}
 
 impl Log for KernelLogger {
     fn enabled(&self, metadata: &Metadata) -> bool {
-        metadata.level() <= Level::Trace
+        true
     }
 
     fn log(&self, record: &Record) {
