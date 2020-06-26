@@ -3,7 +3,7 @@ use alloc::vec::Vec;
 use core::fmt::{Debug, Formatter};
 use core::marker::PhantomData;
 use core::mem;
-
+use lkm::user_ptr::
 #[repr(C)]
 pub struct UserPtr<T, P: Policy> {
     ptr: *mut T,
@@ -102,9 +102,9 @@ impl<T, P: Read> UserPtr<T, P> {
         trace!("UserPtr::read");
         self.check()?;
         let mut data = [0; mem::size_of::<T>];
-        lkm::user_ptr::UserSlicePtr(
-            self.ptr, mem::size_of::<T>()
-        ).read(data).map_err(|_| { Error::InvalidPointer })?;
+        UserSlicePtr(
+            self.ptr as u64, mem::size_of::<T>
+        ).reader().read(data).map_err(|_| { Error::InvalidPointer })?;
         Ok(unsafe {
             data.into()
         })
