@@ -482,6 +482,7 @@ fn main() {
 
     let target = env::var("TARGET").unwrap();
 
+    #[cfg(feature="bindgen")]
     let mut builder = bindgen::Builder::default()
         .use_core()
         .ctypes_prefix("c_types")
