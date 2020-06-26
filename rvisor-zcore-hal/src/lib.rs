@@ -6,7 +6,6 @@
 
 extern crate alloc;
 
-extern crate lkm;
 
 pub mod defs {
     use bitflags::bitflags;
