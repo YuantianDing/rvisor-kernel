@@ -5,8 +5,9 @@ authors = ["Alex Gaynor <alex.gaynor@gmail.com>", "Yuantian Ding <dnailzb@outloo
 edition = "2018"
 
 [dependencies]
-bitflags = "1"
 log = "0.4"
+[dependencies]
+bitflags = "1"
 
 [build-dependencies]
 bindgen = "0.51.0"
