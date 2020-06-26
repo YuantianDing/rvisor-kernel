@@ -521,7 +521,7 @@ fn main() {
         
         fs::copy(out_path.join("bindings.rs"), "src/bindings_raw.rs").expect("cp failed");
     }
-    println!("{}", env::current_dir()?);
+    println!("{}", env::current_dir().expect("err"));
     handle_kernel_version_cfg(&PathBuf::from("src/bindings_raw.rs"));
     handle_kernel_symbols_cfg(&PathBuf::from(&kdir).join("Module.symvers"));
 
