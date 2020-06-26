@@ -38,9 +38,9 @@
 //! We build kernel module by Makefile, Makefile will use /lib/modules/$(uname -r)/build (we known as $(KDIR)). Then Kbuild file will be triggerd.
 //! 
 //! Kbuild should contains the infomation of where the compiled library (writen in rust) is, and how to convert them to object file.
+#![no_std]
 #![allow(unused_imports)]
 #![allow(dead_code)]
-#![no_std]
 #![feature(allocator_api, alloc_error_handler, const_fn, const_raw_ptr_deref)]
 
 extern crate alloc;
