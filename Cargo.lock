@@ -7,7 +7,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3f5b1ccc3856d8d93733ae245ed34d9468cd2449891c45a2951c697754537f04"
 dependencies = [
  "bit_field 0.10.0",
- "log 0.4.8",
+ "log",
 ]
 
 [[package]]
@@ -61,7 +61,7 @@ dependencies = [
  "clap",
  "env_logger",
  "lazy_static",
- "log 0.4.8",
+ "log",
  "peeking_take_while",
  "proc-macro2",
  "quote",
@@ -144,7 +144,7 @@ checksum = "aafcde04e90a5226a6443b7aabdb016ba2f8307c847d524724bd9b346dd1a2d3"
 dependencies = [
  "atty",
  "humantime",
- "log 0.4.8",
+ "log",
  "regex",
  "termcolor",
 ]
@@ -203,17 +203,8 @@ dependencies = [
  "bitflags",
  "cc",
  "glob",
- "log 0.3.9",
+ "log",
  "shlex",
-]
-
-[[package]]
-name = "log"
-version = "0.3.9"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e19e8d5c34a3e0e2223db8e060f9e8264aeeb5c5fc64a4ee9965c062211c024b"
-dependencies = [
- "log 0.4.8",
 ]
 
 [[package]]
@@ -338,7 +329,7 @@ dependencies = [
  "acpi",
  "bitflags",
  "lkm",
- "log 0.4.8",
+ "log",
  "numeric-enum-macro",
  "trapframe",
 ]
@@ -403,7 +394,7 @@ version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7118467f8e44bc1a458675cc4adc4115c2d18a4277b5cd0da11fdebb7fc5f036"
 dependencies = [
- "log 0.4.8",
+ "log",
  "raw-cpuid",
  "riscv",
  "x86_64",
