@@ -11,6 +11,8 @@ use {
 mod cshim;
 use cshim::*;
 
+pub mod num;
+
 mod orig;
 pub use orig::*;
 
