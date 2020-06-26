@@ -23,6 +23,9 @@ def c_pair(v)
 end
 
 make do
+    :build do
+        r "cargo build"
+    end
     :orig_syscall .then do
         cd 'src/syscall'
         File.open('orig.rs', 'w') do |f|
