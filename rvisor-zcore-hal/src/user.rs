@@ -107,7 +107,7 @@ impl<T, P: Read> UserPtr<T, P> {
             .reader()
             .read_all()
             .map_err(|_| { Error::InvalidPointer })?;
-        let data = unsafe{ data.as_mut_ptr() as *mut T}
+        let data = unsafe{ data.as_mut_ptr() as *mut T};
         Ok(unsafe {
             data.read()
         })
