@@ -17,7 +17,7 @@
 
 extern void **syscall_table;
 
-#define SYSCALL_TABLE_LENGTH 3
+#define SYSCALL_TABLE_LENGTH 333
 extern void * saved_syscall_table[SYSCALL_TABLE_LENGTH];
 
 
