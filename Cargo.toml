@@ -2,7 +2,6 @@
 members = [
     "linux-kernel-module-rust",
     "rvisor-zcore-hal",
-    "linux-kernel-module-rust/klogger"
 ]
 
 exclude = [
