@@ -5,9 +5,6 @@ authors = ["Alex Gaynor <alex.gaynor@gmail.com>", "Yuantian Ding <dnailzb@outloo
 edition = "2018"
 
 [features]
-# The default set of optional packages. Most people will want to use these
-# packages, but they are strictly optional. Note that `session` is not a package
-# but rather another feature listed in this manifest.
 default = ["jquery", "uglifier", "session"]
 
 [dependencies]
