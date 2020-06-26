@@ -53,6 +53,7 @@ make do
             f.puts "}"
             f.puts ""
             f.puts "pub mod kern {"
+            f.puts "    use super::*;"
             $syscalls.each do |k, v|
                 f.puts "    #[inline]"
                 f.puts "    pub fn #{k}(#{rust_pair(v).join(', ')}) -> i64 {"
