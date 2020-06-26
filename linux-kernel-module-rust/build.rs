@@ -43,7 +43,7 @@ const INCLUDED_FUNCTIONS: &[&str] = &[
     "rng_is_initialized",
     "strncpy_from_user",
 ];
-const INCLUDED_VARS: &[&str] = &[
+const _INCLUDED_VARS: &[&str] = &[
     "EINVAL",
     "ENOMEM",
     "ESPIPE",
