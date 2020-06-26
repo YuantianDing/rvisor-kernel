@@ -13,7 +13,7 @@ extern "C" {
     /// replace the syscall (here we replace open for test)
     fn replace_syscall(sysnum : c_uint, f_ptr : *const()) -> c_int;
     /// recover the replace
-    fn replace_clear() -> c_int;
+    // fn replace_clear() -> c_int;
 
     pub fn user_max() -> u64;
 }
