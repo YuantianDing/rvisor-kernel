@@ -47,6 +47,7 @@ extern crate alloc;
 
 
 #[macro_use]
+#[no_std]
 extern crate log;
 
 use core::panic::PanicInfo;
