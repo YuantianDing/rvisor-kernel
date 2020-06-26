@@ -172,6 +172,7 @@ dependencies = [
  "bitflags",
  "cc",
  "glob",
+ "log",
  "shlex",
 ]
 
