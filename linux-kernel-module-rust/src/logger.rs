@@ -32,7 +32,7 @@ impl Log for KernelLogger {
 }
 
 pub fn init() -> Result<(), SetLoggerError> {
-    static LOGGER = KernelLogger{};
+    static LOGGER : KernelLogger = KernelLogger{};
     log::set_logger(&LOGGER)?;
     Ok(())
 }
