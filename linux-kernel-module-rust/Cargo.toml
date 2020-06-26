@@ -4,14 +4,11 @@ version = "0.1.0"
 authors = ["Alex Gaynor <alex.gaynor@gmail.com>", "Yuantian Ding <dnailzb@outlook.com>"]
 edition = "2018"
 
-[dependencies.log]
-version = "0.3.9"
-default-features = false
-
 [dependencies]
 bitflags = "1"
 
 [build-dependencies]
+log = "0.4
 bindgen = "0.51.0"
 cc = "1.0"
 shlex = "0.1"
