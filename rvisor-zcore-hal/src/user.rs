@@ -101,7 +101,7 @@ impl<T, P: Read> UserPtr<T, P> {
         // TODO: check ptr and return err
         trace!("UserPtr::read");
         self.check()?;
-        let mut data  = Vec<u8>::with_capacity(size_of::<T>());
+        let mut data  = Vec::<u8>::with_capacity(size_of::<T>());
         UserSlicePtr::new_ptr(self.ptr as u64, size_of::<T>())
             .map_err(|_| { Error::InvalidPointer })?
             .reader()
