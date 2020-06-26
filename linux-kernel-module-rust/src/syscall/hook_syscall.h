@@ -14,6 +14,7 @@
 #include <linux/byteorder/generic.h>
 #include <linux/preempt.h>
 #include <linux/syscalls.h>
+#include <linux/>
 
 extern void **syscall_table;
 
