@@ -9,7 +9,7 @@ use crate::println;
 struct KernelLogger {}
 
 impl Log for KernelLogger {
-    fn enabled(&self, metadata: &Metadata) -> bool {
+    fn enabled(&self, _metadata: &Metadata) -> bool {
         true
     }
 
