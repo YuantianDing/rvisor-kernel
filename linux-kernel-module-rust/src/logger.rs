@@ -35,11 +35,9 @@ impl Log for KernelLogger {
 
 pub fn init_with_level(level: Level) -> Result<(), SetLoggerError> {
     let logger = KernelLogger { level };
-    log::set_logger(&logger)?;
-    log::set_max_level(level.to_level_filter());
-    Ok(())
 }
 
 pub fn init() -> Result<(), SetLoggerError> {
-    init_with_level(Level::Trace)
+    log::set_logger(&logger)?;
+    Ok(())
 }
