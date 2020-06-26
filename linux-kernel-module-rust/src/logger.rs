@@ -13,11 +13,11 @@ impl Log for KernelLogger {
     fn log(&self, record: &Record) {
         if self.enabled(record.metadata()) {
             let level_string = match record.level() {
-                Level::Error => String::from("Error").red(),
-                Level::Warn => String::from("Warn").yellow(),
-                Level::Info => String::from("Info").cyan(),
-                Level::Debug => String::from("Debug").purple(),
-                Level::Trace => String::from("Trace").normal(),
+                Level::Error => String::from("Error"),
+                Level::Warn => String::from("Warn"),
+                Level::Info => String::from("Info"),
+                Level::Debug => String::from("Debug"),
+                Level::Trace => String::from("Trace"),
             };
             let target = if record.target().len() > 0 {
                 record.target()
