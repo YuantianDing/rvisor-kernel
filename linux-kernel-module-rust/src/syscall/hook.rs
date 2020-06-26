@@ -1,9 +1,9 @@
 //! 系统调用挂钩的模块
 //! 
 
-use linux_kernel_module::bindings;
-use linux_kernel_module::c_types::*;
-use linux_kernel_module::println;
+use crate::bindings;
+use crate::c_types::*;
+use crate::println;
 
 pub mod syscall;
 
