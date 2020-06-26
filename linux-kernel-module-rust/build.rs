@@ -520,8 +520,9 @@ fn main() {
             .expect("Couldn't write bindings!");
         
         fs::copy(out_path.join("bindings.rs"), "src/bindings_raw.rs").expect("cp failed");
+        println!("asd{:?}", env::current_dir().expect("err"));
     }
-    println!("{:?}", env::current_dir().expect("err"));
+    println!("asdgfg{:?}", env::current_dir().expect("err"));
     handle_kernel_version_cfg(&PathBuf::from("src/bindings_raw.rs"));
     handle_kernel_symbols_cfg(&PathBuf::from(&kdir).join("Module.symvers"));
 
