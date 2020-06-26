@@ -105,7 +105,8 @@ impl<T, P: Read> UserPtr<T, P> {
         UserSlicePtr::new(self.ptr as u64, mem::size_of::<T>)
             .map_err(|_| { Error::InvalidPointer })?
             .reader()
-            .read(data);
+            .read(data)
+            .map_err(|_| { Error::InvalidPointer })?;
         Ok(unsafe {
             data.into()
         })
