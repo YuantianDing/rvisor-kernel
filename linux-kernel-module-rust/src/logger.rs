@@ -24,7 +24,7 @@ impl Log for KernelLogger {
             };
             let file = record.file().unwrap_or("unknownfile");
             let line = record.line().unwrap_or(0);
-            println!("{:<5} [{}:{}] {}", level_string, target, line, record.args());
+            println!("[{:<5} {}:{}] {}", level_string, file, line, record.args());
         }
     }
 
