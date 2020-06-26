@@ -1,6 +1,9 @@
 [workspace]
 members = [
-    "linux-kernel-module-rust"
+    "linux_kernel_module_rust",
+    "rvisor-zcore-hal"
 ]
 
-exclude = []
+exclude = [
+    
+]
