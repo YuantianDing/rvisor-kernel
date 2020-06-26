@@ -6,7 +6,7 @@
 
 extern crate alloc;
 
-#[marco_use]
+#![marco_use]
 extern crate log;
 
 pub mod defs {
