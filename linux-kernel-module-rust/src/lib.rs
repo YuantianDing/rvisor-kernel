@@ -41,16 +41,6 @@
 #![allow(unused_imports)]
 #![allow(dead_code)]
 #![no_std]
-#![no_std]
-#![no_std]
-#![no_std]
-#![no_std]
-#![no_std]
-#![no_std]
-#![no_std]
-#![no_std]
-#![no_std]
-#![no_std]
 #![feature(allocator_api, alloc_error_handler, const_fn, const_raw_ptr_deref)]
 
 extern crate alloc;
