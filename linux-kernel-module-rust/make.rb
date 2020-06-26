@@ -43,7 +43,7 @@ make do
             f.puts "    super::*,"
             f.puts "};"
             f.puts ""
-            f.puts "mod lx_orig {"
+            f.puts "pub mod user {"
             f.puts "    extern \"C\" {"
             $syscalls.each do |k, v|
                 f.puts "        pub fn #{k}(#{rust_pair(v).join(', ')}) -> i64;"
@@ -52,15 +52,16 @@ make do
             f.puts "    }"
             f.puts "}"
             f.puts ""
-            f.puts ""
+            f.puts "pub mod kern {"
             $syscalls.each do |k, v|
-                f.puts "#[inline]"
-                f.puts "pub fn #{k}(#{rust_pair(v).join(', ')}) -> i64 {"
-                f.puts "    let fs = ProtFs::prot();"
-                f.puts "    unsafe{ lx_orig::#{k}(#{v.map{ |n,t| n }.join(', ')}) }"
-                f.puts "}"
+                f.puts "    #[inline]"
+                f.puts "    pub fn #{k}(#{rust_pair(v).join(', ')}) -> i64 {"
+                f.puts "        let fs = ProtFs::prot();"
+                f.puts "        unsafe{ user::#{k}(#{v.map{ |n,t| n }.join(', ')}) }"
+                f.puts "    }"
                 f.puts ""
             end
+            f.puts "}"
         end
 
         File.open('syscall.c', 'w') do |f|
