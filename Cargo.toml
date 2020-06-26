@@ -1,6 +1,6 @@
 [workspace]
 members = [
-    "linux_kernel_module_rusdt",
+    "linux_kernel_module_rust",
     "rvisor-zcore-hal"
 ]
 
