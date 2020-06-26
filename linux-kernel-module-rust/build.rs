@@ -10,7 +10,7 @@ use std::process::Command;
 use std::{env, fs};
 use glob::glob;
 
-const INCLUDED_TYPES: &[&str] = &[
+const _INCLUDED_TYPES: &[&str] = &[
     "file_system_type",
     "mode_t",
     "umode_t", 
