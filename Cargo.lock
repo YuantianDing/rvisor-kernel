@@ -196,13 +196,14 @@ dependencies = [
 ]
 
 [[package]]
-name = "linux-kernel-module"
+name = "lkm"
 version = "0.1.0"
 dependencies = [
  "bindgen",
  "bitflags",
  "cc",
  "glob",
+ "log",
  "shlex",
 ]
 
@@ -327,6 +328,7 @@ version = "0.1.0"
 dependencies = [
  "acpi",
  "bitflags",
+ "lkm",
  "numeric-enum-macro",
  "trapframe",
 ]
