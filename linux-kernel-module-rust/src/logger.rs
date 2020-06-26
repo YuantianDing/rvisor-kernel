@@ -23,7 +23,7 @@ impl Log for KernelLogger {
                 Level::Trace => String::from("Trace"),
             };
             let file = record.file().unwrap_or("unknownfile");
-            let line = record.line().unwrap_or(-1);
+            let line = record.line().unwrap_or(0);
             println!("{:<5} [{}] {}", level_string, target, record.args());
         }
     }
