@@ -32,7 +32,6 @@ impl Log for SimpleLogger {
             } else {
                 record.module_path().unwrap_or_default()
             };
-            #[cfg(feature = "chrono")]
             {
                 println!(
                     "{} {:<5} [{}] {}",
@@ -41,10 +40,6 @@ impl Log for SimpleLogger {
                     target,
                     record.args()
                 );
-
-            #[cfg(not(feature = "chrono"))]
-            {
-                println!("{:<5} [{}] {}", level_string, target, record.args());
             }
         }
     }
