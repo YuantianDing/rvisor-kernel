@@ -1,6 +1,8 @@
 
 #![no_std]
 
+extern crate alloc;
+
 use log::{Level, Log, Metadata, Record, SetLoggerError};
 use alloc::string::String;
 use alloc::boxed::Box;
