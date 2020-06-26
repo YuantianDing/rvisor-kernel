@@ -24,7 +24,7 @@ impl Log for KernelLogger {
             let target = if record.target().len() > 0 {
                 record.target()
             } else {
-                record.module_path().unwrap_or_default()
+                record.module_path().unwrap_or_default();
             };
             println!("{:<5} [{}] {}", level_string, target, record.args());
         }
