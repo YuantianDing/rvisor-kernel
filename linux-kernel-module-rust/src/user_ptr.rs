@@ -227,11 +227,25 @@ pub fn writestr_to_user(user_ptr : u64, max_length : usize, mut src : String) ->
     Ok(())
 }
 
-pub fn write_any<T>(ptr : *mut T, mut data: T) -> error::KernelResult<()> {
+pub fn write_any<T>(ptr : *mut T, data: T) -> error::KernelResult<()> {
     let res = unsafe {
         bindings::_copy_to_user(
             ptr as _,
-            &mut data as *mut T as *const c_types::c_void,
+            &mut data as *const T as *const c_types::c_void,
+            size_of::<T>() as _,
+        )
+    };
+    if res != 0 {
+        return Err(error::Error::EFAULT);
+    }
+    Ok(())
+}
+
+pub fn write_array<T>(ptr : *mut T, data: &[T]) -> error::KernelResult<()> {
+    let res = unsafe {
+        bindings::_copy_to_user(
+            ptr as _,
+            &mut data as *const T as *const c_types::c_void,
             size_of::<T>() as _,
         )
     };
