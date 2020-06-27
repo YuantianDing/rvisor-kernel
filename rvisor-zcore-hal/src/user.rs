@@ -129,7 +129,7 @@ impl<T, P: Read> UserPtr<T, P> {
             return Ok(Vec::default());
         }
         self.check()?;
-        let mut data = UserSlicePtr::new_ptr(self.ptr as u64, size_of::<T>())
+        let mut data = UserSlicePtr::new_ptr(self.ptr as u64, size_of::<T>()*len)
             .map_err(|_| { Error::InvalidPointer })?
             .reader()
             .read_all()
