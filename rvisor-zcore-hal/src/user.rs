@@ -154,9 +154,8 @@ impl<P: Read> UserPtr<u8, P> {
         self.check()?;
 
         let mut data = self.read_array(len)?;
-        Ok(
-            String::from_utf8(data)
-                .map_err(|_| Error::InvalidUtf8)?
+        Ok(String::from_utf8(data)
+            .map_err(|_| Error::InvalidUtf8)?
         )
     }
 
@@ -165,7 +164,7 @@ impl<P: Read> UserPtr<u8, P> {
     pub fn read_cstring(&self) -> Result<String> {
         trace!("UserPtr::read_cstring");
         self.check()?;
-        readstr_from_user(self.ptr, )
+        readstr_from_user(self.ptr, BUFFER_MAX).map_err
     }
 }
 
