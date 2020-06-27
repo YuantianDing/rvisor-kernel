@@ -214,7 +214,7 @@ pub fn readstr_from_user(user_ptr : u64, max_length : usize) -> KernelResult<Str
         let i = bindings::strncpy_from_user(ret.as_mut_ptr() as _, user_ptr as _, max_length as _);
         ret.truncate(i as usize);
         if i < 0 {
-            return Err(Error::from_kernel_errno(i as _));
+            return Err(Error::EFAULT);
         }
     }
     Ok(String::from_utf8(ret).map_err(|_| Error::EINVAL)?)
