@@ -206,6 +206,27 @@ impl UserSlicePtrWriter {
         self.1 -= data.len();
         Ok(())
     }
+    pub fn write<T>(&mut self, data: T) -> error::KernelResult<()> {
+        if data.len() > self.1 || data.len() > u32::MAX as usize {
+            return Err(error::Error::EFAULT);
+        }
+        let res = unsafe {
+            bindings::_copy_to_user(
+                self.0,
+                data.as_ptr() as *const c_types::c_void,
+                data.len() as _,
+            )
+        };
+        if res != 0 {
+            return Err(error::Error::EFAULT);
+        }
+        // Since this is not a pointer to a valid object in our program,
+        // we cannot use `add`, which has C-style rules for defined
+        // behavior.
+        self.0 = self.0.wrapping_add(data.len());
+        self.1 -= data.len();
+        Ok(())
+    }
 }
 
 pub fn readstr_from_user(user_ptr : u64, max_length : usize) -> KernelResult<String> {
