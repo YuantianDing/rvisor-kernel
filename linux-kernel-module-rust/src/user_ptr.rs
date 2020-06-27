@@ -228,12 +228,9 @@ pub fn writestr_to_user(user_ptr : u64, max_length : usize, mut src : String) ->
 }
 
 pub fn write_any<T>(ptr : *mut T, data: T) -> error::KernelResult<()> {
-    if size_of::<T>() > self.1 || size_of::<T>() > u32::MAX as usize {
-        return Err(error::Error::EFAULT);
-    }
     let res = unsafe {
         bindings::_copy_to_user(
-            self.0,
+            ptr as _,
             &mut data as *mut T as *const c_types::c_void,
             size_of::<T>() as _,
         )
@@ -241,10 +238,5 @@ pub fn write_any<T>(ptr : *mut T, data: T) -> error::KernelResult<()> {
     if res != 0 {
         return Err(error::Error::EFAULT);
     }
-    // Since this is not a pointer to a valid object in our program,
-    // we cannot use `add`, which has C-style rules for defined
-    // behavior.
-    self.0 = self.0.wrapping_add(size_of::<T>());
-    self.1 -= size_of::<T>();
     Ok(())
 }
