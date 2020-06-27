@@ -2,6 +2,7 @@ use alloc::vec;
 use alloc::vec::Vec;
 use core::u32;
 
+use alloc::string::String;
 use crate::bindings;
 use crate::c_types;
 use crate::error;
@@ -206,8 +207,6 @@ impl UserSlicePtrWriter {
         Ok(())
     }
 }
-
-use alloc::string::String;
 
 pub fn readstr_from_user(user_ptr : u64, max_length : usize) -> KernelResult<String> {
     let mut ret = String::from("                                                                                                                             ");
