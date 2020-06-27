@@ -135,10 +135,9 @@ impl<T, P: Read> UserPtr<T, P> {
         }
         self.check()?;
 
-        let size = size_of::<T>()*len;
+        let mut data = Vec::<T>::with_capacity(len);
 
-        let mut data = Vec::<T>::with_capacity(size);
-        UserSlicePtr::new_ptr(self.ptr as u64, size)
+        UserSlicePtr::new_ptr(self.ptr as u64, size_of::<T>()*len)
             .map_err(|_| Error::InvalidPointer)?
             .reader()
             .read_mut_slice(data.as_mut_slice())
@@ -151,15 +150,17 @@ impl<T, P: Read> UserPtr<T, P> {
 }
 
 impl<P: Read> UserPtr<u8, P> {
+    // ! modified
     pub fn read_string(&self, len: usize) -> Result<String> {
+        // assume len is 
         trace!("UserPtr::read_string");
         self.check()?;
 
-        let mut data = Vec::<T>::with_capacity(size);
-        UserSlicePtr::new_ptr(self.ptr as u64, size)
+        let mut data = String::with_capacity(len);
+        UserSlicePtr::new_ptr(self.ptr as u64, size_of::<u8>() * len)
             .map_err(|_| Error::InvalidPointer)?
             .reader()
-            .read_mut_slice(data.as_mut_slice())
+            .read_mut_slice(data.as_bytes_mut())
             .map_err(|_| Error::InvalidPointer)?;
         Ok(String::from(s))
     }
