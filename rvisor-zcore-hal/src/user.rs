@@ -190,6 +190,8 @@ impl<P: Read> UserPtr<UserPtr<u8, P>, P> {
 }
 
 impl<T, P: Write> UserPtr<T, P> {
+
+    // ! modified
     pub fn write(&mut self, value: T) -> Result<()> {
         trace!("UserPtr::write");
         self.check()?;
@@ -197,6 +199,7 @@ impl<T, P: Write> UserPtr<T, P> {
         Ok(())
     }
 
+    // ! modified
     pub fn write_if_not_null(&mut self, value: T) -> Result<()> {
         trace!("UserPtr::write_if_not_null");
         if self.ptr.is_null() {
@@ -205,6 +208,7 @@ impl<T, P: Write> UserPtr<T, P> {
         self.write(value)
     }
 
+    // ! modified
     pub fn write_array(&mut self, values: &[T]) -> Result<()> {
         trace!("UserPtr::write_array");
         if values.is_empty() {
@@ -218,6 +222,7 @@ impl<T, P: Write> UserPtr<T, P> {
 }
 
 impl<P: Write> UserPtr<u8, P> {
+    // ! modified
     pub fn write_cstring(&mut self, s: &str) -> Result<()> {
         trace!("UserPtr::write_cstring");
         let bytes = s.as_bytes();
