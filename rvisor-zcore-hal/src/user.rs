@@ -211,7 +211,8 @@ impl<T, P: Write> UserPtr<T, P> {
             return Ok(());
         }
         self.check()?;
-        lkm::user_ptr::write_any_array(self.ptr, values)?;
+        lkm::user_ptr::write_any_array(self.ptr, values)
+            .map_err(|_| Error::InvalidPointer)?;
         Ok(())
     }
 }
