@@ -246,7 +246,7 @@ pub fn write_array<T>(ptr : *mut T, data: &[T]) -> error::KernelResult<()> {
         bindings::_copy_to_user(
             ptr as _,
             data as *const _ as _,
-            size_of::<T>() as _,
+            data.len() * size_of::<T>() as _,
         )
     };
     if res != 0 {
