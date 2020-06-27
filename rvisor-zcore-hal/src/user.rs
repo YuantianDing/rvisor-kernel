@@ -154,16 +154,18 @@ impl<P: Read> UserPtr<u8, P> {
         self.check()?;
 
         let mut data = self.read_array(len)?;
-        let s = core::str::from_utf8(data.as_slice()).map_err(|_| Error::InvalidUtf8)?;
-        Ok(String::from(s))
+        Ok(
+            String::from_utf8(data)
+                .map_err(|_| Error::InvalidUtf8)?
+        )
     }
 
     // ! modified
+    const 
     pub fn read_cstring(&self) -> Result<String> {
         trace!("UserPtr::read_cstring");
         self.check()?;
-        let len = unsafe { (0usize..).find(|&i| *self.ptr.add(i) == 0).unwrap() };
-        self.read_string(len)
+        readstr_from_user(self.ptr, )
     }
 }
 
