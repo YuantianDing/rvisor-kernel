@@ -189,7 +189,7 @@ impl<P: Read> UserPtr<UserPtr<u8, P>, P> {
             .into_iter()
             .map(|ptr| ptr.read_cstring())
             .collect();
-        Ok()
+        Ok(vec)
     }
 }
 
