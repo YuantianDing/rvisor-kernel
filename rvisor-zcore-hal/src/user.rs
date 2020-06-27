@@ -150,7 +150,7 @@ impl<P: Read> UserPtr<u8, P> {
         debug!("UserPtr::read_string");
         self.check()?;
 
-        let mut data = self.read_array(len)?;
+        let data = self.read_array(len)?;
         Ok(String::from_utf8(data)
             .map_err(|_| Error::InvalidUtf8)?
         )
