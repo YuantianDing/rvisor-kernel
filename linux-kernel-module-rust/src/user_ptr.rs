@@ -213,7 +213,7 @@ impl UserSlicePtrWriter {
         let res = unsafe {
             bindings::_copy_to_user(
                 self.0,
-                &data as *const c_types::c_void,
+                &mut data as *const c_types::c_void,
                 size_of::<T>() as _,
             )
         };
