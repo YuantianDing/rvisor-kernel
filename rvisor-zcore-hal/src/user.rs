@@ -3,11 +3,7 @@ use alloc::vec::Vec;
 use core::fmt::{Debug, Formatter};
 use core::marker::PhantomData;
 use core::mem::size_of;
-use lkm::user_ptr::{
-    UserSlicePtr,
-    readstr_from_user,
-    writestr_to_user,
-};
+use lkm::user_ptr::*;
 #[repr(C)]
 pub struct UserPtr<T, P: Policy> {
     ptr: *mut T,
@@ -199,11 +195,7 @@ impl<T, P: Write> UserPtr<T, P> {
         
         let slice = self.ptr;
         
-        lkm::bindings::_copy_to_user(
-            self.0,
-            &mut data as *mut T as *const c_types::c_void,
-            size_of::<T>() as _,
-        )
+
         Ok(())
     }
 
