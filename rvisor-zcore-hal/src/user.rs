@@ -178,12 +178,12 @@ impl<P: Read> UserPtr<UserPtr<u8, P>, P> {
     pub fn read_cstring_array(&self) -> Result<Vec<String>> {
         trace!("UserPtr::read_cstring_array");
         self.check()?;
-        let len =
-            (0usize..).find(|&i| 
-                if let Ok(data) = self.add(i).read() {
-                    data.is_null()
-                } else { false }
-            ).unwrap();
+        let len = (0usize..).find(|&i| 
+            if let Ok(data) = self.add(i).read() {
+                data.is_null()
+            } else { false }
+        ).unwrap();
+        
         self.read_array(len)?
             .into_iter()
             .map(|ptr| ptr.read_cstring())
