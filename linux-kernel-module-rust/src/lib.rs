@@ -54,6 +54,7 @@ mod allocator;
 pub mod syscall;
 pub mod bindings;
 pub use bindings::*;
+
 pub mod c_types;
 pub mod chrdev;
 mod error;
