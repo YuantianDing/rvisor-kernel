@@ -196,9 +196,9 @@ impl<T, P: Write> UserPtr<T, P> {
     pub fn write(&mut self, value: T) -> Result<()> {
         trace!("UserPtr::write");
         self.check()?;
-        unsafe {
-            self.ptr.write(value);
-        }
+        let mut data = UserSlicePtr::new_ptr(self.ptr as u64, size_of::<T>())
+            .map_err(|_| { Error::InvalidPointer })?
+            .
         Ok(())
     }
 
