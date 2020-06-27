@@ -231,7 +231,7 @@ pub fn write_any<T>(ptr : *mut T, data: T) -> error::KernelResult<()> {
     let res = unsafe {
         bindings::_copy_to_user(
             ptr as _,
-            &mut data as *const T as *const c_types::c_void,
+            &data as *const T as *const c_types::c_void,
             size_of::<T>() as _,
         )
     };
