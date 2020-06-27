@@ -194,9 +194,8 @@ impl<T, P: Write> UserPtr<T, P> {
         trace!("UserPtr::write");
         self.check()?;
         
-        let slice = self.ptr;
+        write_any(self.ptr, value).map_err(|_| Error::InvalidPointer)?;
         
-
         Ok(())
     }
 
