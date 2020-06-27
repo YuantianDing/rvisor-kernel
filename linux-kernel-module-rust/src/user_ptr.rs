@@ -248,7 +248,7 @@ pub fn write_any_array<T>(ptr : *mut T, data: &[T]) -> error::KernelResult<()> {
             data as *const _ as _,
             (data.len() * size_of::<T>()) as _
         )
-    }; 
+    };
     if res != 0 {
         return Err(error::Error::EFAULT);
     }
