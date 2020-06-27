@@ -4,6 +4,7 @@ use core::fmt::{Debug, Formatter};
 use core::marker::PhantomData;
 use core::mem::size_of;
 use lkm::user_ptr::UserSlicePtr;
+use lkm::bindings::_copy_from_user;
 #[repr(C)]
 pub struct UserPtr<T, P: Policy> {
     ptr: *mut T,
