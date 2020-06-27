@@ -156,7 +156,7 @@ impl<P: Read> UserPtr<u8, P> {
         trace!("UserPtr::read_string");
         self.check()?;
 
-        let mut data = String::with_capacity(len);
+        let mut data = Vec::<u8>::with_capacity(len);
         UserSlicePtr::new_ptr(self.ptr as u64, size_of::<u8>() * len)
             .map_err(|_| Error::InvalidPointer)?
             .reader()
