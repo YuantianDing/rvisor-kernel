@@ -166,6 +166,7 @@ impl<P: Read> UserPtr<u8, P> {
             |e| match e {
                 KError::EFAULT => Error::BufferTooSmall,
                 KError::EINVAL => Error::InvalidUtf8,
+                _ => Error::InvalidUtf8,
             }
         )
     }
