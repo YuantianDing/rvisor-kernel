@@ -110,7 +110,7 @@ impl<T, P: Read> UserPtr<T, P> {
         let data = data.as_mut_ptr() as *mut T;
 
         Ok(unsafe {
-            data.read()
+            data.read(
         })
     }
 
