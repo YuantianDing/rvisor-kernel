@@ -153,15 +153,8 @@ impl<P: Read> UserPtr<u8, P> {
         debug!("UserPtr::read_string");
         self.check()?;
 
-        let mut data = Vec::<u8>::with_capacity(len);
-        unsafe {data.set_len(len);}
-        UserSlicePtr::new_ptr(self.ptr as u64, size_of::<u8>() * len)
-            .map_err(|_| Error::InvalidPointer)?
-            .reader()
-            .read_mut_slice(data.as_mut_slice())
-            .map_err(|_| Error::InvalidPointer)?;
+        let mut data = self.read_array(len)?;
         let s = core::str::from_utf8(data.as_slice()).map_err(|_| Error::InvalidUtf8)?;
-
         Ok(String::from(s))
     }
 
