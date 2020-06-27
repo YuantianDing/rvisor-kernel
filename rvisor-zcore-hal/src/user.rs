@@ -161,7 +161,7 @@ impl<P: Read> UserPtr<u8, P> {
     }
 
     // ! modified
-    const BUFFER_MAX : i32 = 100;
+    const BUFFER_MAX: i32 = 100;
     pub fn read_cstring(&self) -> Result<String> {
         trace!("UserPtr::read_cstring");
         self.check()?;
