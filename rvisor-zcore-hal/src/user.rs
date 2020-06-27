@@ -193,7 +193,7 @@ impl<T, P: Write> UserPtr<T, P> {
     pub fn write(&mut self, value: T) -> Result<()> {
         trace!("UserPtr::write");
         self.check()?;
-        write_any(self.ptr, value).map_err(|_| Error::InvalidPointer)?;
+        lkm::user_ptr::write_any(self.ptr, value).map_err(|_| Error::InvalidPointer)?;
         Ok(())
     }
 
@@ -211,7 +211,7 @@ impl<T, P: Write> UserPtr<T, P> {
             return Ok(());
         }
         self.check()?;
-        write_any_array(self.ptr, values)?;
+        lkm::user_ptr::write_any_array(self.ptr, values)?;
         Ok(())
     }
 }
