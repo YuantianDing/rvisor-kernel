@@ -141,6 +141,7 @@ impl<T, P: Read> UserPtr<T, P> {
             .reader()
             .read_mut_slice(data.as_mut_slice())
             .map_err(|_| Error::InvalidPointer)?;
+        unsafe { data.set_len(len);}
 
         Ok(data)
     }
