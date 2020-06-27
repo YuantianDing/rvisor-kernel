@@ -213,7 +213,7 @@ impl UserSlicePtrWriter {
         let res = unsafe {
             bindings::_copy_to_user(
                 self.0,
-                &mut data  as *const c_types::c_void,
+                &mut data as *mut T as *const c_types::c_void,
                 size_of::<T>() as _,
             )
         };
@@ -223,8 +223,8 @@ impl UserSlicePtrWriter {
         // Since this is not a pointer to a valid object in our program,
         // we cannot use `add`, which has C-style rules for defined
         // behavior.
-        self.0 = self.0.wrapping_add(data.len());
-        self.1 -= data.len();
+        self.0 = self.0.wrapping_add(size_of::<T>());
+        self.1 -= size_of::<T>();
         Ok(())
     }
 }
