@@ -134,7 +134,7 @@ impl<T, P: Read> UserPtr<T, P> {
         UserSlicePtr::new_ptr(self.ptr as u64, size)
             .map_err(|_| { Error::InvalidPointer })?
             .reader()
-            .read(data.as_mut_ptr() as * const u8 as &mut [u8])
+            .read(data.as_slice() as &mut [u8])
             .map_err(|_| { Error::InvalidPointer })?;
         Ok(data)
     }
