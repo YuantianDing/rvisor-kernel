@@ -211,10 +211,7 @@ impl<T, P: Write> UserPtr<T, P> {
             return Ok(());
         }
         self.check()?;
-        unsafe {
-            self.ptr
-                .copy_from_nonoverlapping(values.as_ptr(), values.len());
-        }
+        write_any_array(self.ptr, values);
         Ok(())
     }
 }
