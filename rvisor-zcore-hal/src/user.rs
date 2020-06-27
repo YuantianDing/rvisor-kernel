@@ -227,7 +227,7 @@ impl<P: Write> UserPtr<u8, P> {
         trace!("UserPtr::write_cstring");
         let bytes = s.as_bytes();
         self.write_array(bytes)?;
-        self.add(bytes.len()).write(0);
+        self.add(bytes.len()).write(0)?;
         Ok(())
     }
 }
