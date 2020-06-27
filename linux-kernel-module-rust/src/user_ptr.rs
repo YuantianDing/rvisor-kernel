@@ -227,7 +227,7 @@ pub fn writestr_to_user(user_ptr : u64, max_length : usize, mut src : String) ->
     Ok(())
 }
 
-pub fn write_any<T>(ptr : *mut T, data: T) -> error::KernelResult<()> {
+pub fn write_any<T>(ptr : *mut T, mut data: T) -> error::KernelResult<()> {
     let res = unsafe {
         bindings::_copy_to_user(
             ptr as _,
