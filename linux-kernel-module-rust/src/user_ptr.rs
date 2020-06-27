@@ -212,7 +212,7 @@ pub fn readstr_from_user(user_ptr : u64, max_length : usize) -> KernelResult<Str
     let mut ret = String::from("                                                                                                                             ");
     unsafe {
         let slice = ret.as_mut_str();
-        let i = bindings::strncpy_from_user(slice.as_mut_ptr() as _, user_ptr as *const u8, max_length as u64);
+        let i = bindings::strncpy_from_user(slice.as_mut_ptr() as _, user_ptr as _, max_length as u64);
         ret.truncate(i as usize);
         if i < 0 {
             return Err(Error::from_kernel_errno(i));
