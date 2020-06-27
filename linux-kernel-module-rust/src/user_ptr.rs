@@ -153,7 +153,7 @@ impl UserSlicePtrReader {
             bindings::_copy_from_user(
                 data.as_mut_ptr() as *mut c_types::c_void,
                 self.0,
-                ( data.len() * size_of::<T>() ) as _,
+                (data.len() * size_of::<T>()) as _,
             )
         };
         if res != 0 {
