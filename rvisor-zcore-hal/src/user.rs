@@ -198,6 +198,7 @@ impl<T, P: Write> UserPtr<T, P> {
         self.check()?;
         let mut data = UserSlicePtr::new_ptr(self.ptr as u64, size_of::<T>())
             .map_err(|_| { Error::InvalidPointer })?
+            .writer()
             .
         Ok(())
     }
