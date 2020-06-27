@@ -185,10 +185,11 @@ impl<P: Read> UserPtr<UserPtr<u8, P>, P> {
             } else { false }
         ).unwrap();
 
-        self.read_array(len)?
+        let vec = self.read_array(len)?
             .into_iter()
             .map(|ptr| ptr.read_cstring())
-            .collect()
+            .collect();
+        vec
     }
 }
 
