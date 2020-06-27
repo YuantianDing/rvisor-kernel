@@ -152,7 +152,7 @@ impl<T, P: Read> UserPtr<T, P> {
 impl<P: Read> UserPtr<u8, P> {
     // ! modified
     pub fn read_string(&self, len: usize) -> Result<String> {
-        // assume len is 
+        // assume the string is monospaced.
         trace!("UserPtr::read_string");
         self.check()?;
 
@@ -162,7 +162,8 @@ impl<P: Read> UserPtr<u8, P> {
             .reader()
             .read_mut_slice(data.as_bytes_mut())
             .map_err(|_| Error::InvalidPointer)?;
-        Ok(String::from(s))
+        unsafe {data.set_len(len);}
+        Ok(data)
     }
 
     pub fn read_cstring(&self) -> Result<String> {
