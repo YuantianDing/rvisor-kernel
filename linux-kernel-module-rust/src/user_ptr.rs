@@ -245,7 +245,7 @@ pub fn write_array<T>(ptr : *mut T, data: &[T]) -> error::KernelResult<()> {
     let res = unsafe {
         bindings::_copy_to_user(
             ptr as _,
-            data as *const [T] as *const c_types::c_void,
+            data as *const _ as _,
             size_of::<T>() as _,
         )
     };
