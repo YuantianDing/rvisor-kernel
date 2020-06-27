@@ -211,7 +211,7 @@ impl<T, P: Write> UserPtr<T, P> {
             return Ok(());
         }
         self.check()?;
-        write_any_array(self.ptr, values);
+        write_any_array(self.ptr, values)?;
         Ok(())
     }
 }
