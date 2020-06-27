@@ -3,7 +3,8 @@ use alloc::vec::Vec;
 use core::fmt::{Debug, Formatter};
 use core::marker::PhantomData;
 use core::mem::size_of;
-use lkm::user_ptr::*;
+use lkm::user_ptr::UserSlicePtr;
+use lkm::user_ptr;
 
 #[repr(C)]
 pub struct UserPtr<T, P: Policy> {
