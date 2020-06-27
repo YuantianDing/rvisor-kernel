@@ -142,6 +142,28 @@ impl UserSlicePtrReader {
         self.1 -= data.len();
         Ok(())
     }
+
+    pub fn read_slice<T>(&mut self, data: &mut [T]) -> error::KernelResult<()> {
+        if data.len() > self.1 || data.len() > u32::MAX as usize {
+            return Err(error::Error::EFAULT);
+        }
+        let res = unsafe {
+            bindings::_copy_from_user(
+                data.as_mut_ptr() as *mut c_types::c_void,
+                self.0,
+                data.len() as _,
+            )
+        };
+        if res != 0 {
+            return Err(error::Error::EFAULT);
+        }
+        // Since this is not a pointer to a valid object in our program,
+        // we cannot use `add`, which has C-style rules for defined
+        // behavior.
+        self.0 = self.0.wrapping_add(data.len());
+        self.1 -= data.len();
+        Ok(())
+    }
 }
 
 pub struct UserSlicePtrWriter(*mut c_types::c_void, usize);
