@@ -136,15 +136,12 @@ impl<T, P: Read> UserPtr<T, P> {
         self.check()?;
 
         let mut data = Vec::<T>::with_capacity(len);
-
+        unsafe { data.set_len(len);}
         UserSlicePtr::new_ptr(self.ptr as u64, size_of::<T>()*len)
             .map_err(|_| Error::InvalidPointer)?
             .reader()
             .read_mut_slice(data.as_mut_slice())
             .map_err(|_| Error::InvalidPointer)?;
-            
-        unsafe { data.set_len(len);}
-
         Ok(data)
     }
 }
@@ -157,13 +154,14 @@ impl<P: Read> UserPtr<u8, P> {
         self.check()?;
 
         let mut data = Vec::<u8>::with_capacity(len);
+        unsafe {data.set_len(len);}
         UserSlicePtr::new_ptr(self.ptr as u64, size_of::<u8>() * len)
             .map_err(|_| Error::InvalidPointer)?
             .reader()
-            .read_mut_slice(data.as_bytes_mut())
+            .read_mut_slice(data.as_mut_slice())
             .map_err(|_| Error::InvalidPointer)?;
-        unsafe {data.set_len(len);}
-        Ok(data)
+        let s = core::str::from_utf8(data.as_slice()).map_err(|_| Error::InvalidUtf8)?;
+        Ok(s)
     }
 
     pub fn read_cstring(&self) -> Result<String> {
