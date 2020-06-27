@@ -100,7 +100,7 @@ impl<T, P: Read> UserPtr<T, P> {
         warn!("UserPtr as_ref!");
         Ok(unsafe { &*self.ptr })
     }
-
+    // ! modified
     pub fn read(&self) -> Result<T> {
         trace!("UserPtr::read");
         
@@ -126,6 +126,7 @@ impl<T, P: Read> UserPtr<T, P> {
         Ok(Some(value))
     }
 
+    // ! modified
     pub fn read_array(&self, len: usize) -> Result<Vec<T>> {
         trace!("UserPtr::read_array");
         if len == 0 {
