@@ -151,7 +151,6 @@ impl<P: Read> UserPtr<u8, P> {
         trace!("UserPtr::read_string");
         self.check()?;
 
-
         let src = unsafe { core::slice::from_raw_parts(self.ptr, len) };
         let s = core::str::from_utf8(src).map_err(|_| Error::InvalidUtf8)?;
         Ok(String::from(s))
