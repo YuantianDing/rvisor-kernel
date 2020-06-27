@@ -6,6 +6,11 @@ use crate::bindings;
 use crate::c_types;
 use crate::error;
 
+use crate::{
+    Error,
+    KernelResult,
+}
+
 use core::mem::size_of;
 
 extern "C" {
