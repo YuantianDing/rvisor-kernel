@@ -130,7 +130,7 @@ impl<T, P: Read> UserPtr<T, P> {
         self.check()?;
 
         let size = size_of::<T>()*len;
-        
+
         let mut data = Vec::<T>::with_capacity(size);
         UserSlicePtr::new_ptr(self.ptr as u64, size)
             .map_err(|_| { Error::InvalidPointer })?
@@ -146,6 +146,7 @@ impl<P: Read> UserPtr<u8, P> {
     pub fn read_string(&self, len: usize) -> Result<String> {
         trace!("UserPtr::read_string");
         self.check()?;
+        
         let src = unsafe { core::slice::from_raw_parts(self.ptr, len) };
         let s = core::str::from_utf8(src).map_err(|_| Error::InvalidUtf8)?;
         Ok(String::from(s))
