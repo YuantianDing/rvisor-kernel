@@ -100,6 +100,7 @@ impl<T, P: Read> UserPtr<T, P> {
         warn!("UserPtr as_ref!");
         Ok(unsafe { &*self.ptr })
     }
+
     // ! modified
     pub fn read(&self) -> Result<T> {
         trace!("UserPtr::read");
@@ -142,6 +143,7 @@ impl<T, P: Read> UserPtr<T, P> {
             .reader()
             .read_mut_slice(data.as_mut_slice())
             .map_err(|_| Error::InvalidPointer)?;
+            
         unsafe { data.set_len(len);}
 
         Ok(data)
