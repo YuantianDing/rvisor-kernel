@@ -198,11 +198,12 @@ impl<T, P: Write> UserPtr<T, P> {
         self.check()?;
         
         let slice = self.ptr;
-
-        let mut data = UserSlicePtr::new_ptr(self.ptr as u64, size_of::<T>())
-            .map_err(|_| { Error::InvalidPointer })?
-            .writer()
-            .write
+        
+        lkm::bindings::_copy_to_user(
+            self.0,
+            &mut data as *mut T as *const c_types::c_void,
+            size_of::<T>() as _,
+        )
         Ok(())
     }
 
