@@ -3,6 +3,7 @@ use core::num::TryFromIntError;
 use crate::bindings;
 use crate::c_types;
 
+#[derive(PartialEq, Eq)]
 pub struct Error(c_types::c_int);
 
 impl Error {
