@@ -209,7 +209,7 @@ impl UserSlicePtrWriter {
 
 use alloc::string::String;
 
-pub fn read_from_user(user_ptr : u64, max_length : usize) -> KernelResult<String> {
+pub fn readstr_from_user(user_ptr : u64, max_length : usize) -> KernelResult<String> {
     let mut ret = String::from("                                                                                                                             ");
     unsafe {
         let slice = ret.as_mut_str();
@@ -222,7 +222,7 @@ pub fn read_from_user(user_ptr : u64, max_length : usize) -> KernelResult<String
     Ok(ret)
 }
 
-pub fn write_to_user(user_ptr : u64, max_length : usize, mut src : String) -> KernelResult<()> {
+pub fn writestr_to_user(user_ptr : u64, max_length : usize, mut src : String) -> KernelResult<()> {
     src.push(0 as char);
     let uptr = UserSlicePtr::new_ptr(user_ptr, max_length)?;
     uptr.write_all(src.as_bytes())?;
