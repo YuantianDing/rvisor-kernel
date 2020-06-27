@@ -159,13 +159,13 @@ impl<P: Read> UserPtr<u8, P> {
     // ! modified
     pub fn read_cstring(&self) -> Result<String> {
         const BUFFER_MAX: i32 = 100;
-        use lkm::Error;
+        use lkm::Error as KError;
         trace!("UserPtr::read_cstring");
         self.check()?;
         readstr_from_user(self.ptr as _, BUFFER_MAX as _).map_err(
             |e| match e {
-                Error::EFAULT => Error::BufferTooSmall,
-                Error::EINVAL => Error::InvalidUtf8,
+                KError::EFAULT => Error::BufferTooSmall,
+                KError::EINVAL => Error::InvalidUtf8,
             }
         )
     }
