@@ -6,6 +6,8 @@ use crate::bindings;
 use crate::c_types;
 use crate::error;
 
+use core::mem::size_of;
+
 extern "C" {
     fn access_ok_helper(addr: *const c_types::c_void, len: c_types::c_ulong) -> c_types::c_int;
 }
@@ -143,7 +145,7 @@ impl UserSlicePtrReader {
         Ok(())
     }
 
-    pub fn read_slice<T>(&mut self, data: &mut [T]) -> error::KernelResult<()> {
+    pub fn read_mut_slice<T>(&mut self, data: &mut [T]) -> error::KernelResult<()> {
         if data.len() > self.1 || data.len() > u32::MAX as usize {
             return Err(error::Error::EFAULT);
         }
@@ -151,7 +153,7 @@ impl UserSlicePtrReader {
             bindings::_copy_from_user(
                 data.as_mut_ptr() as *mut c_types::c_void,
                 self.0,
-                data.len() as _,
+                data.len() * size_of<T>() as _,
             )
         };
         if res != 0 {
