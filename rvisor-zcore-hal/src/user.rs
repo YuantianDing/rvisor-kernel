@@ -161,7 +161,7 @@ impl<P: Read> UserPtr<u8, P> {
             .read_mut_slice(data.as_mut_slice())
             .map_err(|_| Error::InvalidPointer)?;
         let s = core::str::from_utf8(data.as_slice()).map_err(|_| Error::InvalidUtf8)?;
-        Ok(s)
+        Ok(String::from(s))
     }
 
     pub fn read_cstring(&self) -> Result<String> {
