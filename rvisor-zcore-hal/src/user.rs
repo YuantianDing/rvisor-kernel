@@ -164,9 +164,10 @@ impl<P: Read> UserPtr<u8, P> {
     pub fn read_cstring(&self) -> Result<String> {
         trace!("UserPtr::read_cstring");
         self.check()?;
-        readstr_from_user(self.ptr, BUFFER_MAX).map_err(
+        readstr_from_user(self.ptr as _, BUFFER_MAX as _).map_err(
             |e| match e {
-                
+                lkm::Error::EFAULT => Error::BufferTooSmall,
+                lkm::Error::EINVAL => Error::InvalidUtf8,
             }
         )
     }
