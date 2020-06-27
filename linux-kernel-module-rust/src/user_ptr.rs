@@ -217,7 +217,7 @@ pub fn readstr_from_user(user_ptr : u64, max_length : usize) -> KernelResult<Str
             return Err(Error::from_kernel_errno(i as _));
         }
     }
-    Ok(ret)
+    Ok(String::from_utf8(ret))
 }
 
 pub fn writestr_to_user(user_ptr : u64, max_length : usize, mut src : String) -> KernelResult<()> {
