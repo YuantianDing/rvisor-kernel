@@ -209,7 +209,7 @@ impl UserSlicePtrWriter {
 }
 
 pub fn readstr_from_user(user_ptr : u64, max_length : usize) -> KernelResult<String> {
-    let mut ret = String::from("                                                                                                                             ");
+    let mut ret = String::from();
     unsafe {
         let slice = ret.as_mut_str();
         let i = bindings::strncpy_from_user(slice.as_mut_ptr() as _, user_ptr as _, max_length as _);
