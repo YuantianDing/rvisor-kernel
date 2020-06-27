@@ -129,7 +129,7 @@ impl<T, P: Read> UserPtr<T, P> {
 
     // ! modified
     pub fn read_array(&self, len: usize) -> Result<Vec<T>> {
-        trace!("UserPtr::read_array");
+        debug!("UserPtr::read_array");
         if len == 0 {
             return Ok(Vec::default());
         }
@@ -150,7 +150,7 @@ impl<P: Read> UserPtr<u8, P> {
     // ! modified
     pub fn read_string(&self, len: usize) -> Result<String> {
         // assume the string is monospaced.
-        trace!("UserPtr::read_string");
+        debug!("UserPtr::read_string");
         self.check()?;
 
         let mut data = Vec::<u8>::with_capacity(len);
@@ -161,9 +161,11 @@ impl<P: Read> UserPtr<u8, P> {
             .read_mut_slice(data.as_mut_slice())
             .map_err(|_| Error::InvalidPointer)?;
         let s = core::str::from_utf8(data.as_slice()).map_err(|_| Error::InvalidUtf8)?;
+
         Ok(String::from(s))
     }
 
+    // ! modified
     pub fn read_cstring(&self) -> Result<String> {
         trace!("UserPtr::read_cstring");
         self.check()?;
