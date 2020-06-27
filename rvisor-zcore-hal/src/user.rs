@@ -188,7 +188,7 @@ impl<P: Read> UserPtr<UserPtr<u8, P>, P> {
         self.read_array(len)?
             .into_iter()
             .map(|ptr| ptr.read_cstring())
-            .collect();
+            .collect()
     }
 }
 
