@@ -195,7 +195,6 @@ impl<T, P: Write> UserPtr<T, P> {
         self.check()?;
         
         write_any(self.ptr, value).map_err(|_| Error::InvalidPointer)?;
-        
         Ok(())
     }
 
