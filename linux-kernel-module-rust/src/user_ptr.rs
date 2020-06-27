@@ -241,7 +241,7 @@ pub fn write_any<T>(ptr : *mut T, data: T) -> error::KernelResult<()> {
     Ok(())
 }
 
-pub fn write_array<T>(ptr : *mut T, data: &[T]) -> error::KernelResult<()> {
+pub fn write_any_array<T>(ptr : *mut T, data: &[T]) -> error::KernelResult<()> {
     let res = unsafe {
         bindings::_copy_to_user(
             ptr as _,
