@@ -206,7 +206,7 @@ impl UserSlicePtrWriter {
         self.1 -= data.len();
         Ok(())
     }
-    pub fn write_any<T>(&mut self, data: &T) -> error::KernelResult<()> {
+    pub fn write_any<T>(&mut self, data: T) -> error::KernelResult<()> {
         if size_of::<T>() > self.1 || size_of::<T>() > u32::MAX as usize {
             return Err(error::Error::EFAULT);
         }
