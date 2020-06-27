@@ -5,7 +5,8 @@ use core::marker::PhantomData;
 use core::mem::size_of;
 use lkm::user_ptr::{
     UserSlicePtr,
-    
+    readstr_from_user,
+    writestr_to_user,
 };
 #[repr(C)]
 pub struct UserPtr<T, P: Policy> {
