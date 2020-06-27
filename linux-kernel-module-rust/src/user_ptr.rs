@@ -202,9 +202,9 @@ impl UserSlicePtrWriter {
     }
 }
 
+use alloc::string::String;
 
 pub fn read_from_user(user_ptr : u64, max_length : usize) -> KernelResult<String> {
-    use alloc::string::String;
     info!("read_from_user");
     let mut ret = String::from("                                                                                                                             ");
     unsafe {
