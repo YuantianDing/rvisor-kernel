@@ -214,7 +214,7 @@ impl UserSlicePtrWriter {
             bindings::_copy_to_user(
                 self.0,
                 data.as_ptr() as *const c_types::c_void,
-                data.len() as _,
+                size_of::<T>() as _,
             )
         };
         if res != 0 {
