@@ -222,7 +222,7 @@ impl<P: Write> UserPtr<u8, P> {
         let bytes = s.as_bytes();
         self.write_array(bytes)?;
         unsafe {
-            self.ptr.add(bytes.len()).write(0);
+            self.add(bytes.len()).write(0);
         }
         Ok(())
     }
