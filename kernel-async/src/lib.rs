@@ -87,6 +87,7 @@ pub fn spawn(future: impl Future<Output = ()> + 'static + Send) {
 /// Run futures until there is no runnable task.
 pub fn run_until_idle() {
     while let Some(task) = { || GLOBAL_EXECUTOR.lock().pop_runnable_task() }() {
+        
         task.mark_sleep();
         // make a waker for our task
         let waker = waker_ref(&task);
