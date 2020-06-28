@@ -10,6 +10,7 @@ edition = "2018"
 woke = "0.0.2"
 spin = "0.5.2"
 log = "0.4"
+env_logger = "
 
 [dependencies.lazy_static]
 version = "1.4.0"
