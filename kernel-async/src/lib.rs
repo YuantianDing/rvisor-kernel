@@ -15,7 +15,7 @@ use {
 /// Executor holds a list of tasks to be processed
 #[derive(Default)]
 pub struct Executor {
-    tasks: VecDeque<Arc<Task>>,
+    pub tasks: VecDeque<Arc<Task>>,
 }
 
 /// Task is our unit of execution and holds a future are waiting on
@@ -87,7 +87,7 @@ pub fn spawn(future: impl Future<Output = ()> + 'static + Send) {
 /// Run futures until there is no runnable task.
 pub fn run_until_idle() {
     while let Some(task) = { || GLOBAL_EXECUTOR.lock().pop_runnable_task() }() {
-        
+        info!("{:?}", GLOBAL_EXECUTOR.lock().tasks);
         task.mark_sleep();
         // make a waker for our task
         let waker = waker_ref(&task);
