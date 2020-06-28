@@ -106,8 +106,21 @@ pub fn run_until_idle() {
 
 #[cfg(test)]
 mod tests {
+
+    async fn func1() {
+        println!("func1 called");
+    }
+    
+    async fn func2() {
+        println!("func1 called");
+    }
+
+    async fn async_main() {
+        
+    }
+
     #[test]
     fn it_works() {
-        assert_eq!(2 + 2, 4);
+        
     }
 }
