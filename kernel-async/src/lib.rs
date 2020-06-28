@@ -118,7 +118,7 @@ mod tests {
     }
 
     async fn func2() {
-        println!("func1 called");
+        println!("func2 called");
     }
 
     async fn async_main() {
