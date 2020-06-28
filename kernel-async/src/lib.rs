@@ -126,8 +126,8 @@ mod tests {
 
     #[test]
     fn test_async() {
-        spawn(async_main())
-        run_until_idle()
+        spawn(async_main());
+        run_until_idle();
 
     }
 }
