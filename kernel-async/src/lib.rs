@@ -1,5 +1,9 @@
 
 extern crate alloc;
+
+#[marco_use]
+extern crate log;
+
 use lazy_static::*;
 use {
     alloc::{boxed::Box, collections::vec_deque::VecDeque, sync::Arc},
