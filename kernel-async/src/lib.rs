@@ -1,7 +1,7 @@
 
 extern crate alloc;
 
-#[marco_use]
+#[macro_use]
 extern crate log;
 
 use lazy_static::*;
@@ -23,6 +23,7 @@ pub struct Executor {
 }
 
 /// Task is our unit of execution and holds a future are waiting on
+#[derive(Debug)]
 pub struct Task {
     pub future: Mutex<Pin<Box<dyn Future<Output = ()> + Send + 'static>>>,
     state: Mutex<bool>,
