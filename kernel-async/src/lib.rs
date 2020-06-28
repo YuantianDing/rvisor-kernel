@@ -122,6 +122,7 @@ mod tests {
     }
 
     async fn async_main() {
+        println!("async_main called");
         spawn(func1());
     }
 
