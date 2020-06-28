@@ -106,17 +106,18 @@ pub fn run_until_idle() {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
 
     async fn func1() {
         println!("func1 called");
     }
-    
+
     async fn func2() {
         println!("func1 called");
     }
 
     async fn async_main() {
-        
+        spawn(func1())
     }
 
     #[test]
