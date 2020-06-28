@@ -92,8 +92,8 @@ pub fn spawn(future: impl Future<Output = ()> + 'static + Send) {
 pub fn run_until_idle() {
 
     let mut i = 0;
+    println!("cycle{}: queue({})", i, GLOBAL_EXECUTOR.lock().tasks.len());
     while let Some(task) = { || GLOBAL_EXECUTOR.lock().pop_runnable_task() }() {
-        println!("cycle{}: queue({})", i, GLOBAL_EXECUTOR.lock().tasks.len());
         i += 1;
         task.mark_sleep();
         // make a waker for our task
@@ -104,6 +104,7 @@ pub fn run_until_idle() {
         if let Poll::Pending = ret {
             GLOBAL_EXECUTOR.lock().push_task(task);
         }
+        println!("cycle{}: queue({})", i, GLOBAL_EXECUTOR.lock().tasks.len());
     }
 }
 
