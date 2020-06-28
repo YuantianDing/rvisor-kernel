@@ -110,6 +110,7 @@ mod tests {
 
     async fn func1() {
         println!("func1 called");
+        func2().await;
     }
 
     async fn func2() {
@@ -117,7 +118,7 @@ mod tests {
     }
 
     async fn async_main() {
-        spawn(func1())
+        spawn(func1());
     }
 
     #[test]
