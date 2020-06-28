@@ -90,8 +90,11 @@ pub fn spawn(future: impl Future<Output = ()> + 'static + Send) {
 
 /// Run futures until there is no runnable task.
 pub fn run_until_idle() {
+
+    let mut i = 0;
     while let Some(task) = { || GLOBAL_EXECUTOR.lock().pop_runnable_task() }() {
-        info!("{}", GLOBAL_EXECUTOR.lock().tasks.len());
+        info!("cycle{}: queue({})", i, GLOBAL_EXECUTOR.lock().tasks.len());
+        i += 1;
         task.mark_sleep();
         // make a waker for our task
         let waker = waker_ref(&task);
@@ -122,7 +125,9 @@ mod tests {
     }
 
     #[test]
-    fn it_works() {
-        
+    fn test_async() {
+        spawn(async_main())
+        run_until_idle()
+
     }
 }
