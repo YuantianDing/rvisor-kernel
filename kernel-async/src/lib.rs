@@ -23,7 +23,6 @@ pub struct Executor {
 }
 
 /// Task is our unit of execution and holds a future are waiting on
-#[derive(Debug)]
 pub struct Task {
     pub future: Mutex<Pin<Box<dyn Future<Output = ()> + Send + 'static>>>,
     state: Mutex<bool>,
@@ -92,7 +91,7 @@ pub fn spawn(future: impl Future<Output = ()> + 'static + Send) {
 /// Run futures until there is no runnable task.
 pub fn run_until_idle() {
     while let Some(task) = { || GLOBAL_EXECUTOR.lock().pop_runnable_task() }() {
-        info!("{:?}", GLOBAL_EXECUTOR.lock().tasks);
+        info!("{}", GLOBAL_EXECUTOR.lock().tasks.len());
         task.mark_sleep();
         // make a waker for our task
         let waker = waker_ref(&task);
