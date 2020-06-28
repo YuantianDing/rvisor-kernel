@@ -93,7 +93,7 @@ pub fn run_until_idle() {
 
     let mut i = 0;
     while let Some(task) = { || GLOBAL_EXECUTOR.lock().pop_runnable_task() }() {
-        info!("cycle{}: queue({})", i, GLOBAL_EXECUTOR.lock().tasks.len());
+        println!("cycle{}: queue({})", i, GLOBAL_EXECUTOR.lock().tasks.len());
         i += 1;
         task.mark_sleep();
         // make a waker for our task
